@@ -18,3 +18,11 @@ For changes affecting the website, run `npm start` and check:
 - Repeated gym/floor changes leave a working scene without duplicate canvases or console errors.
 
 Check browser console and network failures. Compare visual changes against the prior version, especially equipment detail and gym layout. Use a separate browser profile for destructive storage tests; do not clear the owner's saved plans.
+
+## Subscription regression checks
+
+Run `npm test` for the centralized plan store and isolated test workspace. See [Subscription simulation](SUBSCRIPTIONS.md) for the intended capability matrix.
+
+Implementation verification covered Free locking, immediate Premium unlocking, Trainer client creation and retention after downgrades, Business navigation, trainer/promotion entry creation and status changes, per-gym maintenance isolation, plan persistence after reload, English/Polish, dark/light mode, a 390px mobile viewport without horizontal overflow, live workout set counts, the custom editor, Atlas floor switching and 2D/walls controls. No browser errors were observed; bundled Three.js reports its existing PCFSoftShadowMap fallback warning.
+
+The embedded browser did not expose a download event when testing JSON export. Confirm file saving in a normal browser before relying on that convenience feature. Remaining manual checks include full touch gesture coverage, physical WASD/Shift navigation and longer workout sessions.

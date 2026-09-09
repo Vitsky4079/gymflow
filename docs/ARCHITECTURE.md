@@ -26,4 +26,6 @@ Gym/floor changes rebuild the map. map.js owns rendering resources and event cle
 
 ## Growing the project
 
+The temporary account preview is isolated in `subscription.js`, `subscription-ui.js`, `subscription-i18n.js`, `test-workspace.js` and `subscription.css`. See [Subscription simulation](SUBSCRIPTIONS.md) for capabilities and persistence. It uses in-page navigation and does not introduce authentication or a URL router.
+
 Keep dist/ as source until an explicit restructuring is agreed. Extract focused modules incrementally when features justify it, retaining the existing import map and relative asset paths. Add regression coverage around changed behavior. Discuss backend requirements, authentication, storage migration, dependencies and framework changes before introducing them. Do not replace existing geometry as part of structural cleanup.

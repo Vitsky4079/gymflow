@@ -48,3 +48,11 @@ The existing application and bundled assets are preserved in `dist/`. This folde
 - See [Repository guidance](AGENTS.md) for preservation requirements.
 
 Development infrastructure does not enable automatic website deployment. Repository visibility, licensing and production hosting remain owner decisions.
+
+## Test subscriptions
+
+Use **Test subscription** above the workout to preview Free, Premium, Trainer or Business. The selection persists locally and changes feature access immediately. Existing 3D gym and workout functionality remains available on every plan.
+
+Premium adds current-session insights and workout export. Trainer includes Premium plus local client management. Business provides gym inventory analytics, maintenance labels, trainers and promotions. Management entries are fictional local test data; there are no payments, accounts or backend subscription checks.
+
+Read [Subscription simulation](docs/SUBSCRIPTIONS.md) for the capability matrix, storage boundaries and removal instructions. Run `npm test` for regression tests.

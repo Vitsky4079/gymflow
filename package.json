@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node server.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "test": "node --test tests/subscription.test.mjs"
   },
   "engines": {
     "node": ">=18"
