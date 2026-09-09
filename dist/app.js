@@ -1,4 +1,4 @@
-import {mountSubscriptionUI} from './subscription-ui.js';
+import {mountWorkspaceUI} from './workspace-ui.js';
 let subscriptionUI;
 import {gyms,getGym,equipmentForGym,normalizeSteps} from './gyms.js';
 import {openWorkoutEditor} from './workout-editor.js';
@@ -30,4 +30,4 @@ function openEditor(addId){const steps=custom.map(s=>({...s}));if(addId&&!steps.
 $('#gym-select').onchange=event=>{save();gymId=event.target.value;gym=getGym(gymId);equipment=equipmentForGym(gymId);presets=gym.presets;loadGymState();$('#search').value='';save();render();mountMap();toast(t('gymChanged',{name:gym.name}))};
 let mapGeneration=0;async function mountMap(){const generation=++mapGeneration;map?.dispose();map=null;$('#labels').replaceChildren();$('#walls').setAttribute('aria-pressed','false');$('#walls').textContent=t('wallsFull');$('#webgl-error').hidden=true;$('#map-loading').hidden=false;document.querySelectorAll('.view-controls button').forEach(b=>b.disabled=true);try{const {createMap}=await import('./map.js');if(generation!==mapGeneration)return;const created=await createMap(equipment,choose,gym,currentFloor,()=>{const next=currentFloor===0?1:0;currentFloor=next;selected=equipment.find(e=>e.floor===next).id;render();mountMap()});if(generation!==mapGeneration){created.dispose();return}map=created;$('#map-loading').hidden=true;document.querySelectorAll('.view-controls button').forEach(b=>b.disabled=false);syncMap();applyTheme()}catch(error){if(generation!==mapGeneration)return;console.error(error);$('#map-loading').hidden=true;$('#webgl-error').hidden=false}}mountMap();
 
-subscriptionUI=mountSubscriptionUI(()=>({gym,equipment,steps:getPlan().map(s=>({...s})),completedSets:getPlan().reduce((n,s)=>n+checks(s).filter(Boolean).length,0)}));
+subscriptionUI=mountWorkspaceUI(()=>({gym,equipment,steps:getPlan().map(s=>({...s})),completedSets:getPlan().reduce((n,s)=>n+checks(s).filter(Boolean).length,0)}));

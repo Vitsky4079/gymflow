@@ -17,6 +17,9 @@ GymFlow is a static browser application with ES modules and locally bundled Thre
 | dist/workout-editor.js | Custom workout dialog and editing |
 | dist/i18n.js | English/Polish translations and equipment localization |
 | dist/vendor/ | Three.js, utilities, controls and third-party license |
+| dist/router.js | Minimal hash router used to switch Consumer/Trainer/Business/Account workspaces |
+| dist/workspace-ui.js, dist/workspace-i18n.js, dist/workspace-data.js | Dev preview selector, workspace navigation/pages, and their local demo content (see [Subscription simulation](SUBSCRIPTIONS.md)) |
+| dist/subscription.js, dist/test-workspace.js | Plan/capability store and local Trainer/Business test data (unchanged by the workspace refactor) |
 
 ## State and lifecycle
 
@@ -26,6 +29,6 @@ Gym/floor changes rebuild the map. map.js owns rendering resources and event cle
 
 ## Growing the project
 
-The temporary account preview is isolated in `subscription.js`, `subscription-ui.js`, `subscription-i18n.js`, `test-workspace.js` and `subscription.css`. See [Subscription simulation](SUBSCRIPTIONS.md) for capabilities and persistence. It uses in-page navigation and does not introduce authentication or a URL router.
+The temporary account preview and its Consumer/Trainer/Business workspaces are isolated in `subscription.js`, `router.js`, `workspace-ui.js`, `workspace-i18n.js`, `workspace-data.js`, `test-workspace.js` and `workspace.css`. See [Subscription simulation](SUBSCRIPTIONS.md) for the workspace layout, capabilities and persistence. Navigation between workspaces uses a minimal hash router (`router.js`) rather than server-side routes or history/state beyond `location.hash`; it does not introduce authentication.
 
 Keep dist/ as source until an explicit restructuring is agreed. Extract focused modules incrementally when features justify it, retaining the existing import map and relative asset paths. Add regression coverage around changed behavior. Discuss backend requirements, authentication, storage migration, dependencies and framework changes before introducing them. Do not replace existing geometry as part of structural cleanup.
