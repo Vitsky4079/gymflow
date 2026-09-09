@@ -1,0 +1,21 @@
+# Local dependencies and caches
+node_modules/
+.npm/
+coverage/
+*.log
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Original delivery archives and local files
+*.zip
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# dist/ is the application source and MUST remain tracked.

@@ -1,0 +1,14 @@
+{
+  "name": "gymflow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Interactive Three.js gym and workout planning prototype",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
