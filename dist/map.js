@@ -2,7 +2,17 @@ import {findGymPath} from './gym-routing.js';
 import {t,machine} from './i18n.js';
 import {cameraMovement,isTypingTarget} from './camera-navigation.js';
 import {buildEquipment} from './equipment-models.js';
-export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){const equipment=allEquipment.filter(e=>e.floor===currentFloor);const lifecycle=new AbortController();const on=(target,event,handler)=>target.addEventListener(event,handler,{signal:lifecycle.signal});let disposed=false,frameId;const $=s=>document.querySelector(s);const THREE=await import('three');const {OrbitControls}=await import('three/addons/OrbitControls.js');const container=$('#scene');const scene=new THREE.Scene();scene.background=new THREE.Color('#edf2ee');const camera=new THREE.PerspectiveCamera(34,1,.1,250);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;renderer.setClearColor('#edf2ee');container.appendChild(renderer.domElement);const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.15;controls.maxPolarAngle=Math.PI*.475;controls.minDistance=4;controls.maxDistance=145;controls.target.set(0,0,0);controls.enablePan=true;
+export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){const equipment=allEquipment.filter(e=>e.floor===currentFloor);const lifecycle=new AbortController();const on=(target,event,handler)=>target.addEventListener(event,handler,{signal:lifecycle.signal});let disposed=false,frameId;const $=s=>document.querySelector(s);const THREE=await import('three');const {OrbitControls}=await import('three/addons/OrbitControls.js');const container=$('#scene');const scene=new THREE.Scene();scene.background=new THREE.Color('#edf2ee');const camera=new THREE.PerspectiveCamera(34,1,.1,250);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;renderer.setClearColor('#edf2ee');container.appendChild(renderer.domElement);
+// Real GLB machines are PBR (metalness/roughness) and look flat/matte with
+// only directional lights and nothing to reflect. A synthetic "room" IBL
+// (three.js's built-in RoomEnvironment, no HDRI file to download) gives
+// metal surfaces believable highlights, matching how they look rendered
+// in a lit studio — this is purely lighting, the models are unchanged.
+const {RoomEnvironment}=await import('three/addons/RoomEnvironment.js');
+const pmrem=new THREE.PMREMGenerator(renderer);
+scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;
+pmrem.dispose();
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.15;controls.maxPolarAngle=Math.PI*.475;controls.minDistance=4;controls.maxDistance=145;controls.target.set(0,0,0);controls.enablePan=true;
 // Some Android WebViews don't reliably report a second finger as its own
 // Pointer Events pointerId, so OrbitControls' own 1-vs-2-finger bookkeeping
 // can get stuck thinking it's a single-finger drag for an entire two-finger
