@@ -1,6 +1,38 @@
 import * as T from 'three';
 import {RoundedBoxGeometry} from './vendor/RoundedBoxGeometry.js';
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
+
+// Real Matrix-brand GLB models, keyed by equipment id — swapped in over the
+// procedural placeholder once loaded (see buildEquipment at the bottom).
+// Ids with no entry here (mats, kettlebell, trx — accessories Matrix doesn't
+// manufacture) simply keep the procedural geometry forever.
+const MODEL_MAP={treadmill:'treadmill',legpress:'legpress',chest:'chest',lat:'lat',row:'row',shoulder:'shoulder',legcurl:'legcurl',legextension:'legextension',cable:'cable',pullup:'pullup',bench:'bench',rack:'rack',bike:'bike',elliptical:'elliptical',rower:'rower',stairs:'stairs',airbike:'airbike',pecdeck:'pecdeck',reverse:'reverse',abductor:'abductor',adductor:'adductor',calf:'calf',smith:'smith',hipthrust:'hipthrust',dumbbells:'dumbbells',incline:'incline',dips:'dips'};
+
+let loaderPromise=null;
+function getLoader(){
+	if(!loaderPromise)loaderPromise=Promise.all([import('three/addons/GLTFLoader.js'),import('three/addons/meshopt_decoder.module.js')]).then(([{GLTFLoader},{MeshoptDecoder}])=>{const loader=new GLTFLoader();loader.setMeshoptDecoder(MeshoptDecoder);return loader});
+	return loaderPromise;
+}
+
+// Real models are exported at wildly different native scales/pivots; fit
+// each one into roughly the footprint our procedural machines occupy and
+// drop it onto the floor instead of hand-tuning 27 individual transforms.
+function normalizeModel(object){
+	object.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});
+	const box=new T.Box3().setFromObject(object);const size=new T.Vector3();box.getSize(size);
+	const scale=1.7/Math.max(size.x,size.z,.1);
+	object.scale.setScalar(scale);
+	const box2=new T.Box3().setFromObject(object);
+	object.position.x-=(box2.min.x+box2.max.x)/2;
+	object.position.z-=(box2.min.z+box2.max.z)/2;
+	object.position.y-=box2.min.y;
+}
+
+const modelCache=new Map();
+function loadModel(id){
+	if(!modelCache.has(id))modelCache.set(id,getLoader().then(loader=>new Promise((resolve,reject)=>loader.load(`./models/${id}.glb`,gltf=>{normalizeModel(gltf.scene);resolve(gltf.scene)},undefined,reject))));
+	return modelCache.get(id);
+}
 const material=(color,metalness=0,roughness=.5)=>new T.MeshStandardMaterial({color,metalness,roughness});
 const steel=material('#4c5052',.72,.3),black=material('#171a1c',.25,.45),chrome=material('#c7cbcd',.95,.2),vinyl=material('#242728',.05,.68),edge=material('#373b3e',.1,.65),yellow=material('#d5bb42',.3,.4),belt=material('#141617',0,.94),screen=material('#11272c',.1,.25),cable=material('#080909',.1,.5);
 const geoCache=new Map();function cached(key,fn){if(!geoCache.has(key))geoCache.set(key,fn());return geoCache.get(key)}
@@ -27,7 +59,7 @@ if(e.kind==='stairs'){box(g,1.17,1.12,1.3,0,.7,-.35,edge,.1);for(let k=0;k<5;k++
 if(e.kind==='rower'){beam(g,[0,.32,-1.2],[0,.32,1.65],.065,chrome);pad(g,.43,.15,.45,0,.48,.75);const fan=shaft(g,.4,.28,0,.63,-1,black);for(let i=0;i<16;i++){const a=i*Math.PI/8;beam(g,[.15,.63,-1],[.15,.63+Math.sin(a)*.35,-1+Math.cos(a)*.35],.008,steel)}beam(g,[0,.62,-.75],[0,.7,-.25],.009,cable);grip(g,[-.28,.7,-.25],[.28,.7,-.25]);[-.32,.32].forEach(x=>{box(g,.24,.05,.45,x,.38,-.1,black);box(g,.24,.04,.08,x,.47,-.1,edge);foot(g,x,-1);foot(g,x,1.5)});consolePanel(g,0,1.15,-.92);return}
 base(g);const elliptical=e.kind==='elliptical';const fw=shaft(g,.36,.3,0,.48,-.3,edge);shaft(g,.21,.31,0,.48,-.3,black);tube(g,[[0,.2,.8],[0,.65,.05],[0,1.38,-.73]],.075);beam(g,[0,.25,.5],[0,1,.5],.038,chrome);pad(g,.36,.1,.5,0,1.03,.5);tube(g,[[-.35,1.3,-.5],[-.4,1.48,-.8],[.4,1.48,-.8],[.35,1.3,-.5]],.035,black);consolePanel(g,0,1.48,-.85);[-.44,.44].forEach((x,i)=>{const z=i? .38:-.28;beam(g,[x,.48,0],[x,.22,z],.026,chrome);box(g,.22,.04,elliptical?.85:.28,x,.21,z,black);if(elliptical)tube(g,[[x,.22,z],[x,1,-.45],[x,1.75,-.7]],.035,black)})}
 function dumbbell(g,x,y,z,r=.14){beam(g,[x,y,z-.2],[x,y,z+.2],.025,chrome);[-.16,.16].forEach(d=>{const a=cyl(g,r,.13,x,y,z+d,black);a.rotation.x=Math.PI/2;const b=cyl(g,r*.7,.14,x,y,z+d,edge);b.rotation.x=Math.PI/2})}
-export function buildEquipment(e){const g=new T.Group();g.name=e.id;
+function buildProceduralEquipment(e){const g=new T.Group();g.name=e.id;
 if(['treadmill','bike','elliptical','rower','stairs'].includes(e.kind))cardio(g,e);
 else if(['rack','smith','pullup','trx'].includes(e.kind))rack(g,e.kind);
 else if(e.kind==='bench')bench(g,e.id==='incline');
@@ -48,4 +80,24 @@ else {const curl=e.kind==='legcurl';shaft(g,.11,.9,0,curl?1:.31,1.02,vinyl);[-.4
 if(!['mats','kettlebell','dumbbells'].includes(e.kind)){[-.57,.57].forEach(x=>{bolt(g,x,.19,.72);bolt(g,x,.19,-.6)});box(g,.13,.025,.07,.1,.18,.4,yellow,.008)}
 // Batch each material into a single mesh per station to keep mobile draw calls low.
 g.updateMatrixWorld(true);const buckets=new Map();g.traverse(o=>{if(o.isMesh){let geo=o.geometry.clone().applyMatrix4(o.matrixWorld);if(geo.index){const flat=geo.toNonIndexed();geo.dispose();geo=flat;}const arr=buckets.get(o.material)||[];arr.push(geo);buckets.set(o.material,arr)}});const result=new T.Group();result.name=e.id;for(const [m,geos]of buckets){const merged=mergeGeometries(geos,false);if(merged){mesh(result,merged,m)}geos.forEach(geo=>geo.dispose())}return result;
+}
+
+// The scene needs *something* on screen the instant it loads, so every
+// station starts as the (instant, no network) procedural placeholder above;
+// if a real Matrix model exists for this id, swap it in once it's ready.
+// The placeholder lives in its own child group so map.js's own additions to
+// the returned group (hit-boxes, halos are added to `equipment`, not here —
+// but callers are still free to add children) are never touched by the swap.
+export function buildEquipment(e){
+	const holder=new T.Group();holder.name=e.id;
+	const placeholder=buildProceduralEquipment(e);
+	holder.add(placeholder);
+	if(MODEL_MAP[e.id]){
+		loadModel(MODEL_MAP[e.id]).then(scene=>{
+			holder.remove(placeholder);
+			placeholder.traverse(o=>{if(o.isMesh){o.geometry.dispose()}});
+			holder.add(scene.clone(true));
+		}).catch(()=>{/* keep the procedural placeholder */});
+	}
+	return holder;
 }
