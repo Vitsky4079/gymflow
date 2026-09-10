@@ -24,7 +24,11 @@ function getLoader(){
 // hardware, unnamed parts alike — goes to the same neutral dark. This throws
 // away the original textures entirely, but gives one consistent showroom
 // finish regardless of which line a given machine came from.
-const FRAME_KEYWORDS=['paint','chrome','alumin','steel','frame','coating','silver','wht','white','metal'];
+// "chrome"/"metal"/"steel"/"alumin" are deliberately NOT in this list: they
+// show up just as often on small chrome-plated hardware (dumbbell handles,
+// guide rods) as on the actual frame, and the latter is far more common —
+// only the paint/coating call-outs reliably mean "this is the frame".
+const FRAME_KEYWORDS=['paint','frame','coating','wht','white'];
 function isFrameMaterial(name){
 	const n=(name||'').toLowerCase();
 	return FRAME_KEYWORDS.some(k=>n.includes(k));
@@ -45,10 +49,14 @@ function flattenMaterial(m){
 // Real models are exported at wildly different native scales/pivots; fit
 // each one into roughly the footprint our procedural machines occupy and
 // drop it onto the floor instead of hand-tuning 27 individual transforms.
+// Scaling off the LARGER of width/depth crushes anything wide-but-shallow
+// (a cable crossover spanning two towers is wide in one axis only) down to
+// the same tiny footprint as a compact seated machine; average the two
+// instead so an elongated station keeps looking elongated.
 function normalizeModel(object){
 	object.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;const mats=Array.isArray(o.material)?o.material:[o.material];mats.forEach(flattenMaterial)}});
 	const box=new T.Box3().setFromObject(object);const size=new T.Vector3();box.getSize(size);
-	const scale=1.7/Math.max(size.x,size.z,.1);
+	const scale=1.7/Math.max((size.x+size.z)/2,.1);
 	object.scale.setScalar(scale);
 	const box2=new T.Box3().setFromObject(object);
 	object.position.x-=(box2.min.x+box2.max.x)/2;
