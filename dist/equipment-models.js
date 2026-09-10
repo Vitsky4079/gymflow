@@ -33,16 +33,24 @@ function isFrameMaterial(name){
 	const n=(name||'').toLowerCase();
 	return FRAME_KEYWORDS.some(k=>n.includes(k));
 }
+// Several product lines keep a genuinely separate "Plastic_yellow" material for
+// the pin/knob hardware (weight-stack selector pins, adjustment knobs) — Matrix
+// paints those safety yellow on the real machines, so keep that accent instead
+// of collapsing it into the dark bucket with everything else.
+function isYellowMaterial(name){
+	return (name||'').toLowerCase().includes('yellow');
+}
 function flattenMaterial(m){
 	if(!m)return;
 	const frame=isFrameMaterial(m.name);
+	const yellow=!frame&&isYellowMaterial(m.name);
 	m.map?.dispose();m.map=null;
 	m.emissiveMap?.dispose();m.emissiveMap=null;
 	m.metalnessMap?.dispose();m.metalnessMap=null;
 	m.roughnessMap?.dispose();m.roughnessMap=null;
-	m.color?.set(frame?'#a7abaf':'#17191a');
-	if('metalness' in m)m.metalness=frame?.65:.05;
-	if('roughness' in m)m.roughness=frame?.3:.6;
+	m.color?.set(frame?'#a7abaf':yellow?'#d5bb42':'#17191a');
+	if('metalness' in m)m.metalness=frame?.65:yellow?.3:.05;
+	if('roughness' in m)m.roughness=frame?.3:yellow?.4:.6;
 	m.needsUpdate=true;
 }
 
@@ -53,10 +61,19 @@ function flattenMaterial(m){
 // (a cable crossover spanning two towers is wide in one axis only) down to
 // the same tiny footprint as a compact seated machine; average the two
 // instead so an elongated station keeps looking elongated.
-function normalizeModel(object){
+// The cable crossover's bounding box spans both towers plus the open gap
+// between them, so its footprint average is dominated by that gap rather
+// than the towers' actual size — footprint-based scaling shrinks the whole
+// rig well below neighboring upright machines. Scale it off height instead,
+// to the same effective height a typical tower (e.g. the lat pulldown) ends
+// up at under the footprint formula below, so it reads as tall as its
+// neighbors instead of squat.
+const HEIGHT_TARGETS={cable:2.9};
+function normalizeModel(object,id){
 	object.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;const mats=Array.isArray(o.material)?o.material:[o.material];mats.forEach(flattenMaterial)}});
 	const box=new T.Box3().setFromObject(object);const size=new T.Vector3();box.getSize(size);
-	const scale=1.7/Math.max((size.x+size.z)/2,.1);
+	const heightTarget=HEIGHT_TARGETS[id];
+	const scale=heightTarget?heightTarget/Math.max(size.y,.1):1.7/Math.max((size.x+size.z)/2,.1);
 	object.scale.setScalar(scale);
 	const box2=new T.Box3().setFromObject(object);
 	object.position.x-=(box2.min.x+box2.max.x)/2;
@@ -66,7 +83,7 @@ function normalizeModel(object){
 
 const modelCache=new Map();
 function loadModel(id){
-	if(!modelCache.has(id))modelCache.set(id,getLoader().then(loader=>new Promise((resolve,reject)=>loader.load(`./models/${id}.glb`,gltf=>{normalizeModel(gltf.scene);resolve(gltf.scene)},undefined,reject))));
+	if(!modelCache.has(id))modelCache.set(id,getLoader().then(loader=>new Promise((resolve,reject)=>loader.load(`./models/${id}.glb`,gltf=>{normalizeModel(gltf.scene,id);resolve(gltf.scene)},undefined,reject))));
 	return modelCache.get(id);
 }
 const material=(color,metalness=0,roughness=.5)=>new T.MeshStandardMaterial({color,metalness,roughness});
