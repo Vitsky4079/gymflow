@@ -4,6 +4,7 @@ import { createTestWorkspace } from './test-workspace.js';
 import { createWorkspaceContent, demoNumber, demoPick } from './workspace-data.js';
 import { getRoute, navigate, onRoute, requiredCapability, defaultRouteForPlan } from './router.js';
 import { machine, t, getLanguage, zoneName, preset } from './i18n.js';
+import { createDropdown } from './dropdown.js';
 
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const cryptoId = () => (globalThis.crypto?.randomUUID ? crypto.randomUUID() : 'id-' + Math.random().toString(36).slice(2));
@@ -27,10 +28,15 @@ export function mountWorkspaceUI(getWorkout) {
 
   const devWrap = document.createElement('div');
   devWrap.className = 'dev-select';
-  devWrap.innerHTML = '<b></b><select id="dev-plan-select"></select>';
+  devWrap.innerHTML = '<b></b><button type="button" class="plan-picker-trigger" id="dev-plan-trigger" aria-haspopup="listbox" aria-expanded="false"><span id="dev-plan-label"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>';
   header.querySelector('.header-actions').prepend(devWrap);
-  const devSelect = devWrap.querySelector('select');
-  devSelect.addEventListener('change', () => { subscription.setPlan(devSelect.value); navigate(defaultRouteForPlan(devSelect.value)); });
+  const devTrigger = devWrap.querySelector('#dev-plan-trigger');
+  const devLabel = devWrap.querySelector('#dev-plan-label');
+  const devPicker = createDropdown(devTrigger, {
+    fit: 'content',
+    onOpen: menu => { menu.innerHTML = Object.entries(PLANS).map(([id, p]) => `<button type="button" class="plan-option nowrap ${id === subscription.getSnapshot().plan ? 'active' : ''}" data-option="${id}" role="option"><span class="plan-option-main"><span class="plan-option-name">${esc(p.name.replace('GymFlow ', ''))}</span></span></button>`).join(''); },
+    onSelect: value => { subscription.setPlan(value); navigate(defaultRouteForPlan(value)); },
+  });
 
   const shellBar = document.createElement('div');
   shellBar.id = 'gym-shell-bar';
@@ -66,9 +72,10 @@ export function mountWorkspaceUI(getWorkout) {
 
   function renderDevSelect(plan) {
     devWrap.querySelector('b').textContent = st('devMode');
-    devSelect.setAttribute('aria-label', st('previewAs'));
-    devSelect.title = st('devModeHint');
-    devSelect.innerHTML = Object.entries(PLANS).map(([id, p]) => `<option value="${id}" ${id === plan ? 'selected' : ''}>${esc(p.name.replace('GymFlow ', ''))}</option>`).join('');
+    devTrigger.setAttribute('aria-label', st('previewAs') + ': ' + PLANS[plan].name.replace('GymFlow ', ''));
+    devTrigger.title = st('devModeHint');
+    devLabel.textContent = PLANS[plan].name.replace('GymFlow ', '');
+    devPicker.refresh();
   }
 
   function renderShellBar(route, context) {

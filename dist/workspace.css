@@ -2,9 +2,10 @@
 /* ---------- dev preview selector (header) ---------- */
 .dev-select{display:flex;align-items:center;gap:7px;border:1px dashed var(--secondary);border-radius:11px;background:var(--surface);min-height:42px;box-shadow:var(--shadow);backdrop-filter:blur(18px);padding:7px 11px}
 .dev-select b{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--secondary);white-space:nowrap}
-.dev-select select{width:auto;min-width:0;border:0;background:transparent;padding:2px 16px 2px 0;font-size:12px;font-weight:600;color:var(--ink);min-height:0}
+.dev-select .plan-picker-trigger{width:auto;min-width:0;border:0;background:transparent;padding:2px 4px 2px 0;font-size:12px;font-weight:600;color:var(--ink);min-height:0}
+.dev-select .plan-picker-trigger svg{width:14px;height:14px}
 @media(max-width:900px){.header-actions{flex-wrap:wrap;justify-content:flex-end;row-gap:7px}}
-@media(max-width:540px){.dev-select b{display:none}.dev-select{padding:7px 8px}.dev-select select{max-width:88px}}
+@media(max-width:540px){.dev-select b{display:none}.dev-select{padding:7px 8px}.dev-select .plan-picker-trigger{max-width:88px}}
 
 /* ---------- gym-shell bar: consumer nav or workspace back-pill above the 3D gym ---------- */
 #gym-shell-bar{display:none}
