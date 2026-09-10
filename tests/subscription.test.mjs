@@ -9,12 +9,12 @@ const memory = () => {
 };
 test('all four plans have explicit, isolated capabilities', () => {
   const expected = {
-    free: ['gym'], premium: ['gym', 'insights', 'export'],
-    trainer: ['gym', 'insights', 'export', 'clients'],
+    free: ['gym'], premium: ['gym', 'insights', 'export', 'route', 'library'],
+    trainer: ['gym', 'insights', 'export', 'route', 'library', 'clients'],
     business: ['gym', 'business', 'analytics', 'equipment', 'trainers', 'promotions'],
   };
   for (const [plan, capabilities] of Object.entries(expected)) {
-    for (const feature of ['gym', 'insights', 'export', 'clients', 'business', 'analytics', 'equipment', 'trainers', 'promotions']) {
+    for (const feature of ['gym', 'insights', 'export', 'route', 'library', 'clients', 'business', 'analytics', 'equipment', 'trainers', 'promotions']) {
       assert.equal(canAccess(plan, feature), capabilities.includes(feature), `${plan}: ${feature}`);
     }
   }

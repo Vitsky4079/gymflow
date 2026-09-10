@@ -163,4 +163,6 @@ body{min-height:100vh}
 .layout-stats .stat-card{flex:1;min-width:140px;margin-bottom:0}
 
 .mock-note{font-size:11px;color:var(--secondary);margin-top:6px}
+.plan-upsell a{color:var(--accent);font-weight:600;text-decoration:none}
+.plan-upsell a:hover{text-decoration:underline}
 .workspace-toast{margin:0 0 14px;padding:10px 13px;border-radius:9px;background:var(--accent-soft);color:var(--accent);font-size:12px}

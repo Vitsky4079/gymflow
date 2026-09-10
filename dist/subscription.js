@@ -2,8 +2,8 @@
 export const STORAGE_KEY = 'gymflow-test-subscription-v1';
 export const PLANS = Object.freeze({
   free: Object.freeze({ name: 'GymFlow Free', capabilities: Object.freeze(['gym']) }),
-  premium: Object.freeze({ name: 'GymFlow Premium', capabilities: Object.freeze(['gym', 'insights', 'export']) }),
-  trainer: Object.freeze({ name: 'GymFlow Trainer', capabilities: Object.freeze(['gym', 'insights', 'export', 'clients']) }),
+  premium: Object.freeze({ name: 'GymFlow Premium', capabilities: Object.freeze(['gym', 'insights', 'export', 'route', 'library']) }),
+  trainer: Object.freeze({ name: 'GymFlow Trainer', capabilities: Object.freeze(['gym', 'insights', 'export', 'route', 'library', 'clients']) }),
   business: Object.freeze({ name: 'GymFlow Business', capabilities: Object.freeze(['gym', 'business', 'analytics', 'equipment', 'trainers', 'promotions']) }),
 });
 export const isPlan = value => typeof value === 'string' && Object.hasOwn(PLANS, value);
