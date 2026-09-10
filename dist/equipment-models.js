@@ -50,7 +50,7 @@ function flattenMaterial(m){
 	m.roughnessMap?.dispose();m.roughnessMap=null;
 	m.color?.set(frame?'#a7abaf':yellow?'#d5bb42':'#17191a');
 	if('metalness' in m)m.metalness=frame?.65:yellow?.3:.05;
-	if('roughness' in m)m.roughness=frame?.3:yellow?.4:.6;
+	if('roughness' in m)m.roughness=frame?.3:yellow?.4:.35;
 	m.needsUpdate=true;
 }
 
