@@ -14,11 +14,38 @@ function getLoader(){
 	return loaderPromise;
 }
 
+// Each Matrix product line (Aura, Ultra, Versa, Magnum, G1...) styles its
+// marketing renders with a different accent color on the same parts — olive,
+// navy, whatever — so a gym assembled from several lines comes out as a
+// patchwork instead of one consistent light-frame/dark-upholstery machine.
+// Strip the hue and keep only the lightness: frames (already light neutral)
+// are unaffected, and every colored seat/shroud/stack collapses to the same
+// neutral dark, exactly like a single showroom color scheme would.
+const desaturatedTextures=new WeakSet();
+function desaturateTexture(texture){
+	if(!texture||!texture.image||desaturatedTextures.has(texture))return;
+	desaturatedTextures.add(texture);
+	const img=texture.image;const w=img.width||img.videoWidth,h=img.height||img.videoHeight;
+	if(!w||!h)return;
+	const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+	const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,w,h);
+	const data=ctx.getImageData(0,0,w,h);const d=data.data;
+	for(let i=0;i<d.length;i+=4){const gray=.2126*d[i]+.7152*d[i+1]+.0722*d[i+2];d[i]=d[i+1]=d[i+2]=gray}
+	ctx.putImageData(data,0,0);
+	texture.image=canvas;texture.needsUpdate=true;
+}
+function desaturateMaterial(m){
+	if(!m)return;
+	if(m.color){const hsl={};m.color.getHSL(hsl);m.color.setHSL(0,0,hsl.l)}
+	desaturateTexture(m.map);
+	if(m.emissive){const hsl={};m.emissive.getHSL(hsl);m.emissive.setHSL(0,0,hsl.l)}
+}
+
 // Real models are exported at wildly different native scales/pivots; fit
 // each one into roughly the footprint our procedural machines occupy and
 // drop it onto the floor instead of hand-tuning 27 individual transforms.
 function normalizeModel(object){
-	object.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});
+	object.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;const mats=Array.isArray(o.material)?o.material:[o.material];mats.forEach(desaturateMaterial)}});
 	const box=new T.Box3().setFromObject(object);const size=new T.Vector3();box.getSize(size);
 	const scale=1.7/Math.max(size.x,size.z,.1);
 	object.scale.setScalar(scale);
