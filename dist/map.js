@@ -11,6 +11,7 @@ export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){c
 const {RoomEnvironment}=await import('three/addons/RoomEnvironment.js');
 const pmrem=new THREE.PMREMGenerator(renderer);
 scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;
+scene.environmentIntensity=.3;
 pmrem.dispose();
 const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.15;controls.maxPolarAngle=Math.PI*.475;controls.minDistance=4;controls.maxDistance=145;controls.target.set(0,0,0);controls.enablePan=true;
 // Some Android WebViews don't reliably report a second finger as its own
