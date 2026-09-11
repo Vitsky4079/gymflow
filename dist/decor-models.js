@@ -25,24 +25,18 @@ const FRAME_KEYWORDS=['paint','frame','coating','wht','white','chrome'];
 const isFrameMaterial=name=>FRAME_KEYWORDS.some(k=>(name||'').toLowerCase().includes(k));
 const isYellowMaterial=name=>(name||'').toLowerCase().includes('yellow');
 // Several free-weight props bake a tiny "PaletteMaterial"/"Palette*" texture
-// per material instead of a real photographic one — some genuinely encode a
-// colour accent (red weight-plate red, safety-yellow knobs), but most are
-// just a grayscale AO-style shading strip with no hue at all, no black, and
-// no yellow. Their material names carry zero frame/dark signal either way
-// (PaletteMaterial001, etc.), so the only way to tell the two apart is to
-// look at the pixels: a real saturated swatch is trustworthy on its own, but
-// a colourless one needs the same light-frame/dark-pad recolour real
-// equipment gets, or it reads as flat, contrast-less white/grey instead of
-// matching the rest of the gym.
-// A single material can cover a whole shared mesh — a rack's frame tubes
-// AND its pull-up grips, say — with per-face UV variation the only thing
-// telling them apart (the earlier grayscale bands: ~239 down to ~94 within
-// one material's own texture). Averaging that whole texture to one number
-// and recoloring the entire material flat washes out exactly that contrast,
-// which is why some props still looked uniformly white/grey after the last
-// fix. Recolor pixel-by-pixel instead: same size, same UVs, each texel
-// rebucketed into frame-light or pad-dark by its own brightness, so whatever
-// shape already carried the contrast keeps it.
+// per material instead of a real photographic one, and it's a mix within a
+// single texture: mostly a grayscale AO-style shading strip (no hue, no true
+// black, no yellow) but sometimes a genuine colour accent too (a red weight
+// plate, a branding decal). Deciding "trust or discard" per whole texture
+// got either result wrong somewhere — trusting it left every grayscale prop
+// flat white/grey, discarding it lost real decals and left every prop's
+// frame at one washed-out shade instead of the rest of the gym's silver. So
+// the decision is made per PIXEL instead: a pixel with real saturation (the
+// decal, the plate colour) is kept as-is, and a colourless one is rebucketed
+// into the same light-frame/dark-pad tone real equipment uses. Same size,
+// same UVs — whatever shape the AO shading already carried (a rack's frame
+// tubes vs. its pull-up grips sharing one material) survives the recolor.
 const paletteCache=new Map();
 function paletteInfo(tex){
 	if(!tex?.image)return null;
@@ -55,14 +49,15 @@ function paletteInfo(tex){
 		const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);
 		const imageData=ctx.getImageData(0,0,w,h);
 		const data=imageData.data;
-		let maxSat=0,n=0;
 		const frameRGB=[0xa7,0xab,0xaf],darkRGB=[0x17,0x19,0x1a];
+		let n=0;
 		for(let i=0;i<data.length;i+=4){
 			if(data[i+3]===0)continue;
+			n++;
 			const r=data[i],g=data[i+1],b=data[i+2];
 			const max=Math.max(r,g,b),min=Math.min(r,g,b);
-			maxSat=Math.max(maxSat,max===0?0:(max-min)/max);
-			n++;
+			const saturation=max===0?0:(max-min)/max;
+			if(saturation>.15)continue;
 			const luminance=(0.2126*r+0.7152*g+0.0722*b)/255;
 			const [nr,ng,nb]=luminance>.55?frameRGB:darkRGB;
 			data[i]=nr;data[i+1]=ng;data[i+2]=nb;
@@ -74,7 +69,7 @@ function paletteInfo(tex){
 			recolored.wrapS=tex.wrapS;recolored.wrapT=tex.wrapT;
 			recolored.magFilter=tex.magFilter;recolored.minFilter=tex.minFilter;
 			recolored.needsUpdate=true;
-			info={maxSaturation:maxSat,recolored};
+			info={recolored};
 		}
 	}
 	paletteCache.set(tex.uuid,info);
@@ -83,7 +78,6 @@ function paletteInfo(tex){
 function flattenMaterial(m){
 	if(!m)return;
 	const info=m.map&&paletteInfo(m.map);
-	if(m.map&&info?.maxSaturation>.15)return;
 	m.emissiveMap?.dispose();m.emissiveMap=null;m.metalnessMap?.dispose();m.metalnessMap=null;m.roughnessMap?.dispose();m.roughnessMap=null;
 	if(info){
 		m.map.dispose();m.map=info.recolored;m.color?.set('#ffffff');
