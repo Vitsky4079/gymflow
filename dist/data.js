@@ -215,7 +215,7 @@ export const equipment = [
     "short": "Ławka",
     "area": "Wolne ciężary · poza planem",
     "x": -8.4,
-    "z": 10,
+    "z": 8.3,
     "kind": "bench",
     "steps": [
       "Sprawdź, czy ławka stoi stabilnie, a regulacja oparcia jest zablokowana.",
@@ -519,7 +519,7 @@ export const equipment = [
     "reps": "10–12",
     "rest": 90,
     "x": -14.0,
-    "z": 10,
+    "z": 8.3,
     "number": 25,
     "featured": false,
     "zone": "Wolne ciężary"
@@ -540,7 +540,7 @@ export const equipment = [
     "reps": "10–12",
     "rest": 90,
     "x": -2.8000000000000007,
-    "z": 10,
+    "z": 8.3,
     "number": 26,
     "featured": false,
     "zone": "Wolne ciężary"
@@ -582,7 +582,7 @@ export const equipment = [
     "reps": "45 s",
     "rest": 90,
     "x": 8.399999999999999,
-    "z": 10,
+    "z": 8.3,
     "number": 28,
     "featured": false,
     "zone": "Funkcjonalna"
@@ -603,7 +603,7 @@ export const equipment = [
     "reps": "10–12",
     "rest": 90,
     "x": 2.799999999999997,
-    "z": 10,
+    "z": 8.3,
     "number": 29,
     "featured": false,
     "zone": "Funkcjonalna"
@@ -624,7 +624,7 @@ export const equipment = [
     "reps": "10–12",
     "rest": 90,
     "x": 14.0,
-    "z": 10,
+    "z": 8.3,
     "number": 30,
     "featured": false,
     "zone": "Funkcjonalna"

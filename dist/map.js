@@ -66,8 +66,10 @@ wall(10.1,.18,-13.05,10.6);wall(.18,3.7,-8,12.45);wall(.18,3.7,-8,17.75);
 wall(10.1,.18,13.05,10.6);wall(.18,3.7,8,12.45);wall(.18,3.7,8,17.75);
 // Men's (west side) — lockers along the long outer wall plus both short
 // walls so the room reads as lined with lockers, not just one bank.
-placeProp(scene,'gym_locker_02',{x:-17.55,z:12.85,rotY:Math.PI/2});
-placeProp(scene,'gym_locker_02',{x:-17.55,z:17.35,rotY:Math.PI/2});
+// gym_locker_02 is a real ~6.2m bank (not the ~4.5m guessed earlier) —
+// one centered on the wall fills it; a second one would've both
+// overlapped it and poked through the front/back walls.
+placeProp(scene,'gym_locker_02',{x:-17.5,z:15.1,rotY:Math.PI/2});
 placeProp(scene,'gym_locker_01',{x:-13.05,z:11.1,rotY:0});
 placeProp(scene,'gym_locker_01',{x:-13.05,z:19.1,rotY:Math.PI});
 placeProp(scene,'gym_locker_01',{x:-8.55,z:12.45,rotY:-Math.PI/2});
@@ -76,8 +78,7 @@ box(scene,3,.15,.6,-13.05,.5,13,wood);[-14.1,-12].forEach(x=>box(scene,.12,.5,.4
 box(scene,3,.15,.6,-13.05,.5,17.5,wood);[-14.1,-12].forEach(x=>box(scene,.12,.5,.4,x,.25,17.5,dark));
 textOnFloor('changingMen',-13.05,15.1,1);
 // Women's (east side, right by reception) — mirror layout.
-placeProp(scene,'gym_locker_02',{x:17.55,z:12.85,rotY:-Math.PI/2});
-placeProp(scene,'gym_locker_02',{x:17.55,z:17.35,rotY:-Math.PI/2});
+placeProp(scene,'gym_locker_02',{x:17.5,z:15.1,rotY:-Math.PI/2});
 placeProp(scene,'gym_locker_01',{x:13.05,z:11.1,rotY:0});
 placeProp(scene,'gym_locker_01',{x:13.05,z:19.1,rotY:Math.PI});
 placeProp(scene,'gym_locker_01',{x:8.55,z:12.45,rotY:Math.PI/2});
