@@ -10,7 +10,7 @@ import {loadKettlebellCluster,loadMatsSpread} from './decor-models.js';
 // aren't Matrix machines either, but real scanned models for those do exist
 // (see decor-models.js) — PROP_LOADERS below handles those two separately
 // since they're not single-GLB swaps (kettlebell composites three weights).
-const MODEL_MAP={treadmill:'treadmill',legpress:'legpress',legpress2:'legpress',chest:'chest',lat:'lat',row:'row',shoulder:'shoulder',legcurl:'legcurl',legextension:'legextension',cable:'cable',pullup:'pullup',bench:'bench',rack:'rack',bike:'bike',elliptical:'elliptical',rower:'rower',stairs:'stairs',airbike:'airbike',pecdeck:'pecdeck',reverse:'reverse',abductor:'abductor',adductor:'adductor',calf:'calf',smith:'smith',hipthrust:'hipthrust',dumbbells:'dumbbells',incline:'incline',dips:'dips'};
+const MODEL_MAP={treadmill:'treadmill',legpress:'legpress',legpress2:'legpress',chest:'chest',lat:'lat',row:'row',shoulder:'shoulder',legcurl:'legcurl',legextension:'legextension',cable:'cable',pullup:'pullup',bench:'bench',rack:'rack',bike:'bike',elliptical:'elliptical',rower:'rower',stairs:'stairs',airbike:'airbike',pecdeck:'pecdeck',reverse:'reverse',abductor:'abductor',adductor:'adductor',calf:'calf',smith:'smith',hipthrust:'hipthrust',dumbbells:'dumbbells',incline:'incline',dips:'dips',abcrunch:'abcrunch',armcurl:'armcurl'};
 
 let loaderPromise=null;
 function getLoader(){
