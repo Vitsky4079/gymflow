@@ -59,8 +59,11 @@ tiledFloorMaterial('concrete_floor',37,9).then(m=>{lobbyFloor.material=m;dirty=t
 // instead of stacked together, so reception (in the middle, by the door)
 // has one right next to it either way you turn.
 wall(36.4,.22,0,-13.5);wall(.22,33.1,-18.1,3.05);wall(.22,33.1,18.1,3.05);wall(15,.22,-10.6,19.6);wall(15,.22,10.6,19.6);
-wall(.18,3.7,-8,12.45);wall(.18,3.7,-8,17.75);
-wall(.18,3.7,8,12.45);wall(.18,3.7,8,17.75);
+// Each changing room needs its own 4th wall closing it off from the
+// training floor (z=10.6) — without it the room was only enclosed on
+// three sides and bled straight into the free-weights/functional zone.
+wall(10.1,.18,-13.05,10.6);wall(.18,3.7,-8,12.45);wall(.18,3.7,-8,17.75);
+wall(10.1,.18,13.05,10.6);wall(.18,3.7,8,12.45);wall(.18,3.7,8,17.75);
 // Men's (west side) — lockers along the long outer wall plus both short
 // walls so the room reads as lined with lockers, not just one bank.
 placeProp(scene,'gym_locker_02',{x:-17.55,z:12.85,rotY:Math.PI/2});
