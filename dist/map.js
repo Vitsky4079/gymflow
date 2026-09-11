@@ -46,11 +46,7 @@ const wood=surface(mat('#8d7353',0,.65),'wood');
 function wall(w,d,x,z){return box(scene,w,3.3,d,x,1.65,z,mat('#ebeae7'))}
 const floorLabels=[];function textOnFloor(key,x,z,size=1.8){const c=document.createElement('canvas');c.width=768;c.height=128;const ctx=c.getContext('2d');ctx.clearRect(0,0,768,128);ctx.font='600 44px sans-serif';ctx.textAlign='center';ctx.fillStyle='#aeb3b0';ctx.fillText(t(key),384,77);const mesh=new THREE.Mesh(new THREE.PlaneGeometry(size*3,size*.5),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));mesh.rotation.x=-Math.PI/2;mesh.position.set(x,.055,z);scene.add(mesh);floorLabels.push({key,canvas:c,ctx,mesh})}
 if(gym.id==='studio'){
-// Widened to cover the west wing (functional zone + fitness studio) added
-// below, alongside the original 36m-wide hall — the whole slab is no
-// longer centered on x=0, hence the -7.95 offset (halfway between the
-// new outer wall at x=-34 and the original one at x=18.2).
-box(scene,52.4,.65,33.5,-7.95,-.45,3.05,mat('#8a948b'));box(scene,52,.12,33.1,-7.95,-.06,3.05,floorMat);
+box(scene,36.4,.65,33.5,0,-.45,3.05,mat('#8a948b'));box(scene,36,.12,33.1,0,-.06,3.05,floorMat);
 box(scene,35.7,.03,5,0,.025,-10,wood);
 // Free weights (west) and machines (east) each get their own puzzle-mat
 // floor, with a concrete aisle straight up the middle — walk in from the
@@ -67,38 +63,7 @@ tiledFloorMaterial('concrete_floor',6,18).then(m=>{aisleFloor.material=m;dirty=t
 const westPlaceholder=box(scene,15,.03,18.1,-10.5,.025,1.55,mat('#3c4640',0,.9));
 tiledMatFloor(scene,'puzzle_mats',{x:-10.5,z:1.55,width:15,depth:18.1,y:.03}).then(()=>{scene.remove(westPlaceholder);dirty=true});
 const eastMatsFloor=box(scene,15,.03,18.1,10.5,.025,1.55,mat('#3c4640',0,.9));
-tiledFloorMaterial('concrete_floor',18,15).then(m=>{eastMatsFloor.material=m;dirty=true});
-// West wing, added onto the original hall: an open functional-training zone
-// (rig, kettlebell wall rack — no wall separates it from free weights, so
-// it just reads as more of that floor) with a fully enclosed fitness
-// studio behind it (own walls + door, since group classes need a wood
-// floor, mirrors and a closed door, not open-plan gym floor).
-const funcPlaceholder=box(scene,16,.03,15.5,-26,.025,-5.75,mat('#3c4640',0,.9));
-tiledMatFloor(scene,'puzzle_mats',{x:-26,z:-5.75,width:16,depth:15.5,y:.03}).then(()=>{scene.remove(funcPlaceholder);dirty=true});
-const salaFloor=box(scene,16,.03,8.6,-26,.025,6.3,wood);
-// Functional zone: a Connexus rig (real Matrix functional-trainer frame —
-// the closest match in the catalog to the open multi-station cage rigs
-// these gyms actually use) plus the wall-mounted kettlebell/medicine-ball
-// rack and a couple of loaded bars leaning against it.
-placeProp(scene,'rig',{x:-30,z:-3,rotY:Math.PI/2});
-placeProp(scene,'rig',{x:-26,z:-3,rotY:Math.PI/2});
-placeProp(scene,'gym_equipment_rack',{x:-32.2,z:-11.5,rotY:Math.PI/2,scale:.85,matte:true});
-placeProp(scene,'barbell1',{x:-22,z:-3,rotY:Math.PI/2});
-placeProp(scene,'barbell2',{x:-22,z:-6.5,rotY:Math.PI/2});
-for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:-30+(ix-1)*.5,z:2+(iz-1)*.5});
-textOnFloor('floorFunctional',-26,-9.5,1.6);
-// Fitness studio: full mirror wall (with a thin LED strip along the top,
-// matching the light bar seen above studio mirrors) opposite the door,
-// plus stacked step platforms and a small ball/roller rack — no aerobic
-// step or resistance-band prop exists in either source folder, so these
-// are simple procedural stand-ins rather than real scans.
-box(scene,.025,2.6,8,-33.9,1.9,6.3,mat('#aebcbc',.8,.15));
-box(scene,.06,.06,8,-33.85,3.2,6.3,mat('#f4f6f2',0,.3));
-for(let i=0;i<12;i++)box(scene,.85,.22+i%3*.22,.85,-29+Math.floor(i/3)*1,.11+i%3*.11,3+(i%3)*.9,i%2?mat('#8a2d1f',.1,.6):mat('#1c1d1f',.1,.6));
-placeProp(scene,'kettlebell_16kg',{x:-22.5,z:9.3});
-placeProp(scene,'kettlebell_24kg',{x:-21.8,z:9.3});
-placeProp(scene,'kettlebell_32kg',{x:-21.1,z:9.3});
-textOnFloor('floorFitness',-26,6.3,1.6);
+tiledFloorMaterial('puzzle_mats',25,30).then(m=>{eastMatsFloor.material=m;dirty=true});
 // Each cardio machine (real station or decorative duplicate — the whole
 // row is one evenly spaced 2.4m grid from x=-15.6 to 15.6) gets its own
 // mat patch instead of standing directly on the wood, with wood still
@@ -119,15 +84,7 @@ tiledFloorMaterial('concrete_floor',37,9).then(m=>{lobbyFloor.material=m;dirty=t
 // rooms sit on opposite sides of the lobby — mirror images of each other —
 // instead of stacked together, so reception (in the middle, by the door)
 // has one right next to it either way you turn.
-wall(52.7,.22,-7.95,-13.5);wall(.22,33.1,18.1,3.05);wall(15,.22,-10.6,19.6);wall(15,.22,10.6,19.6);
-// The old single west wall (z -13.6 to 19.6) split in two: the lobby's
-// side stays as it was, but the training-floor portion is gone entirely —
-// that's now the open doorway into the functional zone. A short partition
-// (with its own 1.4m door) keeps the fitness studio behind it separate.
-wall(.22,9,-18.1,15.1);
-wall(.18,5.3,-18.1,4.65);wall(.18,1.9,-18.1,9.65);
-// West wing's own outer walls.
-wall(.22,24.3,-34,-1.45);wall(16.4,.22,-26,10.6);
+wall(36.4,.22,0,-13.5);wall(.22,33.1,-18.1,3.05);wall(.22,33.1,18.1,3.05);wall(15,.22,-10.6,19.6);wall(15,.22,10.6,19.6);
 // Each changing room needs its own 4th wall closing it off from the
 // training floor (z=10.6) — without it the room was only enclosed on
 // three sides and bled straight into the free-weights/functional zone.
@@ -145,9 +102,6 @@ placeProp(scene,'gym_locker_01',{x:-8.55,z:12.45,rotY:-Math.PI/2});
 placeProp(scene,'gym_locker_01',{x:-8.55,z:17.75,rotY:-Math.PI/2});
 box(scene,3,.15,.6,-13.05,.5,13,wood);[-14.1,-12].forEach(x=>box(scene,.12,.5,.4,x,.25,13,dark));
 box(scene,3,.15,.6,-13.05,.5,17.5,wood);[-14.1,-12].forEach(x=>box(scene,.12,.5,.4,x,.25,17.5,dark));
-// Accent-painted wall (the reference locker room had one warm-colored
-// wall among otherwise plain white ones) on the wall facing the door.
-box(scene,9.8,2.8,.05,-13.05,1.5,10.73,mat('#8a2d1f',0,.7));
 textOnFloor('changingMen',-13.05,15.1,1);
 // Women's (east side, right by reception) — mirror layout.
 placeProp(scene,'gym_locker_02',{x:17.5,z:15.1,rotY:-Math.PI/2});
@@ -157,7 +111,6 @@ placeProp(scene,'gym_locker_01',{x:8.55,z:12.45,rotY:Math.PI/2});
 placeProp(scene,'gym_locker_01',{x:8.55,z:17.75,rotY:Math.PI/2});
 box(scene,3,.15,.6,13.05,.5,13,wood);[12,14.1].forEach(x=>box(scene,.12,.5,.4,x,.25,13,dark));
 box(scene,3,.15,.6,13.05,.5,17.5,wood);[12,14.1].forEach(x=>box(scene,.12,.5,.4,x,.25,17.5,dark));
-box(scene,9.8,2.8,.05,13.05,1.5,10.73,mat('#8a2d1f',0,.7));
 textOnFloor('changingWomen',13.05,15.1,1);
 // Reception pulled right up to the entrance so it's the first thing
 // visitors see walking in through the door gap at x:[-3.1,3.1]. Sized up
@@ -264,7 +217,7 @@ on(window,'keydown',event=>{if(document.querySelector('dialog[open]')||event.def
 on(window,'keyup',event=>heldKeys.delete(event.code));
 on(window,'blur',()=>heldKeys.clear());on(document,'visibilitychange',()=>heldKeys.clear());on(document,'focusin',event=>{if(isTypingTarget(event.target))heldKeys.clear()});
 let previousFrame=performance.now();const forward=new THREE.Vector3();
-function moveKeyboard(now){const elapsed=(now-previousFrame)/1000;previousFrame=now;if(document.querySelector('dialog[open]')){heldKeys.clear();return}if(!heldKeys.size)return;camera.getWorldDirection(forward);forward.y=0;if(forward.lengthSq()<.00001){forward.set(0,1,0).applyQuaternion(camera.quaternion);forward.y=0}forward.normalize();const boost=heldKeys.has('ShiftLeft')||heldKeys.has('ShiftRight')?2:1;const speed=THREE.MathUtils.clamp(camera.position.distanceTo(controls.target)*.22,3,18)*boost;const move=cameraMovement(heldKeys,forward,elapsed,speed);const nx=THREE.MathUtils.clamp(controls.target.x+move.x,(gym.minX??-gym.width/2)+5,(gym.maxX??gym.width/2)-5),nz=THREE.MathUtils.clamp(controls.target.z+move.z,gym.minZ+4.5,gym.maxZ-.5);const dx=nx-controls.target.x,dz=nz-controls.target.z;if(dx||dz){controls.autoRotate=false;camera.position.x+=dx;camera.position.z+=dz;controls.target.x=nx;controls.target.z=nz;dirty=true}}
+function moveKeyboard(now){const elapsed=(now-previousFrame)/1000;previousFrame=now;if(document.querySelector('dialog[open]')){heldKeys.clear();return}if(!heldKeys.size)return;camera.getWorldDirection(forward);forward.y=0;if(forward.lengthSq()<.00001){forward.set(0,1,0).applyQuaternion(camera.quaternion);forward.y=0}forward.normalize();const boost=heldKeys.has('ShiftLeft')||heldKeys.has('ShiftRight')?2:1;const speed=THREE.MathUtils.clamp(camera.position.distanceTo(controls.target)*.22,3,18)*boost;const move=cameraMovement(heldKeys,forward,elapsed,speed);const nx=THREE.MathUtils.clamp(controls.target.x+move.x,-23,23),nz=THREE.MathUtils.clamp(controls.target.z+move.z,-18,22.5);const dx=nx-controls.target.x,dz=nz-controls.target.z;if(dx||dz){controls.autoRotate=false;camera.position.x+=dx;camera.position.z+=dz;controls.target.x=nx;controls.target.z=nz;dirty=true}}
 function resize(){dirty=true;camera.aspect=container.clientWidth/container.clientHeight;camera.updateProjectionMatrix();renderer.setSize(container.clientWidth,container.clientHeight)}const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(container);resize();const vec=new THREE.Vector3();function animate(now=performance.now()){if(disposed)return;frameId=requestAnimationFrame(animate);moveKeyboard(now);controls.update();if(!dirty)return;dirty=false;equipment.forEach(e=>{vec.set(e.x,2.7,e.z).project(camera);e.label.style.left=`${(vec.x*.5+.5)*container.clientWidth}px`;e.label.style.top=`${(-vec.y*.5+.5)*container.clientHeight}px`;e.label.style.visibility=vec.z>1?'hidden':'visible'});if(stairsLabel){vec.set(10,3.8,9).project(camera);stairsLabel.style.left=`${(vec.x*.5+.5)*container.clientWidth}px`;stairsLabel.style.top=`${(-vec.y*.5+.5)*container.clientHeight}px`}renderer.render(scene,camera)}animate();
 return{dispose(){disposed=true;cancelAnimationFrame(frameId);lifecycle.abort();resizeObserver.disconnect();controls.dispose();scene.traverse(o=>{o.geometry?.dispose();const materials=Array.isArray(o.material)?o.material:o.material?[o.material]:[];materials.forEach(m=>{m.map?.dispose();m.dispose()})});renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();ownedLabels.forEach(label=>label.remove());stairsLabel?.remove()},update(selected,ids,done,showRoute=true){selectedId=equipment.some(e=>e.id===selected)?selected:equipment[0].id;dirty=true;equipment.forEach((e,i)=>{halos[i].visible=e.id===selected;e.label.classList.toggle('selected',e.id===selected);e.label.classList.toggle('in-route',ids.includes(e.id));e.label.classList.toggle('done',done.includes(e.id));e.label.setAttribute('aria-pressed',String(e.id===selected));e.label.querySelector('b').textContent=done.includes(e.id)?'✓':e.number;e.label.querySelector('.label-text').textContent=machine(e).short;e.label.setAttribute('aria-label',`${e.number}. ${machine(e).name}`);e.label.title=`${machine(e).name}${ids.includes(e.id)?' · '+t('step',{n:ids.indexOf(e.id)+1}):''}`});const routeIds=showRoute?ids:[];if(routeIds.join()!==activeIds.join()){activeIds=[...routeIds];drawRoute(routeIds)}},language(){dirty=true;if(stairsLabel)stairsLabel.textContent=t(currentFloor?'goDown':'goUp');floorLabels.forEach(({key,canvas,ctx,mesh})=>{ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillText(t(key),384,77);mesh.material.map.needsUpdate=true})},theme(value){dirty=true;const bg=value==='dark'?'#0c1012':'#e6e9e7';scene.background.set(bg);renderer.setClearColor(bg);routeMat.color.set(value==='dark'?'#b9ec68':'#528947')},focus(id){focusOn(id)}};
 }

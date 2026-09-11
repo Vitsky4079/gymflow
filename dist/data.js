@@ -224,8 +224,8 @@ export const equipment = [
     "sets": 3,
     "reps": "5–8",
     "rest": 90,
-    "x": -30,
-    "z": -8,
+    "x": 10.5,
+    "z": 6.5,
     "number": 10,
     "featured": true,
     "zone": "Funkcjonalna"
@@ -395,48 +395,6 @@ export const equipment = [
     "x": 4.5,
     "z": 2.5,
     "number": 18,
-    "featured": false,
-    "zone": "Siła"
-  },
-  {
-    "id": "abcrunch",
-    "name": "Brzuszki na maszynie",
-    "short": "Brzuszki na maszynie",
-    "area": "Brzuch",
-    "x": 10.5,
-    "z": 6.5,
-    "kind": "abcrunch",
-    "steps": [
-      "Usiądź i ustaw poduszkę piersiową na wysokości mostka.",
-      "Ściągnij łokcie w dół, zginając tułów bez szarpania.",
-      "Wróć powoli do pozycji wyjściowej, utrzymując napięcie brzucha."
-    ],
-    "tip": "Wybierz obciążenie pozwalające zachować kontrolę nad całym ruchem.",
-    "number": 32,
-    "sets": 3,
-    "reps": "10–12",
-    "rest": 90,
-    "featured": false,
-    "zone": "Siła"
-  },
-  {
-    "id": "armcurl",
-    "name": "Uginanie ramion",
-    "short": "Uginanie ramion",
-    "area": "Biceps",
-    "x": 16.5,
-    "z": 6.5,
-    "kind": "armcurl",
-    "steps": [
-      "Oprzyj ramiona na podparciu i chwyć uchwyty.",
-      "Zegnij ramiona, unikając unoszenia barków.",
-      "Wyprostuj ramiona powoli, bez uderzania stosem."
-    ],
-    "tip": "Wybierz obciążenie pozwalające zachować kontrolę nad całym ruchem.",
-    "number": 33,
-    "sets": 3,
-    "reps": "10–12",
-    "rest": 90,
     "featured": false,
     "zone": "Siła"
   },
@@ -686,8 +644,8 @@ export const equipment = [
     "sets": 3,
     "reps": "10–12",
     "rest": 90,
-    "x": -26,
-    "z": -8,
+    "x": 16.5,
+    "z": 6.5,
     "number": 30,
     "featured": false,
     "zone": "Funkcjonalna"
