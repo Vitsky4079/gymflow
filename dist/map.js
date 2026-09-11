@@ -104,8 +104,10 @@ for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6
 // fill each type out into a proper side-by-side bank of three (like a real
 // gym's cardio wall) with non-interactive duplicates. rotY matches the
 // real stations' CARDIO_WALL rotation in gyms.js so every unit — real or
-// decorative — faces the same TV wall.
-[['treadmill',-10.8],['treadmill',-8.4],['bike',-3.6],['bike',-1.2],['elliptical',3.6],['elliptical',6],['rower',10.8],['rower',13.2]]
+// decorative — faces the same TV wall. The air bike slot at the end
+// became a second stair climber instead (the real airbike station moved
+// back off the wall, just behind this row).
+[['treadmill',-10.8],['treadmill',-8.4],['bike',-3.6],['bike',-1.2],['elliptical',3.6],['elliptical',6],['rower',10.8],['rower',13.2],['stairs',15.6]]
 	.forEach(([kind,x])=>{const g=buildEquipment({id:kind,kind});g.position.set(x,.065,-10);g.rotation.y=Math.PI;g.scale.setScalar(1.08);scene.add(g)});
 for(const x of [-5.6,5.6])for(const z of [-7.5,7.5]){box(scene,.38,3.4,.38,x,1.7,z,mat('#eeeeE7'));box(scene,.5,.1,.5,x,.05,z,dark)}
 // Mirror wall, wall-mounted bars and accessories.

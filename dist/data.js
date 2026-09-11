@@ -351,7 +351,7 @@ export const equipment = [
     "reps": "5 min",
     "rest": 90,
     "x": 15.6,
-    "z": -10,
+    "z": -6,
     "number": 17,
     "featured": false,
     "zone": "Cardio"
