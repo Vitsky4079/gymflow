@@ -24,19 +24,47 @@ function loadTemplate(name){
 const FRAME_KEYWORDS=['paint','frame','coating','wht','white','chrome'];
 const isFrameMaterial=name=>FRAME_KEYWORDS.some(k=>(name||'').toLowerCase().includes(k));
 const isYellowMaterial=name=>(name||'').toLowerCase().includes('yellow');
+// Several free-weight props bake a tiny "PaletteMaterial"/"Palette*" texture
+// per material instead of a real photographic one — some genuinely encode a
+// colour accent (red weight-plate red, safety-yellow knobs), but most are
+// just a grayscale AO-style shading strip with no hue at all, no black, and
+// no yellow. Their material names carry zero frame/dark signal either way
+// (PaletteMaterial001, etc.), so the only way to tell the two apart is to
+// look at the pixels: a real saturated swatch is trustworthy on its own, but
+// a colourless one needs the same light-frame/dark-pad recolour real
+// equipment gets, or it reads as flat, contrast-less white/grey instead of
+// matching the rest of the gym.
+const textureStatsCache=new Map();
+function textureStats(tex){
+	if(!tex?.image)return null;
+	if(textureStatsCache.has(tex.uuid))return textureStatsCache.get(tex.uuid);
+	const img=tex.image;
+	const w=img.width,h=img.height;
+	let stats=null;
+	if(w&&h){
+		const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
+		const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);
+		const data=ctx.getImageData(0,0,w,h).data;
+		let lumaSum=0,n=0,maxSat=0;
+		for(let i=0;i<data.length;i+=4){
+			if(data[i+3]===0)continue;
+			const r=data[i],g=data[i+1],b=data[i+2];
+			lumaSum+=(0.2126*r+0.7152*g+0.0722*b)/255;
+			const max=Math.max(r,g,b),min=Math.min(r,g,b);
+			maxSat=Math.max(maxSat,max===0?0:(max-min)/max);
+			n++;
+		}
+		if(n)stats={luminance:lumaSum/n,maxSaturation:maxSat};
+	}
+	textureStatsCache.set(tex.uuid,stats);
+	return stats;
+}
 function flattenMaterial(m){
 	if(!m)return;
-	// Unlike the real equipment stations (always plain, textureless CAD
-	// materials — flattenMaterial's whole reason to exist), several of these
-	// decorative props carry a genuine small baseColorTexture (a baked
-	// "PaletteMaterial"/"Palette*" colour-swatch atlas). Their material names
-	// (PaletteMaterial001, etc.) carry no frame/dark signal at all, so
-	// name-based flattening would paint everything the same dark bucket —
-	// stripping a real, deliberately authored texture down to solid black.
-	// Trust the baked texture instead of guessing from the name.
-	if(m.map)return;
-	const frame=isFrameMaterial(m.name),yellow=!frame&&isYellowMaterial(m.name);
-	m.emissiveMap?.dispose();m.emissiveMap=null;m.metalnessMap?.dispose();m.metalnessMap=null;m.roughnessMap?.dispose();m.roughnessMap=null;
+	const stats=m.map&&textureStats(m.map);
+	if(m.map&&stats?.maxSaturation>.15)return;
+	const frame=stats?stats.luminance>.55:isFrameMaterial(m.name),yellow=!frame&&!stats&&isYellowMaterial(m.name);
+	m.map?.dispose();m.map=null;m.emissiveMap?.dispose();m.emissiveMap=null;m.metalnessMap?.dispose();m.metalnessMap=null;m.roughnessMap?.dispose();m.roughnessMap=null;
 	m.color?.set(frame?'#a7abaf':yellow?'#b8860c':'#17191a');
 	if('metalness' in m)m.metalness=frame?.65:yellow?.3:.05;
 	if('roughness' in m)m.roughness=frame?.3:yellow?.4:.6;
