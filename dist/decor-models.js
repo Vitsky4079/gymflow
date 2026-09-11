@@ -1,10 +1,13 @@
 import * as T from 'three';
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 
-// Real-world scanned props (lobby furniture, floor tiles, kettlebells) — unlike
-// the Matrix machine pack these ship proper PBR textures and are already
-// correctly metric-scaled, so no flattenMaterial/normalizeModel treatment is
-// needed: just load, clone, place.
+// Most of these are real-world scans (lobby furniture, floor tiles,
+// kettlebells) that ship proper PBR textures and are already correctly
+// metric-scaled — no treatment needed, just load, clone, place. The
+// free-weight zone's rack/bench/barbell/dumbbell-rack props are instead
+// pulled from the same Matrix CAD-export pack as the real equipment
+// stations, which needs flattenMaterial's frame/dark cleanup (see
+// equipment-models.js's copy for why) — `flatten` opts a prop into that.
 let loaderPromise=null;
 function getLoader(){
 	if(!loaderPromise)loaderPromise=Promise.all([import('three/addons/GLTFLoader.js'),import('three/addons/meshopt_decoder.module.js')]).then(([{GLTFLoader},{MeshoptDecoder}])=>{const loader=new GLTFLoader();loader.setMeshoptDecoder(MeshoptDecoder);return loader});
@@ -15,14 +18,39 @@ function loadTemplate(name){
 	if(!modelCache.has(name))modelCache.set(name,getLoader().then(loader=>new Promise((resolve,reject)=>loader.load(`./props/${name}.glb`,gltf=>{gltf.scene.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});resolve(gltf.scene)},undefined,reject))));
 	return modelCache.get(name);
 }
+// Duplicated from equipment-models.js rather than imported — that module
+// already imports from this one (loadKettlebellCluster/loadMatsSpread), and
+// this half is small and stable enough that a circular import isn't worth it.
+const FRAME_KEYWORDS=['paint','frame','coating','wht','white'];
+const isFrameMaterial=name=>FRAME_KEYWORDS.some(k=>(name||'').toLowerCase().includes(k));
+const isYellowMaterial=name=>(name||'').toLowerCase().includes('yellow');
+function flattenMaterial(m){
+	if(!m)return;
+	const frame=isFrameMaterial(m.name),yellow=!frame&&isYellowMaterial(m.name);
+	m.map?.dispose();m.map=null;m.emissiveMap?.dispose();m.emissiveMap=null;m.metalnessMap?.dispose();m.metalnessMap=null;m.roughnessMap?.dispose();m.roughnessMap=null;
+	m.color?.set(frame?'#a7abaf':yellow?'#b8860c':'#17191a');
+	if('metalness' in m)m.metalness=frame?.65:yellow?.3:.05;
+	if('roughness' in m)m.roughness=frame?.3:yellow?.4:.6;
+	m.needsUpdate=true;
+}
+function flattenModel(root){
+	root.traverse(o=>{
+		if(!o.isMesh)return;
+		// clone() copies `.material` by reference — mutating in place would
+		// leak into every other instance (and the cached template) sharing it.
+		const clone=m=>{if(!m)return m;const c=m.clone();flattenMaterial(c);return c};
+		o.material=Array.isArray(o.material)?o.material.map(clone):clone(o.material);
+	});
+}
 // Places one prop instance in the room. Callers await the returned promise
 // only if they need the instance handle; most room decor is fire-and-forget.
-export function placeProp(scene,name,{x=0,y=0,z=0,rotY=0,scale=1}={}){
+export function placeProp(scene,name,{x=0,y=0,z=0,rotY=0,scale=1,flatten=false}={}){
 	return loadTemplate(name).then(template=>{
 		const instance=template.clone(true);
 		instance.position.set(x,y,z);
 		instance.rotation.y=rotY;
 		if(scale!==1)instance.scale.setScalar(scale);
+		if(flatten)flattenModel(instance);
 		scene.add(instance);
 		return instance;
 	});
@@ -53,48 +81,16 @@ export function loadMatsSpread(){
 	});
 }
 // Small floor tiles (puzzle_mats above, concrete/rubber below) are metre-scale
-// real geometry — fine to place a handful of instances, but tiling a whole
-// room out of them would mean hundreds of draw calls. For a big area, reuse
-// the tile's own scanned material (already correctly UV-mapped 0–1 across
-// the tile) on a single plane instead, with the texture's repeat set to the
-// plane's real size in metres — one draw call, same material.
-// Tiling a whole zone this way — one plane, UV-repeated texture — reads as
-// a smeared, blotchy mess once the tile's own texture has real detail
-// (confirmed on the cardio row's floor_mat patches). Real tiles laid edge
-// to edge look correct instead; merging every tile's geometry into one
-// mesh per material (matching equipment-models.js's per-station merge)
-// keeps it to a handful of draw calls despite covering a whole room in
-// ~0.6m tiles.
-export function tiledMatFloor(scene,name,{x=0,z=0,width,depth,y=.03}={}){
-	return loadTemplate(name).then(template=>{
-		const box=new T.Box3().setFromObject(template);
-		const size=new T.Vector3();box.getSize(size);
-		const cols=Math.max(1,Math.round(width/size.x)),rows=Math.max(1,Math.round(depth/size.z));
-		const tileW=width/cols,tileD=depth/rows;
-		const buckets=new Map();
-		for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){
-			const inst=template.clone(true);
-			inst.scale.set(tileW/size.x,1,tileD/size.z);
-			inst.position.set(x+(i-(cols-1)/2)*tileW,y,z+(j-(rows-1)/2)*tileD);
-			inst.updateMatrixWorld(true);
-			inst.traverse(o=>{
-				if(!o.isMesh)return;
-				let geo=o.geometry.clone().applyMatrix4(o.matrixWorld);
-				if(geo.index){const flat=geo.toNonIndexed();geo.dispose();geo=flat}
-				const arr=buckets.get(o.material)||[];arr.push(geo);buckets.set(o.material,arr);
-			});
-		}
-		const group=new T.Group();
-		for(const [m,geos] of buckets){
-			const merged=mergeGeometries(geos,false);
-			if(merged)group.add(new T.Mesh(merged,m));
-			geos.forEach(g=>g.dispose());
-		}
-		group.traverse(o=>{if(o.isMesh)o.receiveShadow=true});
-		scene.add(group);
-		return group;
-	});
-}
+// real geometry — fine to place a handful of instances (the cardio row's
+// floor_mat patches, 6-14 tiles each), but tiling a whole zone out of them
+// packs in hundreds of copies. Merging that many into one mesh worked for
+// floor_mat, but puzzle_mats' own geometry is dense enough that the same
+// approach produced a single ~28-million-vertex mesh for the free-weight
+// zone — which silently failed to render properly. Reuse the tile's own
+// scanned material (already correctly UV-mapped 0–1 across the tile) on a
+// single plane instead, with the texture's repeat set to the plane's real
+// size in metres — one draw call, same material, at the cost of the
+// texture repeating in a visibly regular grid up close.
 export function tiledFloorMaterial(name,repeatX,repeatZ){
 	return loadTemplate(name).then(template=>{
 		let material=null;

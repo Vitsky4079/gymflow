@@ -2,7 +2,7 @@ import {findGymPath} from './gym-routing.js';
 import {t,machine} from './i18n.js';
 import {cameraMovement,isTypingTarget} from './camera-navigation.js';
 import {buildEquipment} from './equipment-models.js';
-import {placeProp,tiledFloorMaterial,tiledMatFloor} from './decor-models.js';
+import {placeProp,tiledFloorMaterial} from './decor-models.js';
 export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){const equipment=allEquipment.filter(e=>e.floor===currentFloor);const lifecycle=new AbortController();const on=(target,event,handler)=>target.addEventListener(event,handler,{signal:lifecycle.signal});let disposed=false,frameId;const $=s=>document.querySelector(s);const THREE=await import('three');const {OrbitControls}=await import('three/addons/OrbitControls.js');const container=$('#scene');const scene=new THREE.Scene();scene.background=new THREE.Color('#edf2ee');const camera=new THREE.PerspectiveCamera(34,1,.1,250);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.97;renderer.setClearColor('#edf2ee');container.appendChild(renderer.domElement);
 // Real GLB machines are PBR (metalness/roughness) and look flat/matte with
 // only directional lights and nothing to reflect. A synthetic "room" IBL
@@ -55,13 +55,14 @@ box(scene,35.7,.03,5,0,.025,-10,wood);
 // brightness mismatch the concrete/mat split below replaces.)
 const aisleFloor=box(scene,6,.03,18.1,0,.025,1.55,mat('#8a8f8c',0,.9));
 tiledFloorMaterial('concrete_floor',6,18).then(m=>{aisleFloor.material=m;dirty=true});
-// Free weights get the real-tile treatment (individual puzzle_mats tiles,
-// merged into a couple of draw calls) so it actually reads as a mat floor
-// up close — completely covering the zone, edge to edge. The machine
-// side keeps the cheaper repeated-texture plane; it's viewed from further
-// back walking between stations, where the difference isn't visible.
-const westPlaceholder=box(scene,15,.03,18.1,-10.5,.025,1.55,mat('#3c4640',0,.9));
-tiledMatFloor(scene,'puzzle_mats',{x:-10.5,z:1.55,width:15,depth:18.1,y:.03}).then(()=>{scene.remove(westPlaceholder);dirty=true});
+// Both zones share the same repeated-texture plane so the color actually
+// matches. The free-weight zone used to merge ~750 individual puzzle_mats
+// tiles into one mesh instead (tiledMatFloor, removed) for a more
+// authentic look — but that tile's geometry is dense enough that it
+// merged into a ~28-million-vertex mesh, which is why that floor was
+// rendering as flat, untextured grey instead of a tiled mat.
+const westMatsFloor=box(scene,15,.03,18.1,-10.5,.025,1.55,mat('#3c4640',0,.9));
+tiledFloorMaterial('puzzle_mats',25,30).then(m=>{westMatsFloor.material=m;dirty=true});
 const eastMatsFloor=box(scene,15,.03,18.1,10.5,.025,1.55,mat('#3c4640',0,.9));
 tiledFloorMaterial('puzzle_mats',25,30).then(m=>{eastMatsFloor.material=m;dirty=true});
 // Each cardio machine (real station or decorative duplicate — the whole
@@ -135,11 +136,14 @@ box(scene,.025,1.8,9,-17.94,1.75,6,mat('#aebcbc',.8,.15));for(let z=-5;z<3;z+=2)
 // (west wall, near the aisle) far enough from the 6 real stations' x
 // positions (-13/-8) that no z-alignment check is needed — every item's
 // measured footprint is under 2.2m, so 3.3m+ of x-separation alone clears
-// them regardless of row.
+// them regardless of row. `flatten` gives them the same frame/dark
+// material cleanup as the real equipment (loaded via equipment-models.js) —
+// without it these render in their raw, inconsistent CAD-export colors
+// (mostly flat white/grey), which is the "bland" look reported.
 [['barbell1',-6.5],['barbell2',-3.9],['dumbbell_rack2',-1.3],['dumbbell_rack3',1.3],['barbell1',3.9],['barbell2',6.5],['bench2',9.1]]
-	.forEach(([name,z])=>placeProp(scene,name,{x:-16.3,z,rotY:Math.PI/2}));
+	.forEach(([name,z])=>placeProp(scene,name,{x:-16.3,z,rotY:Math.PI/2,flatten:true}));
 [['rack2',-6.5],['rack3',-3.9],['rack4',-1.3],['rack5',1.3],['bench3',3.9],['bench4',6.5],['bench5',9.1]]
-	.forEach(([name,z])=>placeProp(scene,name,{x:-4.5,z,rotY:-Math.PI/2}));
+	.forEach(([name,z])=>placeProp(scene,name,{x:-4.5,z,rotY:-Math.PI/2,flatten:true}));
 textOnFloor('floorCardio',0,-12.5,1.8);textOnFloor('floorFree',-10.5,1.55,2.2);textOnFloor('floorStrength',10.5,1.55,2.2);textOnFloor('reception',5,16.4,1);textOnFloor('entrance',0,17.8,1.2);
 }else{
 const rubberFloor=surface(mat(currentFloor?'#46494b':'#535552',0,.92),'rubber');
