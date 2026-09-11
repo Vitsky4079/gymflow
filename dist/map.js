@@ -47,7 +47,17 @@ function wall(w,d,x,z){return box(scene,w,3.3,d,x,1.65,z,mat('#ebeae7'))}
 const floorLabels=[];function textOnFloor(key,x,z,size=1.8){const c=document.createElement('canvas');c.width=768;c.height=128;const ctx=c.getContext('2d');ctx.clearRect(0,0,768,128);ctx.font='600 44px sans-serif';ctx.textAlign='center';ctx.fillStyle='#aeb3b0';ctx.fillText(t(key),384,77);const mesh=new THREE.Mesh(new THREE.PlaneGeometry(size*3,size*.5),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));mesh.rotation.x=-Math.PI/2;mesh.position.set(x,.055,z);scene.add(mesh);floorLabels.push({key,canvas:c,ctx,mesh})}
 if(gym.id==='studio'){
 box(scene,36.4,.65,33.5,0,-.45,3.05,mat('#8a948b'));box(scene,36,.12,33.1,0,-.06,3.05,floorMat);
-box(scene,35.7,.03,5,0,.025,-10,wood);box(scene,35.7,.03,15,0,.025,0,surface(mat('#414346',0,.92),'rubber'));box(scene,18,.03,3.1,-9,.025,9.05,surface(mat('#414346',0,.92),'rubber'));box(scene,17.7,.03,3.1,9,.025,9.05,surface(mat('#505253',0,.92),'rubber'));
+box(scene,35.7,.03,5,0,.025,-10,wood);
+// Free weights (west) and machines (east) each get their own puzzle-mat
+// floor, with a concrete aisle straight up the middle — walk in from the
+// entrance, then choose left or right. (The old east zone used a visibly
+// lighter rubber color than the west one, '#505253' vs '#414346' — the
+// brightness mismatch the concrete/mat split below replaces.)
+const aisleFloor=box(scene,6,.03,18.1,0,.025,1.55,mat('#8a8f8c',0,.9));
+tiledFloorMaterial('concrete_floor',6,18).then(m=>{aisleFloor.material=m;dirty=true});
+const westMatsFloor=box(scene,15,.03,18.1,-10.5,.025,1.55,mat('#3c4640',0,.9));
+const eastMatsFloor=box(scene,15,.03,18.1,10.5,.025,1.55,mat('#3c4640',0,.9));
+tiledFloorMaterial('puzzle_mats',25,30).then(m=>{westMatsFloor.material=m;eastMatsFloor.material=m;dirty=true});
 // Each cardio machine (real station or decorative duplicate — the whole
 // row is one evenly spaced 2.4m grid from x=-15.6 to 15.6) gets its own
 // mat patch instead of standing directly on the wood, with wood still
@@ -107,15 +117,14 @@ for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6
 // fill each type out into a proper side-by-side bank of three (like a real
 // gym's cardio wall) with non-interactive duplicates. rotY matches the
 // real stations' CARDIO_WALL rotation in gyms.js so every unit — real or
-// decorative — faces the same TV wall. The air bike slot at the end
-// became a second stair climber instead (the real airbike station moved
-// back off the wall, just behind this row).
-[['treadmill',-10.8],['treadmill',-8.4],['bike',-3.6],['bike',-1.2],['elliptical',3.6],['elliptical',6],['rower',10.8],['rower',13.2],['stairs',15.6]]
+// decorative — faces the same TV wall. The end of the row is a second
+// stair climber; the real airbike station (a second, real, bike-type
+// unit) now fills one of the two "bike" slots instead of a duplicate.
+[['treadmill',-10.8],['treadmill',-8.4],['bike',-1.2],['elliptical',3.6],['elliptical',6],['rower',10.8],['rower',13.2],['stairs',15.6]]
 	.forEach(([kind,x])=>{const g=buildEquipment({id:kind,kind});g.position.set(x,.065,-10);g.rotation.y=Math.PI;g.scale.setScalar(1.08);scene.add(g)});
-for(const x of [-5.6,5.6])for(const z of [-7.5,7.5]){box(scene,.38,3.4,.38,x,1.7,z,mat('#eeeeE7'));box(scene,.5,.1,.5,x,.05,z,dark)}
 // Mirror wall, wall-mounted bars and accessories.
 box(scene,.025,1.8,9,-17.94,1.75,6,mat('#aebcbc',.8,.15));for(let z=-5;z<3;z+=2){bar(scene,[-17.6,.3,z],[-17.6,2.8,z],.04,wood);bar(scene,[-17.6,.3,z+1.4],[-17.6,2.8,z+1.4],.04,wood);for(let y=.5;y<2.9;y+=.28)bar(scene,[-17.6,y,z],[-17.6,y,z+1.4],.03,wood)}
-textOnFloor('floorCardio',0,-12.5,1.8);textOnFloor('floorStrength',0,-2.5,1.8);textOnFloor('floorFree',-10,7.5,1.4);textOnFloor('floorFunctional',10,9,1.4);textOnFloor('reception',5,16.4,1);textOnFloor('entrance',0,17.8,1.2);
+textOnFloor('floorCardio',0,-12.5,1.8);textOnFloor('floorFree',-10.5,1.55,2.2);textOnFloor('floorStrength',10.5,1.55,2.2);textOnFloor('reception',5,16.4,1);textOnFloor('entrance',0,17.8,1.2);
 }else{
 const rubberFloor=surface(mat(currentFloor?'#46494b':'#535552',0,.92),'rubber');
 box(scene,28.3,.55,24.3,0,-.35,0,mat('#8a948b'));box(scene,28,.1,24,0,-.045,0,rubberFloor);
