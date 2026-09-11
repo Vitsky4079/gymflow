@@ -51,7 +51,30 @@ function flattenMaterial(m){
 	m.color?.set(frame?'#a7abaf':yellow?'#b8860c':'#17191a');
 	if('metalness' in m)m.metalness=frame?.65:yellow?.3:.05;
 	if('roughness' in m)m.roughness=frame?.3:yellow?.4:.35;
+	if(!frame&&!yellow)addCurvatureHighlight(m);
 	m.needsUpdate=true;
+}
+
+// None of the 27 downloaded GLBs ship any texture — the embossed "MATRIX"
+// wordmark and every other engraved detail (pin counts, seams) is bare
+// geometry sharing one flat material with the surrounding panel, so there's
+// no separate colour to give the lettering. A per-mesh decal (stamping a
+// drawn logo onto whichever small part "looks like a badge") turned out not
+// to work: the wordmark isn't its own mesh, it's baked into the same single
+// huge panel mesh as everything else, so nothing isolates it.
+// Fake the contrast a real paint-fill would give instead, with a screen-space
+// curvature highlight: fwidth(normal) spikes wherever the surface normal
+// changes sharply between adjacent pixels — exactly the raised/recessed
+// edges of embossed text or ribbing — and stays ~0 on flat panel. Blend
+// those edges toward a light grey regardless of light direction, so engraved
+// detail reads consistently instead of depending on catching a highlight.
+function addCurvatureHighlight(m){
+	m.onBeforeCompile=shader=>{
+		shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
+	float curvature=length(fwidth(normalize(vNormal)));
+	diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.78,.80,.81),smoothstep(.12,.5,curvature)*.8);`);
+	};
+	m.customProgramCacheKey=()=>'curvatureHighlight';
 }
 
 // Real models are exported at wildly different native scales/pivots; fit
@@ -70,7 +93,11 @@ function flattenMaterial(m){
 // neighbors instead of squat.
 const HEIGHT_TARGETS={cable:2.9};
 function normalizeModel(object,id){
-	object.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;const mats=Array.isArray(o.material)?o.material:[o.material];mats.forEach(flattenMaterial)}});
+	object.traverse(o=>{
+		if(!o.isMesh)return;
+		o.castShadow=true;o.receiveShadow=true;
+		const mats=Array.isArray(o.material)?o.material:[o.material];mats.forEach(flattenMaterial);
+	});
 	const box=new T.Box3().setFromObject(object);const size=new T.Vector3();box.getSize(size);
 	const heightTarget=HEIGHT_TARGETS[id];
 	const scale=heightTarget?heightTarget/Math.max(size.y,.1):1.7/Math.max((size.x+size.z)/2,.1);
