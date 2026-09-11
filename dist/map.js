@@ -51,11 +51,13 @@ box(scene,35.7,.03,5,0,.025,-10,wood);box(scene,35.7,.03,15,0,.025,0,surface(mat
 // Each cardio machine (real station or decorative duplicate — the whole
 // row is one evenly spaced 2.4m grid from x=-15.6 to 15.6) gets its own
 // mat patch instead of standing directly on the wood, with wood still
-// showing through the gaps between machines. Sits above the real
-// stations' soft ground-shadow decal (y=.061, added later below) rather
-// than under it — underneath, the shadow's dark radial gradient cut
-// across the mat's tile pattern and made it look broken.
-tiledFloorMaterial('floor_mat',4,5).then(m=>{for(let i=0;i<14;i++)box(scene,2.1,.02,2.6,-15.6+i*2.4,.07,-10,m);dirty=true});
+// showing through the gaps between machines. Built from real floor_mat
+// tiles (2x scale, 2x3 grid, laid edge-to-edge with no overlap) rather
+// than one plane with a UV-repeated texture — the repeated texture read
+// as a smeared, blotchy mess instead of a clean tiled mat. Sits above
+// the real stations' soft ground-shadow decal (y=.061, added later
+// below) rather than under it, so that shadow doesn't darken the mats.
+for(let i=0;i<14;i++){const cx=-15.6+i*2.4;for(const dx of [-.51,.51])for(const dz of [-1.02,0,1.02])placeProp(scene,'floor_mat',{x:cx+dx,y:.065,z:-10+dz,scale:2});}
 // The lobby reads as its own space (not more training floor) with a real
 // scanned polished-concrete material instead of the wood/rubber zones —
 // one tiled plane rather than hundreds of individual floor-tile props.
