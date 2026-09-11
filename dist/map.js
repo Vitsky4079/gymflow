@@ -101,12 +101,11 @@ placeProp(scene,'gym_equipment_rack',{x:16.8,z:0,rotY:-Math.PI/2,scale:.6,matte:
 for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:16.8+(ix-1)*.5,z:2.2+(iz-1)*.5});
 for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6,.15));box(scene,4.9,.07,.08,x,1.3,-13.3,silver)}
 // The cardio row only has one real, clickable station per machine type —
-// fill each type out into a proper side-by-side bank (three each, two for
-// stairs) with non-interactive duplicates, like a real gym's cardio wall.
-// rotY matches the real stations' CARDIO_WALL rotation in gyms.js so every
-// unit — real or decorative — faces the same TV wall. Airbike moved off
-// this row entirely (kept as a real station elsewhere in the room).
-[['treadmill',-12.1],['treadmill',-9.9],['bike',-5.5],['bike',-3.3],['elliptical',1.1],['elliptical',3.3],['rower',7.7],['rower',9.9],['stairs',14.3]]
+// fill each type out into a proper side-by-side bank of three (like a real
+// gym's cardio wall) with non-interactive duplicates. rotY matches the
+// real stations' CARDIO_WALL rotation in gyms.js so every unit — real or
+// decorative — faces the same TV wall.
+[['treadmill',-10.8],['treadmill',-8.4],['bike',-3.6],['bike',-1.2],['elliptical',3.6],['elliptical',6],['rower',10.8],['rower',13.2]]
 	.forEach(([kind,x])=>{const g=buildEquipment({id:kind,kind});g.position.set(x,.065,-10);g.rotation.y=Math.PI;g.scale.setScalar(1.08);scene.add(g)});
 for(const x of [-5.6,5.6])for(const z of [-7.5,7.5]){box(scene,.38,3.4,.38,x,1.7,z,mat('#eeeeE7'));box(scene,.5,.1,.5,x,.05,z,dark)}
 // Mirror wall, wall-mounted bars and accessories.

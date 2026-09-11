@@ -2,7 +2,7 @@ import {equipment,presets,trainerPresets} from './data.js';
 // Studio 01's cardio row sits against the back wall (TVs mounted above it) —
 // these machines face it (rotY) rather than the default orientation the
 // shared equipment data uses everywhere else, like Atlas Club's own grid.
-const CARDIO_WALL=['treadmill','bike','elliptical','rower','stairs'];
+const CARDIO_WALL=['treadmill','bike','elliptical','rower','stairs','airbike'];
 export const gyms=[
 {id:'studio',name:'Studio 01',description:{en:'Open-plan training studio',pl:'Otwarta przestrzeń treningowa'},floors:1,width:36,depth:33,minZ:-13.5,maxZ:19.5,placements:equipment.map(e=>({id:e.id,x:e.x,z:e.z,floor:0,...(CARDIO_WALL.includes(e.id)?{rotY:Math.PI}:{})})),presets:[...presets,...trainerPresets],obstacles:[{x:-5.6,z:-7.5,w:.8,d:.8},{x:5.6,z:-7.5,w:.8,d:.8},{x:-5.6,z:7.5,w:.8,d:.8},{x:5.6,z:7.5,w:.8,d:.8}]},
 {id:'atlas',name:'Atlas Club',description:{en:'Two floors · strength & movement',pl:'Dwa poziomy · siła i ruch'},floors:2,width:28,depth:24,minZ:-12,maxZ:12,placements:[
