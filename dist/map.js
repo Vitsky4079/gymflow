@@ -51,8 +51,11 @@ box(scene,35.7,.03,5,0,.025,-10,wood);box(scene,35.7,.03,15,0,.025,0,surface(mat
 // Each cardio machine (real station or decorative duplicate — the whole
 // row is one evenly spaced 2.4m grid from x=-15.6 to 15.6) gets its own
 // mat patch instead of standing directly on the wood, with wood still
-// showing through the gaps between machines.
-tiledFloorMaterial('floor_mat',4,5).then(m=>{for(let i=0;i<14;i++)box(scene,2.1,.02,2.6,-15.6+i*2.4,.045,-10,m);dirty=true});
+// showing through the gaps between machines. Sits above the real
+// stations' soft ground-shadow decal (y=.061, added later below) rather
+// than under it — underneath, the shadow's dark radial gradient cut
+// across the mat's tile pattern and made it look broken.
+tiledFloorMaterial('floor_mat',4,5).then(m=>{for(let i=0;i<14;i++)box(scene,2.1,.02,2.6,-15.6+i*2.4,.07,-10,m);dirty=true});
 // The lobby reads as its own space (not more training floor) with a real
 // scanned polished-concrete material instead of the wood/rubber zones —
 // one tiled plane rather than hundreds of individual floor-tile props.
@@ -92,20 +95,11 @@ box(scene,3,.15,.6,13.05,.5,13,wood);[12,14.1].forEach(x=>box(scene,.12,.5,.4,x,
 box(scene,3,.15,.6,13.05,.5,17.5,wood);[12,14.1].forEach(x=>box(scene,.12,.5,.4,x,.25,17.5,dark));
 textOnFloor('changingWomen',13.05,15.1,1);
 // Reception pulled right up to the entrance so it's the first thing
-// visitors see walking in through the door gap at x:[-3.1,3.1].
-placeProp(scene,'reception_desk_no51',{x:5,z:18.3,rotY:Math.PI});
-// Equipment rack moved out of the lobby entirely and onto the training
-// floor, flush against the east wall by the shoulder press (station 6).
-// The scanned rack's real footprint is a good ~3.5m square (diagonal
-// shelf arms puff out its bounding box in every direction) — every wall
-// segment in this room sits within ~5m of a neighboring station, so
-// there's no spot with more than the ~2.35m gap here between the
-// shoulder press and the wall. Sized to the max that still clears both
-// (previously left a visible ~0.17m gap off the wall — tightened flush).
-// Also gets a matte pass since its kettlebells/medicine balls read as wet
-// plastic otherwise.
-placeProp(scene,'gym_equipment_rack',{x:16.83,z:0,rotY:-Math.PI/2,scale:.65,matte:true});
-for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:14.5+(ix-1)*.5,z:2.6+(iz-1)*.5});
+// visitors see walking in through the door gap at x:[-3.1,3.1]. Sized up
+// (its backdrop panel was leaving bare wall showing above and beside it)
+// and pushed back so that backdrop actually touches the front wall
+// instead of standing 0.26m clear of it.
+placeProp(scene,'reception_desk_no51',{x:5,z:18.5,rotY:Math.PI,scale:1.05});
 for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6,.15));box(scene,4.9,.07,.08,x,1.3,-13.3,silver)}
 // The cardio row only has one real, clickable station per machine type —
 // fill each type out into a proper side-by-side bank of three (like a real
