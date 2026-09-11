@@ -72,7 +72,7 @@ function addCurvatureHighlight(m){
 	m.onBeforeCompile=shader=>{
 		shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
 	float curvature=length(fwidth(normalize(vNormal)));
-	diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.78,.80,.81),smoothstep(.12,.5,curvature)*.8);`);
+	diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.84,.86,.87),smoothstep(.045,.22,curvature));`);
 	};
 	m.customProgramCacheKey=()=>'curvatureHighlight';
 }
