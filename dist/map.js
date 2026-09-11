@@ -47,7 +47,7 @@ function wall(w,d,x,z){return box(scene,w,3.3,d,x,1.65,z,mat('#ebeae7'))}
 const floorLabels=[];function textOnFloor(key,x,z,size=1.8){const c=document.createElement('canvas');c.width=768;c.height=128;const ctx=c.getContext('2d');ctx.clearRect(0,0,768,128);ctx.font='600 44px sans-serif';ctx.textAlign='center';ctx.fillStyle='#aeb3b0';ctx.fillText(t(key),384,77);const mesh=new THREE.Mesh(new THREE.PlaneGeometry(size*3,size*.5),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));mesh.rotation.x=-Math.PI/2;mesh.position.set(x,.055,z);scene.add(mesh);floorLabels.push({key,canvas:c,ctx,mesh})}
 if(gym.id==='studio'){
 box(scene,36.4,.65,33.5,0,-.45,3.05,mat('#8a948b'));box(scene,36,.12,33.1,0,-.06,3.05,floorMat);
-box(scene,35.7,.03,5,0,.025,-10,wood);box(scene,35.7,.03,15,0,.025,0,surface(mat('#414346',0,.92),'rubber'));box(scene,18,.03,5,-9,.025,10,surface(mat('#414346',0,.92),'rubber'));box(scene,17.7,.03,5,9,.025,10,surface(mat('#505253',0,.92),'rubber'));
+box(scene,35.7,.03,5,0,.025,-10,wood);box(scene,35.7,.03,15,0,.025,0,surface(mat('#414346',0,.92),'rubber'));box(scene,18,.03,3.1,-9,.025,9.05,surface(mat('#414346',0,.92),'rubber'));box(scene,17.7,.03,3.1,9,.025,9.05,surface(mat('#505253',0,.92),'rubber'));
 // The lobby reads as its own space (not more training floor) with a real
 // scanned polished-concrete material instead of the wood/rubber zones —
 // one tiled plane rather than hundreds of individual floor-tile props.
@@ -86,10 +86,14 @@ textOnFloor('changingWomen',13.05,15.1,1);
 // visitors see walking in through the door gap at x:[-3.1,3.1].
 placeProp(scene,'reception_desk_no51',{x:5,z:18.3,rotY:Math.PI});
 // Equipment rack moved out of the lobby entirely and onto the training
-// floor, flush against the east wall by the shoulder press (station 6) —
-// and gets a matte pass since its scanned kettlebells/medicine balls read
-// as wet plastic otherwise.
-placeProp(scene,'gym_equipment_rack',{x:16.8,z:0,rotY:-Math.PI/2,matte:true});
+// floor, flush against the east wall by the shoulder press (station 6).
+// The scanned rack's real footprint is a good ~3.5m square (diagonal
+// shelf arms puff out its bounding box in every direction), which doesn't
+// fit the ~2.3m gap between that wall and the station row at full scale
+// without clipping through one or the other — scaled down to fit. Also
+// gets a matte pass since its kettlebells/medicine balls read as wet
+// plastic otherwise.
+placeProp(scene,'gym_equipment_rack',{x:16.8,z:0,rotY:-Math.PI/2,scale:.6,matte:true});
 for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:16.8+(ix-1)*.5,z:2.2+(iz-1)*.5});
 for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6,.15));box(scene,4.9,.07,.08,x,1.3,-13.3,silver)}
 for(const x of [-5.6,5.6])for(const z of [-7.5,7.5]){box(scene,.38,3.4,.38,x,1.7,z,mat('#eeeeE7'));box(scene,.5,.1,.5,x,.05,z,dark)}
