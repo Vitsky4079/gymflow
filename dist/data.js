@@ -207,7 +207,8 @@ export const equipment = [
     "z": -5.5,
     "number": 9,
     "featured": true,
-    "zone": "Funkcjonalna"
+    "zone": "Funkcjonalna",
+    "footprint": {"w": 5.2, "d": 3.4}
   },
   {
     "id": "pullup",
