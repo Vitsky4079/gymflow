@@ -2,7 +2,7 @@ import {findGymPath} from './gym-routing.js';
 import {t,machine} from './i18n.js';
 import {cameraMovement,isTypingTarget} from './camera-navigation.js';
 import {buildEquipment} from './equipment-models.js';
-export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){const equipment=allEquipment.filter(e=>e.floor===currentFloor);const lifecycle=new AbortController();const on=(target,event,handler)=>target.addEventListener(event,handler,{signal:lifecycle.signal});let disposed=false,frameId;const $=s=>document.querySelector(s);const THREE=await import('three');const {OrbitControls}=await import('three/addons/OrbitControls.js');const container=$('#scene');const scene=new THREE.Scene();scene.background=new THREE.Color('#edf2ee');const camera=new THREE.PerspectiveCamera(34,1,.1,250);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;renderer.setClearColor('#edf2ee');container.appendChild(renderer.domElement);
+export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){const equipment=allEquipment.filter(e=>e.floor===currentFloor);const lifecycle=new AbortController();const on=(target,event,handler)=>target.addEventListener(event,handler,{signal:lifecycle.signal});let disposed=false,frameId;const $=s=>document.querySelector(s);const THREE=await import('three');const {OrbitControls}=await import('three/addons/OrbitControls.js');const container=$('#scene');const scene=new THREE.Scene();scene.background=new THREE.Color('#edf2ee');const camera=new THREE.PerspectiveCamera(34,1,.1,250);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.97;renderer.setClearColor('#edf2ee');container.appendChild(renderer.domElement);
 // Real GLB machines are PBR (metalness/roughness) and look flat/matte with
 // only directional lights and nothing to reflect. A synthetic "room" IBL
 // (three.js's built-in RoomEnvironment, no HDRI file to download) gives
@@ -11,7 +11,7 @@ export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){c
 const {RoomEnvironment}=await import('three/addons/RoomEnvironment.js');
 const pmrem=new THREE.PMREMGenerator(renderer);
 scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;
-scene.environmentIntensity=.3;
+scene.environmentIntensity=.42;
 pmrem.dispose();
 const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.15;controls.maxPolarAngle=Math.PI*.475;controls.minDistance=4;controls.maxDistance=145;controls.target.set(0,0,0);controls.enablePan=true;
 // Some Android WebViews don't reliably report a second finger as its own
@@ -27,7 +27,12 @@ on(renderer.domElement,'touchstart',syncTouchRotate);
 on(renderer.domElement,'touchmove',syncTouchRotate);
 on(renderer.domElement,'touchend',syncTouchRotate);
 on(renderer.domElement,'touchcancel',syncTouchRotate);
-scene.add(new THREE.HemisphereLight(0xf6f7ff,0x434039,1.7));const sun=new THREE.DirectionalLight(0xfff4df,3.6);sun.position.set(-12,22,-8);sun.castShadow=true;sun.shadow.mapSize.set(container.clientWidth>600?4096:2048,container.clientWidth>600?4096:2048);sun.shadow.camera.left=-32;sun.shadow.camera.right=32;sun.shadow.camera.top=32;sun.shadow.camera.bottom=-32;sun.shadow.normalBias=.018;sun.shadow.bias=-.00012;sun.shadow.radius=4;scene.add(sun);const fillLight=new THREE.DirectionalLight(0xe1eaff,1.1);fillLight.position.set(16,15,15);scene.add(fillLight);
+// Cinematic rig: a cool, hard key light carves deep shadows instead of the
+// flat, evenly-lit "product catalog" look a bright neutral hemisphere gives —
+// dim the ambient way down and let a warm kicker light (instead of a
+// neutral fill) pick out edges on the opposite side for that moody
+// cool-key/warm-rim contrast.
+scene.add(new THREE.HemisphereLight(0x8fa3c9,0x0c0d0f,.55));const sun=new THREE.DirectionalLight(0xf1f5ff,4.4);sun.position.set(-12,22,-8);sun.castShadow=true;sun.shadow.mapSize.set(container.clientWidth>600?4096:2048,container.clientWidth>600?4096:2048);sun.shadow.camera.left=-32;sun.shadow.camera.right=32;sun.shadow.camera.top=32;sun.shadow.camera.bottom=-32;sun.shadow.normalBias=.018;sun.shadow.bias=-.00012;sun.shadow.radius=4;scene.add(sun);const fillLight=new THREE.DirectionalLight(0xff9a4d,.65);fillLight.position.set(15,9,-13);scene.add(fillLight);
 const mat=(c,metalness=0,roughness=.65)=>new THREE.MeshStandardMaterial({color:c,metalness,roughness});const frame=mat('#56595b',.7,.32),dark=mat('#202224',.2,.6),pad=mat('#27292b'),silver=mat('#c6cbce',.9,.23),light=mat('#e1e9df'),rubber=mat('#39483e'),floorMat=mat('#686a67'),green=mat('#648c62');
 function box(parent,w,h,d,x,y,z,m=frame){const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o}
 function cylinder(parent,r,h,x,y,z,m=frame){const o=new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,16),m);o.position.set(x,y,z);o.castShadow=true;parent.add(o);return o}
