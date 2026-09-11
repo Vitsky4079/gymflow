@@ -85,7 +85,33 @@ const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();let down,lastC
 function home(){camera.position.set(42,46,54);if(gym.id==='atlas')camera.position.multiplyScalar(.84);if(container.clientWidth<600)camera.position.multiplyScalar(1.25);controls.target.set(0,0,1);$('#top-view').setAttribute('aria-pressed','false');$('#top-view').textContent=t('view2d');controls.update()}home();$('#home-view').onclick=home;
 // Shared by the manual "Focus" button and the host app's postMessage-driven
 // auto-focus (e.g. jumping straight to today's exercise on the machine).
-function focusOn(id){const e=equipment.find(e=>e.id===id);if(!e)return;controls.target.set(e.x,3,e.z);camera.position.set(e.x+8.5,16.9,e.z+9.5);controls.update();$('#top-view').setAttribute('aria-pressed','false');$('#top-view').textContent=t('view2d')}
+// The standalone app flanks the 3D canvas with two side panels of slightly
+// different widths, so aiming dead at the equipment leaves it looking
+// off-centre in the space that's actually visible between them. Re-aim at a
+// point offset from the equipment (translating camera + target together, so
+// the viewing angle/distance don't change) by however many world units the
+// panel gap's true centre sits from the canvas's own centre; the embed page
+// has no such panels, so the lookup below simply finds nothing and no shift
+// is applied.
+function focusOn(id){
+	const e=equipment.find(e=>e.id===id);if(!e)return;
+	const offset=new THREE.Vector3(8.5,13.9,9.5).multiplyScalar(.6);
+	const target=new THREE.Vector3(e.x,3,e.z);
+	const leftPanel=document.querySelector('.plan-panel'),rightPanel=document.querySelector('.detail-panel');
+	if(leftPanel&&rightPanel){
+		const containerRect=container.getBoundingClientRect();
+		const freeCenterX=(leftPanel.getBoundingClientRect().right+rightPanel.getBoundingClientRect().left)/2;
+		const pixelOffsetX=freeCenterX-(containerRect.left+containerRect.width/2);
+		if(Math.abs(pixelOffsetX)>1&&containerRect.width>0){
+			controls.target.copy(target);camera.position.copy(target).add(offset);camera.updateMatrixWorld();
+			const right=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,0);
+			const visibleWidth=2*offset.length()*Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)*camera.aspect;
+			target.addScaledVector(right,-pixelOffsetX*(visibleWidth/containerRect.width));
+		}
+	}
+	controls.target.copy(target);camera.position.copy(target).add(offset);controls.update();
+	$('#top-view').setAttribute('aria-pressed','false');$('#top-view').textContent=t('view2d');
+}
 $('#focus-equipment').onclick=()=>focusOn(selectedId);$('#rotate').onclick=()=>{camera.position.sub(controls.target).applyAxisAngle(new THREE.Vector3(0,1,0),Math.PI/6).add(controls.target);controls.update()};function zoom(f){const v=camera.position.clone().sub(controls.target);v.setLength(THREE.MathUtils.clamp(v.length()*f,controls.minDistance,controls.maxDistance));camera.position.copy(controls.target).add(v);controls.update()}$('#zoom-in').onclick=()=>zoom(.82);$('#zoom-out').onclick=()=>zoom(1.22);$('#top-view').onclick=()=>{if($('#top-view').getAttribute('aria-pressed')==='true')home();else{camera.position.set(0,container.clientWidth<550?90:70,1.01);controls.target.set(0,0,1);controls.update();$('#top-view').setAttribute('aria-pressed','true');$('#top-view').textContent=t('view3d')}};
 const heldKeys=new Set();
 on(window,'keydown',event=>{if(document.querySelector('dialog[open]')||event.defaultPrevented||event.ctrlKey||event.metaKey||event.altKey||isTypingTarget(event.target))return;if(['KeyW','KeyA','KeyS','KeyD'].includes(event.code)){event.preventDefault();heldKeys.add(event.code)}if(event.code==='ShiftLeft'||event.code==='ShiftRight')heldKeys.add(event.code)});
