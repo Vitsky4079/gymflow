@@ -54,35 +54,43 @@ box(scene,35.7,.03,5,0,.025,-10,wood);box(scene,35.7,.03,15,0,.025,0,surface(mat
 const lobbyFloor=box(scene,36.2,.03,9,0,.025,15.1,wood);
 tiledFloorMaterial('concrete_floor',37,9).then(m=>{lobbyFloor.material=m;dirty=true});
 // Kept the lobby tight (front wall pulled back in from z=21.6 to z=19.6,
-// per feedback that the whole area had grown too big) and split the single
-// changing room into two — a wall at z=15.1 divides them, each with its
-// own doorway off the shared corridor by the entrance-side wall.
+// per feedback that the whole area had grown too big). The two changing
+// rooms sit on opposite sides of the lobby — mirror images of each other —
+// instead of stacked together, so reception (in the middle, by the door)
+// has one right next to it either way you turn.
 wall(36.4,.22,0,-13.5);wall(.22,33.1,-18.1,3.05);wall(.22,33.1,18.1,3.05);wall(15,.22,-10.6,19.6);wall(15,.22,10.6,19.6);
-wall(10.1,.18,-13.05,15.1);
-wall(.18,1.3,-8,11.25);wall(.18,1.8,-8,14.2);
-wall(.18,1.8,-8,16);wall(.18,1.3,-8,18.95);
-// Room A (back, nearer the training floor) — lockers along the long outer
-// wall plus the short back wall so the room reads as lined with lockers,
-// not just one bank.
+wall(.18,3.7,-8,12.45);wall(.18,3.7,-8,17.75);
+wall(.18,3.7,8,12.45);wall(.18,3.7,8,17.75);
+// Men's (west side) — lockers along the long outer wall plus both short
+// walls so the room reads as lined with lockers, not just one bank.
 placeProp(scene,'gym_locker_02',{x:-17.55,z:12.85,rotY:Math.PI/2});
-placeProp(scene,'gym_locker_01',{x:-13.05,z:11.1,rotY:0});
-placeProp(scene,'gym_locker_01',{x:-8.55,z:14.2,rotY:-Math.PI/2});
-box(scene,3,.15,.6,-13.05,.5,13,wood);[-14.1,-12].forEach(x=>box(scene,.12,.5,.4,x,.25,13,dark));
-textOnFloor('changingMen',-13.05,12.85,.9);
-// Room B (front, nearer the entrance) — mirrored layout.
 placeProp(scene,'gym_locker_02',{x:-17.55,z:17.35,rotY:Math.PI/2});
+placeProp(scene,'gym_locker_01',{x:-13.05,z:11.1,rotY:0});
 placeProp(scene,'gym_locker_01',{x:-13.05,z:19.1,rotY:Math.PI});
-placeProp(scene,'gym_locker_01',{x:-8.55,z:16,rotY:-Math.PI/2});
+placeProp(scene,'gym_locker_01',{x:-8.55,z:12.45,rotY:-Math.PI/2});
+placeProp(scene,'gym_locker_01',{x:-8.55,z:17.75,rotY:-Math.PI/2});
+box(scene,3,.15,.6,-13.05,.5,13,wood);[-14.1,-12].forEach(x=>box(scene,.12,.5,.4,x,.25,13,dark));
 box(scene,3,.15,.6,-13.05,.5,17.5,wood);[-14.1,-12].forEach(x=>box(scene,.12,.5,.4,x,.25,17.5,dark));
-textOnFloor('changingWomen',-13.05,17.35,.9);
-// Equipment rack sits flush against the changing-room wall between the two
-// doorways, instead of freestanding — and gets a matte pass since its
-// scanned kettlebells/medicine balls read as wet plastic otherwise.
-placeProp(scene,'gym_equipment_rack',{x:-7.4,z:15.1,rotY:Math.PI/2,matte:true});
-for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:-5.6+(ix-1)*.5,z:15.1+(iz-1)*.5});
+textOnFloor('changingMen',-13.05,15.1,1);
+// Women's (east side, right by reception) — mirror layout.
+placeProp(scene,'gym_locker_02',{x:17.55,z:12.85,rotY:-Math.PI/2});
+placeProp(scene,'gym_locker_02',{x:17.55,z:17.35,rotY:-Math.PI/2});
+placeProp(scene,'gym_locker_01',{x:13.05,z:11.1,rotY:0});
+placeProp(scene,'gym_locker_01',{x:13.05,z:19.1,rotY:Math.PI});
+placeProp(scene,'gym_locker_01',{x:8.55,z:12.45,rotY:Math.PI/2});
+placeProp(scene,'gym_locker_01',{x:8.55,z:17.75,rotY:Math.PI/2});
+box(scene,3,.15,.6,13.05,.5,13,wood);[12,14.1].forEach(x=>box(scene,.12,.5,.4,x,.25,13,dark));
+box(scene,3,.15,.6,13.05,.5,17.5,wood);[12,14.1].forEach(x=>box(scene,.12,.5,.4,x,.25,17.5,dark));
+textOnFloor('changingWomen',13.05,15.1,1);
 // Reception pulled right up to the entrance so it's the first thing
 // visitors see walking in through the door gap at x:[-3.1,3.1].
 placeProp(scene,'reception_desk_no51',{x:5,z:18.3,rotY:Math.PI});
+// Equipment rack moved out of the lobby entirely and onto the training
+// floor, flush against the east wall by the shoulder press (station 6) —
+// and gets a matte pass since its scanned kettlebells/medicine balls read
+// as wet plastic otherwise.
+placeProp(scene,'gym_equipment_rack',{x:16.8,z:0,rotY:-Math.PI/2,matte:true});
+for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:16.8+(ix-1)*.5,z:2.2+(iz-1)*.5});
 for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6,.15));box(scene,4.9,.07,.08,x,1.3,-13.3,silver)}
 for(const x of [-5.6,5.6])for(const z of [-7.5,7.5]){box(scene,.38,3.4,.38,x,1.7,z,mat('#eeeeE7'));box(scene,.5,.1,.5,x,.05,z,dark)}
 // Mirror wall, wall-mounted bars and accessories.
