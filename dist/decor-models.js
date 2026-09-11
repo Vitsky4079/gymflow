@@ -21,13 +21,22 @@ function loadTemplate(name){
 // Duplicated from equipment-models.js rather than imported — that module
 // already imports from this one (loadKettlebellCluster/loadMatsSpread), and
 // this half is small and stable enough that a circular import isn't worth it.
-const FRAME_KEYWORDS=['paint','frame','coating','wht','white'];
+const FRAME_KEYWORDS=['paint','frame','coating','wht','white','chrome'];
 const isFrameMaterial=name=>FRAME_KEYWORDS.some(k=>(name||'').toLowerCase().includes(k));
 const isYellowMaterial=name=>(name||'').toLowerCase().includes('yellow');
 function flattenMaterial(m){
 	if(!m)return;
+	// Unlike the real equipment stations (always plain, textureless CAD
+	// materials — flattenMaterial's whole reason to exist), several of these
+	// decorative props carry a genuine small baseColorTexture (a baked
+	// "PaletteMaterial"/"Palette*" colour-swatch atlas). Their material names
+	// (PaletteMaterial001, etc.) carry no frame/dark signal at all, so
+	// name-based flattening would paint everything the same dark bucket —
+	// stripping a real, deliberately authored texture down to solid black.
+	// Trust the baked texture instead of guessing from the name.
+	if(m.map)return;
 	const frame=isFrameMaterial(m.name),yellow=!frame&&isYellowMaterial(m.name);
-	m.map?.dispose();m.map=null;m.emissiveMap?.dispose();m.emissiveMap=null;m.metalnessMap?.dispose();m.metalnessMap=null;m.roughnessMap?.dispose();m.roughnessMap=null;
+	m.emissiveMap?.dispose();m.emissiveMap=null;m.metalnessMap?.dispose();m.metalnessMap=null;m.roughnessMap?.dispose();m.roughnessMap=null;
 	m.color?.set(frame?'#a7abaf':yellow?'#b8860c':'#17191a');
 	if('metalness' in m)m.metalness=frame?.65:yellow?.3:.05;
 	if('roughness' in m)m.roughness=frame?.3:yellow?.4:.6;
