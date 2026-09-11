@@ -1,11 +1,15 @@
 import * as T from 'three';
 import {RoundedBoxGeometry} from './vendor/RoundedBoxGeometry.js';
 import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
+import {loadKettlebellCluster,loadMatsSpread} from './decor-models.js';
 
 // Real Matrix-brand GLB models, keyed by equipment id — swapped in over the
 // procedural placeholder once loaded (see buildEquipment at the bottom).
-// Ids with no entry here (mats, kettlebell, trx — accessories Matrix doesn't
-// manufacture) simply keep the procedural geometry forever.
+// Ids with no entry here (trx — Matrix doesn't manufacture suspension
+// trainers) simply keep the procedural geometry forever. mats/kettlebell
+// aren't Matrix machines either, but real scanned models for those do exist
+// (see decor-models.js) — PROP_LOADERS below handles those two separately
+// since they're not single-GLB swaps (kettlebell composites three weights).
 const MODEL_MAP={treadmill:'treadmill',legpress:'legpress',chest:'chest',lat:'lat',row:'row',shoulder:'shoulder',legcurl:'legcurl',legextension:'legextension',cable:'cable',pullup:'pullup',bench:'bench',rack:'rack',bike:'bike',elliptical:'elliptical',rower:'rower',stairs:'stairs',airbike:'airbike',pecdeck:'pecdeck',reverse:'reverse',abductor:'abductor',adductor:'adductor',calf:'calf',smith:'smith',hipthrust:'hipthrust',dumbbells:'dumbbells',incline:'incline',dips:'dips'};
 
 let loaderPromise=null;
@@ -141,16 +145,16 @@ g.updateMatrixWorld(true);const buckets=new Map();g.traverse(o=>{if(o.isMesh){le
 // The placeholder lives in its own child group so map.js's own additions to
 // the returned group (hit-boxes, halos are added to `equipment`, not here —
 // but callers are still free to add children) are never touched by the swap.
+const PROP_LOADERS={kettlebell:loadKettlebellCluster,mats:loadMatsSpread};
 export function buildEquipment(e){
 	const holder=new T.Group();holder.name=e.id;
 	const placeholder=buildProceduralEquipment(e);
 	holder.add(placeholder);
+	const swap=scene=>{holder.remove(placeholder);placeholder.traverse(o=>{if(o.isMesh){o.geometry.dispose()}});holder.add(scene)};
 	if(MODEL_MAP[e.id]){
-		loadModel(MODEL_MAP[e.id]).then(scene=>{
-			holder.remove(placeholder);
-			placeholder.traverse(o=>{if(o.isMesh){o.geometry.dispose()}});
-			holder.add(scene.clone(true));
-		}).catch(()=>{/* keep the procedural placeholder */});
+		loadModel(MODEL_MAP[e.id]).then(scene=>swap(scene.clone(true))).catch(()=>{/* keep the procedural placeholder */});
+	}else if(PROP_LOADERS[e.id]){
+		PROP_LOADERS[e.id]().then(swap).catch(()=>{/* keep the procedural placeholder */});
 	}
 	return holder;
 }

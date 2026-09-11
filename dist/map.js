@@ -2,6 +2,7 @@ import {findGymPath} from './gym-routing.js';
 import {t,machine} from './i18n.js';
 import {cameraMovement,isTypingTarget} from './camera-navigation.js';
 import {buildEquipment} from './equipment-models.js';
+import {placeProp,tiledFloorMaterial} from './decor-models.js';
 export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){const equipment=allEquipment.filter(e=>e.floor===currentFloor);const lifecycle=new AbortController();const on=(target,event,handler)=>target.addEventListener(event,handler,{signal:lifecycle.signal});let disposed=false,frameId;const $=s=>document.querySelector(s);const THREE=await import('three');const {OrbitControls}=await import('three/addons/OrbitControls.js');const container=$('#scene');const scene=new THREE.Scene();scene.background=new THREE.Color('#edf2ee');const camera=new THREE.PerspectiveCamera(34,1,.1,250);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.97;renderer.setClearColor('#edf2ee');container.appendChild(renderer.domElement);
 // Real GLB machines are PBR (metalness/roughness) and look flat/matte with
 // only directional lights and nothing to reflect. A synthetic "room" IBL
@@ -45,19 +46,34 @@ const wood=surface(mat('#8d7353',0,.65),'wood');
 function wall(w,d,x,z){return box(scene,w,3.3,d,x,1.65,z,mat('#ebeae7'))}
 const floorLabels=[];function textOnFloor(key,x,z,size=1.8){const c=document.createElement('canvas');c.width=768;c.height=128;const ctx=c.getContext('2d');ctx.clearRect(0,0,768,128);ctx.font='600 44px sans-serif';ctx.textAlign='center';ctx.fillStyle='#aeb3b0';ctx.fillText(t(key),384,77);const mesh=new THREE.Mesh(new THREE.PlaneGeometry(size*3,size*.5),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false}));mesh.rotation.x=-Math.PI/2;mesh.position.set(x,.055,z);scene.add(mesh);floorLabels.push({key,canvas:c,ctx,mesh})}
 if(gym.id==='studio'){
-box(scene,36.4,.65,30.4,0,-.45,1.5,mat('#8a948b'));box(scene,36,.12,30,0,-.06,1.5,floorMat);
-box(scene,35.7,.03,5,0,.025,-10,wood);box(scene,35.7,.03,15,0,.025,0,surface(mat('#414346',0,.92),'rubber'));box(scene,18,.03,5,-9,.025,10,surface(mat('#414346',0,.92),'rubber'));box(scene,17.7,.03,5,9,.025,10,surface(mat('#505253',0,.92),'rubber'));box(scene,35.7,.03,3.8,0,.025,14.5,wood);
+box(scene,36.4,.65,35.4,0,-.45,4,mat('#8a948b'));box(scene,36,.12,35,0,-.06,4,floorMat);
+box(scene,35.7,.03,5,0,.025,-10,wood);box(scene,35.7,.03,15,0,.025,0,surface(mat('#414346',0,.92),'rubber'));box(scene,18,.03,5,-9,.025,10,surface(mat('#414346',0,.92),'rubber'));box(scene,17.7,.03,5,9,.025,10,surface(mat('#505253',0,.92),'rubber'));
+// The lobby reads as its own space (not more training floor) with a real
+// scanned polished-concrete material instead of the wood/rubber zones —
+// one tiled plane rather than hundreds of individual floor-tile props.
+const lobbyFloor=box(scene,35.7,.03,8.5,0,.025,17.15,wood);
+tiledFloorMaterial('concrete_floor',36,9).then(m=>{lobbyFloor.material=m;dirty=true});
 // Rubber tiles and wood planks form readable, separate training zones.
-wall(36.4,.22,0,-13.5);wall(.22,30.4,-18.1,1.5);wall(.22,30.4,18.1,1.5);wall(15,.22,-10.6,16.6);wall(15,.22,10.6,16.6);
-// Reception and changing room partitions leave a wide entrance passage.
-wall(.18,3.6,-7,14.7);wall(10.5,.18,-12.7,12.9);box(scene,3.5,1.15,1.1,11, .58,14.5,mat('#c5b696'));box(scene,.65,.45,.1,11,1.43,14.5,dark);
-for(let x=-16.8;x<-8;x+=.75){box(scene,.65,2.05,.65,x,1.05,15.9,mat('#757879'));box(scene,.04,.2,.04,x+.2,1.1,15.55,silver)}
-box(scene,4,.15,.65,-12,.5,14.5,wood);[-13.5,-10.5].forEach(x=>box(scene,.12,.5,.45,x,.25,14.5,dark));
+wall(36.4,.22,0,-13.5);wall(.22,35.4,-18.1,4);wall(.22,35.4,18.1,4);wall(15,.22,-10.6,21.6);wall(15,.22,10.6,21.6);
+// The lobby got real furniture (reception desk, lockers, a grab-and-go
+// accessory rack), which needed more floor than the old procedural corner —
+// pushed the front wall out from z=16.6 to z=21.6 for it. The changing-room
+// partition now has an actual doorway (it didn't before: the old wall ran
+// solid corner to corner, so there was no way to actually walk in), and
+// moved out from x=-7 to x=-8 to free up a nook for the rack in between it
+// and the entrance corridor.
+wall(10.1,.18,-13.05,12.9);wall(.18,1.6,-8,13.7);wall(.18,5.4,-8,18.8);
+placeProp(scene,'gym_locker_02',{x:-13.05,z:20.75,rotY:Math.PI});
+placeProp(scene,'gym_locker_01',{x:-17.55,z:14.6,rotY:Math.PI/2});
+box(scene,4,.15,.65,-13,.5,19,wood);[-14.5,-11.5].forEach(x=>box(scene,.12,.5,.45,x,.25,19,dark));
+placeProp(scene,'gym_equipment_rack',{x:-5.5,z:17,rotY:Math.PI/2});
+for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:-5.5+(ix-1)*.5,z:19.3+(iz-1)*.5});
+placeProp(scene,'reception_desk_no51',{x:10,z:16.5,rotY:Math.PI});
 for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6,.15));box(scene,4.9,.07,.08,x,1.3,-13.3,silver)}
 for(const x of [-5.6,5.6])for(const z of [-7.5,7.5]){box(scene,.38,3.4,.38,x,1.7,z,mat('#eeeeE7'));box(scene,.5,.1,.5,x,.05,z,dark)}
 // Mirror wall, wall-mounted bars and accessories.
 box(scene,.025,1.8,9,-17.94,1.75,6,mat('#aebcbc',.8,.15));for(let z=-5;z<3;z+=2){bar(scene,[-17.6,.3,z],[-17.6,2.8,z],.04,wood);bar(scene,[-17.6,.3,z+1.4],[-17.6,2.8,z+1.4],.04,wood);for(let y=.5;y<2.9;y+=.28)bar(scene,[-17.6,y,z],[-17.6,y,z+1.4],.03,wood)}
-textOnFloor('floorCardio',0,-12.5,1.8);textOnFloor('floorStrength',0,-2.5,1.8);textOnFloor('floorFree',-10,7.5,1.4);textOnFloor('floorFunctional',10,12.5,1.4);textOnFloor('reception',10,16,1);textOnFloor('changing',-12,13.5,1);textOnFloor('entrance',0,15.5,1.2);
+textOnFloor('floorCardio',0,-12.5,1.8);textOnFloor('floorStrength',0,-2.5,1.8);textOnFloor('floorFree',-10,7.5,1.4);textOnFloor('floorFunctional',10,12.5,1.4);textOnFloor('reception',10,14.7,1);textOnFloor('changing',-13,14.4,1);textOnFloor('entrance',0,17,1.2);
 }else{
 const rubberFloor=surface(mat(currentFloor?'#46494b':'#535552',0,.92),'rubber');
 box(scene,28.3,.55,24.3,0,-.35,0,mat('#8a948b'));box(scene,28,.1,24,0,-.045,0,rubberFloor);
@@ -134,7 +150,7 @@ on(window,'keydown',event=>{if(document.querySelector('dialog[open]')||event.def
 on(window,'keyup',event=>heldKeys.delete(event.code));
 on(window,'blur',()=>heldKeys.clear());on(document,'visibilitychange',()=>heldKeys.clear());on(document,'focusin',event=>{if(isTypingTarget(event.target))heldKeys.clear()});
 let previousFrame=performance.now();const forward=new THREE.Vector3();
-function moveKeyboard(now){const elapsed=(now-previousFrame)/1000;previousFrame=now;if(document.querySelector('dialog[open]')){heldKeys.clear();return}if(!heldKeys.size)return;camera.getWorldDirection(forward);forward.y=0;if(forward.lengthSq()<.00001){forward.set(0,1,0).applyQuaternion(camera.quaternion);forward.y=0}forward.normalize();const boost=heldKeys.has('ShiftLeft')||heldKeys.has('ShiftRight')?2:1;const speed=THREE.MathUtils.clamp(camera.position.distanceTo(controls.target)*.22,3,18)*boost;const move=cameraMovement(heldKeys,forward,elapsed,speed);const nx=THREE.MathUtils.clamp(controls.target.x+move.x,-23,23),nz=THREE.MathUtils.clamp(controls.target.z+move.z,-18,21);const dx=nx-controls.target.x,dz=nz-controls.target.z;if(dx||dz){controls.autoRotate=false;camera.position.x+=dx;camera.position.z+=dz;controls.target.x=nx;controls.target.z=nz;dirty=true}}
+function moveKeyboard(now){const elapsed=(now-previousFrame)/1000;previousFrame=now;if(document.querySelector('dialog[open]')){heldKeys.clear();return}if(!heldKeys.size)return;camera.getWorldDirection(forward);forward.y=0;if(forward.lengthSq()<.00001){forward.set(0,1,0).applyQuaternion(camera.quaternion);forward.y=0}forward.normalize();const boost=heldKeys.has('ShiftLeft')||heldKeys.has('ShiftRight')?2:1;const speed=THREE.MathUtils.clamp(camera.position.distanceTo(controls.target)*.22,3,18)*boost;const move=cameraMovement(heldKeys,forward,elapsed,speed);const nx=THREE.MathUtils.clamp(controls.target.x+move.x,-23,23),nz=THREE.MathUtils.clamp(controls.target.z+move.z,-18,25);const dx=nx-controls.target.x,dz=nz-controls.target.z;if(dx||dz){controls.autoRotate=false;camera.position.x+=dx;camera.position.z+=dz;controls.target.x=nx;controls.target.z=nz;dirty=true}}
 function resize(){dirty=true;camera.aspect=container.clientWidth/container.clientHeight;camera.updateProjectionMatrix();renderer.setSize(container.clientWidth,container.clientHeight)}const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(container);resize();const vec=new THREE.Vector3();function animate(now=performance.now()){if(disposed)return;frameId=requestAnimationFrame(animate);moveKeyboard(now);controls.update();if(!dirty)return;dirty=false;equipment.forEach(e=>{vec.set(e.x,2.7,e.z).project(camera);e.label.style.left=`${(vec.x*.5+.5)*container.clientWidth}px`;e.label.style.top=`${(-vec.y*.5+.5)*container.clientHeight}px`;e.label.style.visibility=vec.z>1?'hidden':'visible'});if(stairsLabel){vec.set(10,3.8,9).project(camera);stairsLabel.style.left=`${(vec.x*.5+.5)*container.clientWidth}px`;stairsLabel.style.top=`${(-vec.y*.5+.5)*container.clientHeight}px`}renderer.render(scene,camera)}animate();
 return{dispose(){disposed=true;cancelAnimationFrame(frameId);lifecycle.abort();resizeObserver.disconnect();controls.dispose();scene.traverse(o=>{o.geometry?.dispose();const materials=Array.isArray(o.material)?o.material:o.material?[o.material]:[];materials.forEach(m=>{m.map?.dispose();m.dispose()})});renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();ownedLabels.forEach(label=>label.remove());stairsLabel?.remove()},update(selected,ids,done,showRoute=true){selectedId=equipment.some(e=>e.id===selected)?selected:equipment[0].id;dirty=true;equipment.forEach((e,i)=>{halos[i].visible=e.id===selected;e.label.classList.toggle('selected',e.id===selected);e.label.classList.toggle('in-route',ids.includes(e.id));e.label.classList.toggle('done',done.includes(e.id));e.label.setAttribute('aria-pressed',String(e.id===selected));e.label.querySelector('b').textContent=done.includes(e.id)?'✓':e.number;e.label.querySelector('.label-text').textContent=machine(e).short;e.label.setAttribute('aria-label',`${e.number}. ${machine(e).name}`);e.label.title=`${machine(e).name}${ids.includes(e.id)?' · '+t('step',{n:ids.indexOf(e.id)+1}):''}`});const routeIds=showRoute?ids:[];if(routeIds.join()!==activeIds.join()){activeIds=[...routeIds];drawRoute(routeIds)}},language(){dirty=true;if(stairsLabel)stairsLabel.textContent=t(currentFloor?'goDown':'goUp');floorLabels.forEach(({key,canvas,ctx,mesh})=>{ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillText(t(key),384,77);mesh.material.map.needsUpdate=true})},theme(value){dirty=true;const bg=value==='dark'?'#0c1012':'#e6e9e7';scene.background.set(bg);renderer.setClearColor(bg);routeMat.color.set(value==='dark'?'#b9ec68':'#528947')},focus(id){focusOn(id)}};
 }
