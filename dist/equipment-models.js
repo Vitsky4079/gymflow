@@ -90,6 +90,17 @@ function loadModel(id){
 	if(!modelCache.has(id))modelCache.set(id,getLoader().then(loader=>new Promise((resolve,reject)=>loader.load(`./models/${id}.glb`,gltf=>{normalizeModel(gltf.scene,id);resolve(gltf.scene)},undefined,reject))));
 	return modelCache.get(id);
 }
+// buildEquipment() below shows an instant procedural placeholder and swaps
+// in the real Matrix model once it's fetched — normally a couple of
+// seconds later, which reads as every station on the floor changing at
+// once partway through load. Call this as early as possible (in parallel
+// with the rest of the scene's own async setup) and await it right before
+// building the station group instances, so the real models are already
+// cached by the time buildEquipment() asks for them and the swap resolves
+// before the first frame instead of visibly later.
+export function preloadModels(ids){
+	return Promise.allSettled(ids.map(id=>MODEL_MAP[id]?loadModel(MODEL_MAP[id]):PROP_LOADERS[id]?PROP_LOADERS[id]():Promise.resolve()));
+}
 const material=(color,metalness=0,roughness=.5)=>new T.MeshStandardMaterial({color,metalness,roughness});
 const steel=material('#4c5052',.72,.3),black=material('#171a1c',.25,.45),chrome=material('#c7cbcd',.95,.2),vinyl=material('#242728',.05,.68),edge=material('#373b3e',.1,.65),yellow=material('#d5bb42',.3,.4),belt=material('#141617',0,.94),screen=material('#11272c',.1,.25),cable=material('#080909',.1,.5);
 const geoCache=new Map();function cached(key,fn){if(!geoCache.has(key))geoCache.set(key,fn());return geoCache.get(key)}

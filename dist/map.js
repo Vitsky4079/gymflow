@@ -1,9 +1,16 @@
 import {findGymPath} from './gym-routing.js';
 import {t,machine} from './i18n.js';
 import {cameraMovement,isTypingTarget} from './camera-navigation.js';
-import {buildEquipment} from './equipment-models.js';
+import {buildEquipment,preloadModels} from './equipment-models.js';
 import {placeProp,tiledFloorMaterial} from './decor-models.js';
-export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){const equipment=allEquipment.filter(e=>e.floor===currentFloor);const lifecycle=new AbortController();const on=(target,event,handler)=>target.addEventListener(event,handler,{signal:lifecycle.signal});let disposed=false,frameId;const $=s=>document.querySelector(s);const THREE=await import('three');const {OrbitControls}=await import('three/addons/OrbitControls.js');const container=$('#scene');const scene=new THREE.Scene();scene.background=new THREE.Color('#edf2ee');const camera=new THREE.PerspectiveCamera(34,1,.1,250);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.97;renderer.setClearColor('#edf2ee');container.appendChild(renderer.domElement);
+export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){const equipment=allEquipment.filter(e=>e.floor===currentFloor);
+// Kick this off now, in parallel with the imports/scene setup below, instead
+// of waiting until the equipment loop — by the time we actually build the
+// station groups further down, the real models are hopefully already
+// fetched and cached, so buildEquipment's placeholder-then-swap resolves
+// before the first frame instead of 2-3s visibly later.
+const modelsReady=preloadModels(equipment.map(e=>e.id));
+const lifecycle=new AbortController();const on=(target,event,handler)=>target.addEventListener(event,handler,{signal:lifecycle.signal});let disposed=false,frameId,dirty=true;const $=s=>document.querySelector(s);const THREE=await import('three');const {OrbitControls}=await import('three/addons/OrbitControls.js');const container=$('#scene');const scene=new THREE.Scene();scene.background=new THREE.Color('#edf2ee');const camera=new THREE.PerspectiveCamera(34,1,.1,250);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.97;renderer.setClearColor('#edf2ee');container.appendChild(renderer.domElement);
 // Real GLB machines are PBR (metalness/roughness) and look flat/matte with
 // only directional lights and nothing to reflect. A synthetic "room" IBL
 // (three.js's built-in RoomEnvironment, no HDRI file to download) gives
@@ -159,12 +166,13 @@ if(currentFloor===0){bar(scene,[10.55,.99,7.6],[10.55,3.85,11.37],.04,silver);ba
 textOnFloor('stairsLabel',10,6.8,.75);textOnFloor('entrance',0,10.5,.9);
 }
 const picks=[],groups=[],halos=[],ownedLabels=[];
+await modelsReady;
 equipment.forEach((e,i)=>{const g=buildEquipment(e);g.position.set(e.x,.065,e.z);g.rotation.y=e.rotY||0;g.scale.setScalar(1.08);scene.add(g);groups.push(g);
 const shadow=new THREE.Mesh(new THREE.PlaneGeometry(3.4,3.8),new THREE.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:'varying vec2 vUv;void main(){vec2 p=(vUv-.5)*2.0;float a=pow(max(0.0,1.0-dot(p,p)),2.0)*.23;gl_FragColor=vec4(0.,0.,0.,a);}'}));shadow.rotation.x=-Math.PI/2;shadow.position.set(e.x,.061,e.z);scene.add(shadow);
 const hit=box(g,2.5,3,2.9,0,1.5,0,new THREE.MeshBasicMaterial({visible:false}));hit.userData.id=e.id;picks.push(hit);const halo=new THREE.Mesh(new THREE.RingGeometry(1.58,1.64,64),new THREE.MeshBasicMaterial({color:'#387d50',transparent:true,opacity:.85,side:THREE.DoubleSide,depthWrite:false}));halo.rotation.x=-Math.PI/2;halo.position.set(e.x,.085,e.z);scene.add(halo);halos.push(halo);
 const label=document.createElement('button');label.className='map-label';label.innerHTML=`<b>${e.number}</b><span class="label-text">${machine(e).short}</span>`;label.setAttribute('aria-label',`${e.number}. ${machine(e).name}`);label.onclick=()=>choose(e.id);label.ondblclick=()=>focusOn(e.id);$('#labels').append(label);ownedLabels.push(label);e.label=label;});
 let stairsLabel=null;if(gym.floors>1){stairsLabel=document.createElement('button');stairsLabel.className='map-label stairs-label';stairsLabel.textContent=t(currentFloor?'goDown':'goUp');stairsLabel.onclick=onStairs;$('#labels').append(stairsLabel)}
-let selectedId=equipment[0].id;let dirty=true;controls.addEventListener('change',()=>dirty=true);
+let selectedId=equipment[0].id;controls.addEventListener('change',()=>dirty=true);
 // Double-click starts a slow "showcase" auto-orbit around the focused
 // machine (see focusOn); OrbitControls fires 'start' the moment the user
 // actually grabs the view themselves — drag, pinch, or scroll-to-zoom — so
