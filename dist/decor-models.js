@@ -34,40 +34,67 @@ const isYellowMaterial=name=>(name||'').toLowerCase().includes('yellow');
 // a colourless one needs the same light-frame/dark-pad recolour real
 // equipment gets, or it reads as flat, contrast-less white/grey instead of
 // matching the rest of the gym.
-const textureStatsCache=new Map();
-function textureStats(tex){
+// A single material can cover a whole shared mesh — a rack's frame tubes
+// AND its pull-up grips, say — with per-face UV variation the only thing
+// telling them apart (the earlier grayscale bands: ~239 down to ~94 within
+// one material's own texture). Averaging that whole texture to one number
+// and recoloring the entire material flat washes out exactly that contrast,
+// which is why some props still looked uniformly white/grey after the last
+// fix. Recolor pixel-by-pixel instead: same size, same UVs, each texel
+// rebucketed into frame-light or pad-dark by its own brightness, so whatever
+// shape already carried the contrast keeps it.
+const paletteCache=new Map();
+function paletteInfo(tex){
 	if(!tex?.image)return null;
-	if(textureStatsCache.has(tex.uuid))return textureStatsCache.get(tex.uuid);
+	if(paletteCache.has(tex.uuid))return paletteCache.get(tex.uuid);
 	const img=tex.image;
 	const w=img.width,h=img.height;
-	let stats=null;
+	let info=null;
 	if(w&&h){
 		const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
 		const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);
-		const data=ctx.getImageData(0,0,w,h).data;
-		let lumaSum=0,n=0,maxSat=0;
+		const imageData=ctx.getImageData(0,0,w,h);
+		const data=imageData.data;
+		let maxSat=0,n=0;
+		const frameRGB=[0xa7,0xab,0xaf],darkRGB=[0x17,0x19,0x1a];
 		for(let i=0;i<data.length;i+=4){
 			if(data[i+3]===0)continue;
 			const r=data[i],g=data[i+1],b=data[i+2];
-			lumaSum+=(0.2126*r+0.7152*g+0.0722*b)/255;
 			const max=Math.max(r,g,b),min=Math.min(r,g,b);
 			maxSat=Math.max(maxSat,max===0?0:(max-min)/max);
 			n++;
+			const luminance=(0.2126*r+0.7152*g+0.0722*b)/255;
+			const [nr,ng,nb]=luminance>.55?frameRGB:darkRGB;
+			data[i]=nr;data[i+1]=ng;data[i+2]=nb;
 		}
-		if(n)stats={luminance:lumaSum/n,maxSaturation:maxSat};
+		if(n){
+			ctx.putImageData(imageData,0,0);
+			const recolored=new T.CanvasTexture(canvas);
+			recolored.colorSpace=tex.colorSpace;recolored.flipY=tex.flipY;
+			recolored.wrapS=tex.wrapS;recolored.wrapT=tex.wrapT;
+			recolored.magFilter=tex.magFilter;recolored.minFilter=tex.minFilter;
+			recolored.needsUpdate=true;
+			info={maxSaturation:maxSat,recolored};
+		}
 	}
-	textureStatsCache.set(tex.uuid,stats);
-	return stats;
+	paletteCache.set(tex.uuid,info);
+	return info;
 }
 function flattenMaterial(m){
 	if(!m)return;
-	const stats=m.map&&textureStats(m.map);
-	if(m.map&&stats?.maxSaturation>.15)return;
-	const frame=stats?stats.luminance>.55:isFrameMaterial(m.name),yellow=!frame&&!stats&&isYellowMaterial(m.name);
-	m.map?.dispose();m.map=null;m.emissiveMap?.dispose();m.emissiveMap=null;m.metalnessMap?.dispose();m.metalnessMap=null;m.roughnessMap?.dispose();m.roughnessMap=null;
-	m.color?.set(frame?'#a7abaf':yellow?'#b8860c':'#17191a');
-	if('metalness' in m)m.metalness=frame?.65:yellow?.3:.05;
-	if('roughness' in m)m.roughness=frame?.3:yellow?.4:.6;
+	const info=m.map&&paletteInfo(m.map);
+	if(m.map&&info?.maxSaturation>.15)return;
+	m.emissiveMap?.dispose();m.emissiveMap=null;m.metalnessMap?.dispose();m.metalnessMap=null;m.roughnessMap?.dispose();m.roughnessMap=null;
+	if(info){
+		m.map.dispose();m.map=info.recolored;m.color?.set('#ffffff');
+		if('metalness' in m)m.metalness=.3;
+		if('roughness' in m)m.roughness=.4;
+	}else{
+		const frame=isFrameMaterial(m.name),yellow=!frame&&isYellowMaterial(m.name);
+		m.color?.set(frame?'#a7abaf':yellow?'#b8860c':'#17191a');
+		if('metalness' in m)m.metalness=frame?.65:yellow?.3:.05;
+		if('roughness' in m)m.roughness=frame?.3:yellow?.4:.6;
+	}
 	m.needsUpdate=true;
 }
 function flattenModel(root){
