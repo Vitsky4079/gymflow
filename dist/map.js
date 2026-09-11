@@ -100,6 +100,13 @@ placeProp(scene,'reception_desk_no51',{x:5,z:18.3,rotY:Math.PI});
 placeProp(scene,'gym_equipment_rack',{x:16.8,z:0,rotY:-Math.PI/2,scale:.6,matte:true});
 for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:16.8+(ix-1)*.5,z:2.2+(iz-1)*.5});
 for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6,.15));box(scene,4.9,.07,.08,x,1.3,-13.3,silver)}
+// The cardio row only has one real, clickable station per machine type —
+// fill each type out into a proper side-by-side bank of three (like a real
+// gym's cardio wall) with non-interactive duplicates. rotY matches the
+// real stations' CARDIO_WALL rotation in gyms.js so every unit — real or
+// decorative — faces the same TV wall.
+[['treadmill',-10.8],['treadmill',-8.4],['bike',-3.6],['bike',-1.2],['elliptical',3.6],['elliptical',6],['rower',10.8],['rower',13.2]]
+	.forEach(([kind,x])=>{const g=buildEquipment({id:kind,kind});g.position.set(x,.065,-10);g.rotation.y=Math.PI;g.scale.setScalar(1.08);scene.add(g)});
 for(const x of [-5.6,5.6])for(const z of [-7.5,7.5]){box(scene,.38,3.4,.38,x,1.7,z,mat('#eeeeE7'));box(scene,.5,.1,.5,x,.05,z,dark)}
 // Mirror wall, wall-mounted bars and accessories.
 box(scene,.025,1.8,9,-17.94,1.75,6,mat('#aebcbc',.8,.15));for(let z=-5;z<3;z+=2){bar(scene,[-17.6,.3,z],[-17.6,2.8,z],.04,wood);bar(scene,[-17.6,.3,z+1.4],[-17.6,2.8,z+1.4],.04,wood);for(let y=.5;y<2.9;y+=.28)bar(scene,[-17.6,y,z],[-17.6,y,z+1.4],.03,wood)}
@@ -118,7 +125,7 @@ if(currentFloor===0){bar(scene,[10.55,.99,7.6],[10.55,3.85,11.37],.04,silver);ba
 textOnFloor('stairsLabel',10,6.8,.75);textOnFloor('entrance',0,10.5,.9);
 }
 const picks=[],groups=[],halos=[],ownedLabels=[];
-equipment.forEach((e,i)=>{const g=buildEquipment(e);g.position.set(e.x,.065,e.z);g.scale.setScalar(1.08);scene.add(g);groups.push(g);
+equipment.forEach((e,i)=>{const g=buildEquipment(e);g.position.set(e.x,.065,e.z);g.rotation.y=e.rotY||0;g.scale.setScalar(1.08);scene.add(g);groups.push(g);
 const shadow=new THREE.Mesh(new THREE.PlaneGeometry(3.4,3.8),new THREE.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{},vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}',fragmentShader:'varying vec2 vUv;void main(){vec2 p=(vUv-.5)*2.0;float a=pow(max(0.0,1.0-dot(p,p)),2.0)*.23;gl_FragColor=vec4(0.,0.,0.,a);}'}));shadow.rotation.x=-Math.PI/2;shadow.position.set(e.x,.061,e.z);scene.add(shadow);
 const hit=box(g,2.5,3,2.9,0,1.5,0,new THREE.MeshBasicMaterial({visible:false}));hit.userData.id=e.id;picks.push(hit);const halo=new THREE.Mesh(new THREE.RingGeometry(1.58,1.64,64),new THREE.MeshBasicMaterial({color:'#387d50',transparent:true,opacity:.85,side:THREE.DoubleSide,depthWrite:false}));halo.rotation.x=-Math.PI/2;halo.position.set(e.x,.085,e.z);scene.add(halo);halos.push(halo);
 const label=document.createElement('button');label.className='map-label';label.innerHTML=`<b>${e.number}</b><span class="label-text">${machine(e).short}</span>`;label.setAttribute('aria-label',`${e.number}. ${machine(e).name}`);label.onclick=()=>choose(e.id);label.ondblclick=()=>focusOn(e.id);$('#labels').append(label);ownedLabels.push(label);e.label=label;});
