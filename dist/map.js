@@ -94,9 +94,17 @@ function home(){camera.position.set(42,46,54);if(gym.id==='atlas')camera.positio
 // has no such panels, so the lookup below simply finds nothing and no shift
 // is applied.
 function focusOn(id){
-	const e=equipment.find(e=>e.id===id);if(!e)return;
+	const idx=equipment.findIndex(e=>e.id===id);if(idx<0)return;
+	const e=equipment[idx];
 	const offset=new THREE.Vector3(8.5,13.9,9.5).multiplyScalar(.6);
-	const target=new THREE.Vector3(e.x,3,e.z);
+	// A fixed aim height reads fine for a tall rack but leaves a low machine
+	// like a treadmill sitting in the bottom of the frame, since we're aiming
+	// well above its actual body. Centre on this specific model's own real
+	// bounding-box midpoint instead, so short and tall equipment alike land
+	// vertically centred.
+	const modelBox=new THREE.Box3().setFromObject(groups[idx]);
+	const aimY=THREE.MathUtils.clamp((modelBox.min.y+modelBox.max.y)/2,.6,3);
+	const target=new THREE.Vector3(e.x,aimY,e.z);
 	const leftPanel=document.querySelector('.plan-panel'),rightPanel=document.querySelector('.detail-panel');
 	if(leftPanel&&rightPanel){
 		const containerRect=container.getBoundingClientRect();
