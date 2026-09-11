@@ -4,7 +4,10 @@ import {equipment,presets,trainerPresets} from './data.js';
 // shared equipment data uses everywhere else, like Atlas Club's own grid.
 const CARDIO_WALL=['treadmill','bike','elliptical','rower','stairs','airbike'];
 export const gyms=[
-{id:'studio',name:'Studio 01',description:{en:'Open-plan training studio',pl:'Otwarta przestrzeń treningowa'},floors:1,width:36,depth:33,minZ:-13.5,maxZ:19.5,placements:equipment.map(e=>({id:e.id,x:e.x,z:e.z,floor:0,...(CARDIO_WALL.includes(e.id)?{rotY:Math.PI}:{})})),presets:[...presets,...trainerPresets],obstacles:[]},
+// Studio 01 drops the floor-mats station (a second leg press sits in its old
+// spot instead) — Atlas Club keeps it, so it stays in the shared equipment
+// data and is just filtered out of this gym's own placements.
+{id:'studio',name:'Studio 01',description:{en:'Open-plan training studio',pl:'Otwarta przestrzeń treningowa'},floors:1,width:36,depth:33,minZ:-13.5,maxZ:19.5,placements:equipment.filter(e=>e.id!=='mats').map(e=>({id:e.id,x:e.x,z:e.z,floor:0,...(CARDIO_WALL.includes(e.id)?{rotY:Math.PI}:{})})),presets:[...presets,...trainerPresets],obstacles:[]},
 {id:'atlas',name:'Atlas Club',description:{en:'Two floors · strength & movement',pl:'Dwa poziomy · siła i ruch'},floors:2,width:28,depth:24,minZ:-12,maxZ:12,placements:[
 ...['treadmill','bike','elliptical','airbike','rower','stairs','mats','kettlebell','trx','pullup','dips','dumbbells'].map((id,i)=>({id,x:-10+(i%4)*6,z:-8+Math.floor(i/4)*6,floor:0})),
 ...['chest','lat','row','shoulder','legcurl','legextension','cable','abductor','hipthrust','rack','bench','incline'].map((id,i)=>({id,x:-10+(i%4)*6,z:-8+Math.floor(i/4)*6,floor:1}))],

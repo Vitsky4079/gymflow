@@ -42,6 +42,27 @@ export const equipment = [
     "zone": "Siła"
   },
   {
+    "id": "legpress2",
+    "name": "Wypychanie na suwnicy",
+    "short": "Suwnica",
+    "area": "Nogi · pośladki · uda",
+    "x": 13.5,
+    "z": 6.5,
+    "sets": 3,
+    "reps": "10–12",
+    "rest": 90,
+    "kind": "legpress",
+    "steps": [
+      "Usiądź z plecami i biodrami opartymi o oparcie. Ustaw stopy na platformie mniej więcej na szerokość barków.",
+      "Po sprawdzeniu blokad wypchnij platformę. Zostaw lekko ugięte kolana.",
+      "Zginaj kolana w kontrolowany sposób, bez odrywania bioder od oparcia. Wypchnij platformę z wydechem."
+    ],
+    "tip": "Nie prostuj gwałtownie kolan. Przed zejściem upewnij się, że platforma jest zablokowana.",
+    "number": 31,
+    "featured": false,
+    "zone": "Siła"
+  },
+  {
     "id": "chest",
     "name": "Wyciskanie na maszynie",
     "short": "Chest press",

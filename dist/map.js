@@ -2,7 +2,7 @@ import {findGymPath} from './gym-routing.js';
 import {t,machine} from './i18n.js';
 import {cameraMovement,isTypingTarget} from './camera-navigation.js';
 import {buildEquipment} from './equipment-models.js';
-import {placeProp,tiledFloorMaterial} from './decor-models.js';
+import {placeProp,tiledFloorMaterial,tiledMatFloor} from './decor-models.js';
 export async function createMap(allEquipment,choose,gym,currentFloor,onStairs){const equipment=allEquipment.filter(e=>e.floor===currentFloor);const lifecycle=new AbortController();const on=(target,event,handler)=>target.addEventListener(event,handler,{signal:lifecycle.signal});let disposed=false,frameId;const $=s=>document.querySelector(s);const THREE=await import('three');const {OrbitControls}=await import('three/addons/OrbitControls.js');const container=$('#scene');const scene=new THREE.Scene();scene.background=new THREE.Color('#edf2ee');const camera=new THREE.PerspectiveCamera(34,1,.1,250);const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=.97;renderer.setClearColor('#edf2ee');container.appendChild(renderer.domElement);
 // Real GLB machines are PBR (metalness/roughness) and look flat/matte with
 // only directional lights and nothing to reflect. A synthetic "room" IBL
@@ -55,9 +55,15 @@ box(scene,35.7,.03,5,0,.025,-10,wood);
 // brightness mismatch the concrete/mat split below replaces.)
 const aisleFloor=box(scene,6,.03,18.1,0,.025,1.55,mat('#8a8f8c',0,.9));
 tiledFloorMaterial('concrete_floor',6,18).then(m=>{aisleFloor.material=m;dirty=true});
-const westMatsFloor=box(scene,15,.03,18.1,-10.5,.025,1.55,mat('#3c4640',0,.9));
+// Free weights get the real-tile treatment (individual puzzle_mats tiles,
+// merged into a couple of draw calls) so it actually reads as a mat floor
+// up close — completely covering the zone, edge to edge. The machine
+// side keeps the cheaper repeated-texture plane; it's viewed from further
+// back walking between stations, where the difference isn't visible.
+const westPlaceholder=box(scene,15,.03,18.1,-10.5,.025,1.55,mat('#3c4640',0,.9));
+tiledMatFloor(scene,'puzzle_mats',{x:-10.5,z:1.55,width:15,depth:18.1,y:.03}).then(()=>{scene.remove(westPlaceholder);dirty=true});
 const eastMatsFloor=box(scene,15,.03,18.1,10.5,.025,1.55,mat('#3c4640',0,.9));
-tiledFloorMaterial('puzzle_mats',25,30).then(m=>{westMatsFloor.material=m;eastMatsFloor.material=m;dirty=true});
+tiledFloorMaterial('puzzle_mats',25,30).then(m=>{eastMatsFloor.material=m;dirty=true});
 // Each cardio machine (real station or decorative duplicate — the whole
 // row is one evenly spaced 2.4m grid from x=-15.6 to 15.6) gets its own
 // mat patch instead of standing directly on the wood, with wood still
@@ -124,6 +130,16 @@ for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6
 	.forEach(([kind,x])=>{const g=buildEquipment({id:kind,kind});g.position.set(x,.065,-10);g.rotation.y=Math.PI;g.scale.setScalar(1.08);scene.add(g)});
 // Mirror wall, wall-mounted bars and accessories.
 box(scene,.025,1.8,9,-17.94,1.75,6,mat('#aebcbc',.8,.15));for(let z=-5;z<3;z+=2){bar(scene,[-17.6,.3,z],[-17.6,2.8,z],.04,wood);bar(scene,[-17.6,.3,z+1.4],[-17.6,2.8,z+1.4],.04,wood);for(let y=.5;y<2.9;y+=.28)bar(scene,[-17.6,y,z],[-17.6,y,z+1.4],.03,wood)}
+// Free-weight zone dressing — real Matrix barbell/rack/bench/dumbbell-rack
+// scans, not clickable stations, just filling the zone out. Two columns
+// (west wall, near the aisle) far enough from the 6 real stations' x
+// positions (-13/-8) that no z-alignment check is needed — every item's
+// measured footprint is under 2.2m, so 3.3m+ of x-separation alone clears
+// them regardless of row.
+[['barbell1',-6.5],['barbell2',-3.9],['dumbbell_rack2',-1.3],['dumbbell_rack3',1.3],['barbell1',3.9],['barbell2',6.5],['bench2',9.1]]
+	.forEach(([name,z])=>placeProp(scene,name,{x:-16.3,z,rotY:Math.PI/2}));
+[['rack2',-6.5],['rack3',-3.9],['rack4',-1.3],['rack5',1.3],['bench3',3.9],['bench4',6.5],['bench5',9.1]]
+	.forEach(([name,z])=>placeProp(scene,name,{x:-4.5,z,rotY:-Math.PI/2}));
 textOnFloor('floorCardio',0,-12.5,1.8);textOnFloor('floorFree',-10.5,1.55,2.2);textOnFloor('floorStrength',10.5,1.55,2.2);textOnFloor('reception',5,16.4,1);textOnFloor('entrance',0,17.8,1.2);
 }else{
 const rubberFloor=surface(mat(currentFloor?'#46494b':'#535552',0,.92),'rubber');

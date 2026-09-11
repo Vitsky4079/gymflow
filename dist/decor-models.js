@@ -1,4 +1,5 @@
 import * as T from 'three';
+import {mergeGeometries} from './vendor/BufferGeometryUtils.js';
 
 // Real-world scanned props (lobby furniture, floor tiles, kettlebells) — unlike
 // the Matrix machine pack these ship proper PBR textures and are already
@@ -57,6 +58,43 @@ export function loadMatsSpread(){
 // the tile's own scanned material (already correctly UV-mapped 0–1 across
 // the tile) on a single plane instead, with the texture's repeat set to the
 // plane's real size in metres — one draw call, same material.
+// Tiling a whole zone this way — one plane, UV-repeated texture — reads as
+// a smeared, blotchy mess once the tile's own texture has real detail
+// (confirmed on the cardio row's floor_mat patches). Real tiles laid edge
+// to edge look correct instead; merging every tile's geometry into one
+// mesh per material (matching equipment-models.js's per-station merge)
+// keeps it to a handful of draw calls despite covering a whole room in
+// ~0.6m tiles.
+export function tiledMatFloor(scene,name,{x=0,z=0,width,depth,y=.03}={}){
+	return loadTemplate(name).then(template=>{
+		const box=new T.Box3().setFromObject(template);
+		const size=new T.Vector3();box.getSize(size);
+		const cols=Math.max(1,Math.round(width/size.x)),rows=Math.max(1,Math.round(depth/size.z));
+		const tileW=width/cols,tileD=depth/rows;
+		const buckets=new Map();
+		for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){
+			const inst=template.clone(true);
+			inst.scale.set(tileW/size.x,1,tileD/size.z);
+			inst.position.set(x+(i-(cols-1)/2)*tileW,y,z+(j-(rows-1)/2)*tileD);
+			inst.updateMatrixWorld(true);
+			inst.traverse(o=>{
+				if(!o.isMesh)return;
+				let geo=o.geometry.clone().applyMatrix4(o.matrixWorld);
+				if(geo.index){const flat=geo.toNonIndexed();geo.dispose();geo=flat}
+				const arr=buckets.get(o.material)||[];arr.push(geo);buckets.set(o.material,arr);
+			});
+		}
+		const group=new T.Group();
+		for(const [m,geos] of buckets){
+			const merged=mergeGeometries(geos,false);
+			if(merged)group.add(new T.Mesh(merged,m));
+			geos.forEach(g=>g.dispose());
+		}
+		group.traverse(o=>{if(o.isMesh)o.receiveShadow=true});
+		scene.add(group);
+		return group;
+	});
+}
 export function tiledFloorMaterial(name,repeatX,repeatZ){
 	return loadTemplate(name).then(template=>{
 		let material=null;
