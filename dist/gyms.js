@@ -1,6 +1,6 @@
 import {equipment,presets,trainerPresets} from './data.js';
 export const gyms=[
-{id:'studio',name:'Studio 01',description:{en:'Open-plan training studio',pl:'Otwarta przestrzeń treningowa'},floors:1,width:36,depth:35,minZ:-13.5,maxZ:21.5,placements:equipment.map(e=>({id:e.id,x:e.x,z:e.z,floor:0})),presets:[...presets,...trainerPresets],obstacles:[{x:-5.6,z:-7.5,w:.8,d:.8},{x:5.6,z:-7.5,w:.8,d:.8},{x:-5.6,z:7.5,w:.8,d:.8},{x:5.6,z:7.5,w:.8,d:.8}]},
+{id:'studio',name:'Studio 01',description:{en:'Open-plan training studio',pl:'Otwarta przestrzeń treningowa'},floors:1,width:36,depth:33,minZ:-13.5,maxZ:19.5,placements:equipment.map(e=>({id:e.id,x:e.x,z:e.z,floor:0})),presets:[...presets,...trainerPresets],obstacles:[{x:-5.6,z:-7.5,w:.8,d:.8},{x:5.6,z:-7.5,w:.8,d:.8},{x:-5.6,z:7.5,w:.8,d:.8},{x:5.6,z:7.5,w:.8,d:.8}]},
 {id:'atlas',name:'Atlas Club',description:{en:'Two floors · strength & movement',pl:'Dwa poziomy · siła i ruch'},floors:2,width:28,depth:24,minZ:-12,maxZ:12,placements:[
 ...['treadmill','bike','elliptical','airbike','rower','stairs','mats','kettlebell','trx','pullup','dips','dumbbells'].map((id,i)=>({id,x:-10+(i%4)*6,z:-8+Math.floor(i/4)*6,floor:0})),
 ...['chest','lat','row','shoulder','legcurl','legextension','cable','abductor','hipthrust','rack','bench','incline'].map((id,i)=>({id,x:-10+(i%4)*6,z:-8+Math.floor(i/4)*6,floor:1}))],

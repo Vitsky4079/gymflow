@@ -14,14 +14,31 @@ function loadTemplate(name){
 	if(!modelCache.has(name))modelCache.set(name,getLoader().then(loader=>new Promise((resolve,reject)=>loader.load(`./props/${name}.glb`,gltf=>{gltf.scene.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}});resolve(gltf.scene)},undefined,reject))));
 	return modelCache.get(name);
 }
+// A few of these scanned props (the equipment rack's medicine balls and
+// kettlebells especially) carry a very low baked-in roughness — under this
+// scene's punchier post-lighting-pass reflections that reads as a wet/shiny
+// plastic sheen rather than rubber. Clamp roughness up and metalness down
+// per-material instead of fighting it with less environment reflection
+// globally (which every other prop in the room already looks right under).
+function matteify(root,{minRoughness=.6,maxMetalness=.15}={}){
+	root.traverse(o=>{
+		if(!o.isMesh)return;
+		// Object3D.clone() copies each mesh's `.material` by reference, not
+		// value — mutating in place would leak into every other instance
+		// (and the cached template) sharing that material. Clone first.
+		const clone=m=>{if(!m)return m;const c=m.clone();if('roughness' in c)c.roughness=Math.max(c.roughness,minRoughness);if('metalness' in c)c.metalness=Math.min(c.metalness,maxMetalness);return c};
+		o.material=Array.isArray(o.material)?o.material.map(clone):clone(o.material);
+	});
+}
 // Places one prop instance in the room. Callers await the returned promise
 // only if they need the instance handle; most room decor is fire-and-forget.
-export function placeProp(scene,name,{x=0,y=0,z=0,rotY=0,scale=1}={}){
+export function placeProp(scene,name,{x=0,y=0,z=0,rotY=0,scale=1,matte=null}={}){
 	return loadTemplate(name).then(template=>{
 		const instance=template.clone(true);
 		instance.position.set(x,y,z);
 		instance.rotation.y=rotY;
 		if(scale!==1)instance.scale.setScalar(scale);
+		if(matte)matteify(instance,matte===true?{}:matte);
 		scene.add(instance);
 		return instance;
 	});
