@@ -48,6 +48,11 @@ const floorLabels=[];function textOnFloor(key,x,z,size=1.8){const c=document.cre
 if(gym.id==='studio'){
 box(scene,36.4,.65,33.5,0,-.45,3.05,mat('#8a948b'));box(scene,36,.12,33.1,0,-.06,3.05,floorMat);
 box(scene,35.7,.03,5,0,.025,-10,wood);box(scene,35.7,.03,15,0,.025,0,surface(mat('#414346',0,.92),'rubber'));box(scene,18,.03,3.1,-9,.025,9.05,surface(mat('#414346',0,.92),'rubber'));box(scene,17.7,.03,3.1,9,.025,9.05,surface(mat('#505253',0,.92),'rubber'));
+// Each cardio machine (real station or decorative duplicate — the whole
+// row is one evenly spaced 2.4m grid from x=-15.6 to 15.6) gets its own
+// mat patch instead of standing directly on the wood, with wood still
+// showing through the gaps between machines.
+tiledFloorMaterial('floor_mat',4,5).then(m=>{for(let i=0;i<14;i++)box(scene,2.1,.02,2.6,-15.6+i*2.4,.045,-10,m);dirty=true});
 // The lobby reads as its own space (not more training floor) with a real
 // scanned polished-concrete material instead of the wood/rubber zones —
 // one tiled plane rather than hundreds of individual floor-tile props.
@@ -92,13 +97,15 @@ placeProp(scene,'reception_desk_no51',{x:5,z:18.3,rotY:Math.PI});
 // Equipment rack moved out of the lobby entirely and onto the training
 // floor, flush against the east wall by the shoulder press (station 6).
 // The scanned rack's real footprint is a good ~3.5m square (diagonal
-// shelf arms puff out its bounding box in every direction), which doesn't
-// fit the ~2.3m gap between that wall and the station row at full scale
-// without clipping through one or the other — scaled down to fit. Also
-// gets a matte pass since its kettlebells/medicine balls read as wet
+// shelf arms puff out its bounding box in every direction) — every wall
+// segment in this room sits within ~5m of a neighboring station, so
+// there's no spot with more than the ~2.35m gap here between the
+// shoulder press and the wall. Sized to the max that still clears both
+// (previously left a visible ~0.17m gap off the wall — tightened flush).
+// Also gets a matte pass since its kettlebells/medicine balls read as wet
 // plastic otherwise.
-placeProp(scene,'gym_equipment_rack',{x:16.8,z:0,rotY:-Math.PI/2,scale:.6,matte:true});
-for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:16.8+(ix-1)*.5,z:2.2+(iz-1)*.5});
+placeProp(scene,'gym_equipment_rack',{x:16.83,z:0,rotY:-Math.PI/2,scale:.65,matte:true});
+for(let ix=0;ix<3;ix++)for(let iz=0;iz<3;iz++)placeProp(scene,'floor_mat',{x:14.5+(ix-1)*.5,z:2.6+(iz-1)*.5});
 for(let x=-15;x<17;x+=5.8){box(scene,4.8,1.55,.035,x,2.1,-13.36,mat('#c0d0d6',.6,.15));box(scene,4.9,.07,.08,x,1.3,-13.3,silver)}
 // The cardio row only has one real, clickable station per machine type —
 // fill each type out into a proper side-by-side bank of three (like a real
