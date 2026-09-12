@@ -106,8 +106,12 @@ wall(10.1,.18,13.05,10.6);wall(.18,3.7,8,12.45);wall(.18,3.7,8,17.75);
 // one centered on the wall fills it; a second one would've both
 // overlapped it and poked through the front/back walls.
 placeProp(scene,'gym_locker_02',{x:-17.5,z:15.1,rotY:Math.PI/2});
-placeProp(scene,'gym_locker_01',{x:-13.05,z:11.1,rotY:0});
-placeProp(scene,'gym_locker_01',{x:-13.05,z:19.1,rotY:Math.PI});
+// gym_locker_01 is only ~2.1m wide, so a single unit leaves most of the
+// 10.1m front/back walls bare — place two side by side on each instead.
+placeProp(scene,'gym_locker_01',{x:-14.2,z:11.1,rotY:0});
+placeProp(scene,'gym_locker_01',{x:-11.9,z:11.1,rotY:0});
+placeProp(scene,'gym_locker_01',{x:-14.2,z:19.1,rotY:Math.PI});
+placeProp(scene,'gym_locker_01',{x:-11.9,z:19.1,rotY:Math.PI});
 placeProp(scene,'gym_locker_01',{x:-8.55,z:12.45,rotY:-Math.PI/2});
 placeProp(scene,'gym_locker_01',{x:-8.55,z:17.75,rotY:-Math.PI/2});
 box(scene,3,.15,.6,-13.05,.5,13,wood);[-14.1,-12].forEach(x=>box(scene,.12,.5,.4,x,.25,13,dark));
@@ -115,8 +119,10 @@ box(scene,3,.15,.6,-13.05,.5,17.5,wood);[-14.1,-12].forEach(x=>box(scene,.12,.5,
 textOnFloor('changingMen',-13.05,15.1,1);
 // Women's (east side, right by reception) — mirror layout.
 placeProp(scene,'gym_locker_02',{x:17.5,z:15.1,rotY:-Math.PI/2});
-placeProp(scene,'gym_locker_01',{x:13.05,z:11.1,rotY:0});
-placeProp(scene,'gym_locker_01',{x:13.05,z:19.1,rotY:Math.PI});
+placeProp(scene,'gym_locker_01',{x:11.9,z:11.1,rotY:0});
+placeProp(scene,'gym_locker_01',{x:14.2,z:11.1,rotY:0});
+placeProp(scene,'gym_locker_01',{x:11.9,z:19.1,rotY:Math.PI});
+placeProp(scene,'gym_locker_01',{x:14.2,z:19.1,rotY:Math.PI});
 placeProp(scene,'gym_locker_01',{x:8.55,z:12.45,rotY:Math.PI/2});
 placeProp(scene,'gym_locker_01',{x:8.55,z:17.75,rotY:Math.PI/2});
 box(scene,3,.15,.6,13.05,.5,13,wood);[12,14.1].forEach(x=>box(scene,.12,.5,.4,x,.25,13,dark));
