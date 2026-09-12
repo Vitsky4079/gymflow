@@ -1,0 +1,2013 @@
+[
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_5_stack_multi_station_g3_ms50.glb",
+    "bytes": 15982396,
+    "sha256": "65a766a3725fc4531b28dae60d5bd08790dc43ee1fcb82713fa1661c6402e3d5",
+    "meshes": 14,
+    "materials": 10,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_abdominal_crunch_g3_s51.glb",
+    "bytes": 4837356,
+    "sha256": "543871bce78329a69500163119c1e270418a268fb2a4caa59587b137a52d347c",
+    "meshes": 10,
+    "materials": 9,
+    "selectedAs": [
+      "abdominal"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_adjustable_cable_crossover_g3_ms20.glb",
+    "bytes": 7826444,
+    "sha256": "818711adc81e441c7d85ae84d0db9f422f297659b1b7157e38fc8e71f017cbe7",
+    "meshes": 363,
+    "materials": 8,
+    "selectedAs": [
+      "cable"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_adjustable_pulley_g3_ms24.glb",
+    "bytes": 2032156,
+    "sha256": "1a8275351e33169a9308e437abdc2a47322b04aa52ce1630127913d1da34927e",
+    "meshes": 7,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_arm_curl_g3_s40.glb",
+    "bytes": 5001532,
+    "sha256": "38cb456bd03efd1de078292a24a1ca2fc5603ddb14bc2f16419da914f20bd3c3",
+    "meshes": 26,
+    "materials": 11,
+    "selectedAs": [
+      "armcurl"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_back_extension_g3_s52.glb",
+    "bytes": 6480592,
+    "sha256": "b984f3a8b15cf2ff2fd1dbaea8306f7e031dc6816ca9e2818d6b45db008b161d",
+    "meshes": 33,
+    "materials": 10,
+    "selectedAs": [
+      "backextension"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_calf_press_g3_s77.glb",
+    "bytes": 952352,
+    "sha256": "a5b9b37b46b27d04b6fa79c5729bd1e88f693e3b82557c991c3373c7e207935b",
+    "meshes": 21,
+    "materials": 10,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_chest_press_g3_s10.glb",
+    "bytes": 3393800,
+    "sha256": "f02f6475742b6b51ae71711964f0d0489dc2d6f3bcffd4266d31779b969df041",
+    "meshes": 12,
+    "materials": 10,
+    "selectedAs": [
+      "chest"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_converging_chest_press_g3_s13.glb",
+    "bytes": 2365216,
+    "sha256": "d0d3d473d9036fe589e7f6b73f72318c34c665788baac7c21ecaea9a5986e27f",
+    "meshes": 16,
+    "materials": 9,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_converging_shoulder_press_g3_s23.glb",
+    "bytes": 2339988,
+    "sha256": "d9c5e43a3c844104d80e50e722d05244879d1b9f7a4bda739e11fdd139fb5edc",
+    "meshes": 22,
+    "materials": 11,
+    "selectedAs": [
+      "shoulder"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_dip_chin_assist_g3_s60_3d.glb",
+    "bytes": 6873192,
+    "sha256": "bf68f633c120e275ad11988a29c6d5b7971b4d2c7dc2536a2b7024b0631646ab",
+    "meshes": 12,
+    "materials": 11,
+    "selectedAs": [
+      "assisted"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_diverging_lat_pulldown_g3_s33.glb",
+    "bytes": 2610248,
+    "sha256": "ecffbbb1db29e299c81ef8b6d915262e5006c8db1ea14b1cc52d9e75bc21c3d0",
+    "meshes": 12,
+    "materials": 9,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_diverging_seated_row_g3_s34.glb",
+    "bytes": 1859908,
+    "sha256": "a15a95ea68fc2293204100a4364bfa5c82ddf6a3999f86ff1167ffd76a728f31",
+    "meshes": 12,
+    "materials": 9,
+    "selectedAs": [
+      "row"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_functional_trainer_300_400_g3_msft3_4.glb",
+    "bytes": 19742968,
+    "sha256": "6ca49f0b9e9396f141494736fd602609155a096e3b0b43cff1cb27b1de2ce72b",
+    "meshes": 440,
+    "materials": 10,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_hip_abductor_g3_s75.glb",
+    "bytes": 2852860,
+    "sha256": "0393375a096bd68be0f0e51e8b7a29a7ea6201ca3cdd2a3472358d9caec5bea0",
+    "meshes": 11,
+    "materials": 9,
+    "selectedAs": [
+      "abductor"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_hip_adductor_g3_s74.glb",
+    "bytes": 5545712,
+    "sha256": "4aa469ff9a259dd0d3f8756340cb183c034e467f48f1db2eafd139c56217b028",
+    "meshes": 10,
+    "materials": 9,
+    "selectedAs": [
+      "adductor"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_lat_pulldown_g3_ms51.glb",
+    "bytes": 2318312,
+    "sha256": "8b614f7f6b626f5142533fc8ba64f143353290727e8469323726adf14f30c465",
+    "meshes": 55,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_lat_pulldown_g3_s30.glb",
+    "bytes": 1829060,
+    "sha256": "6ec9fc1fceca9d3989e5537f4b88c6c47dbed3a615114f9cc508b7cf1915cae4",
+    "meshes": 13,
+    "materials": 9,
+    "selectedAs": [
+      "lat"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_lateral_raise_g3_s21.glb",
+    "bytes": 2728076,
+    "sha256": "f6f41f490049fc66af3469ccd2c8728d10d296af012726940813ab479997ce82",
+    "meshes": 42,
+    "materials": 12,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_leg_extension_g3_s71.glb",
+    "bytes": 2103924,
+    "sha256": "3d9ce466a32d98ab93efa0647ffcb47a7d882e1991c6788a6ab463a90687f915",
+    "meshes": 12,
+    "materials": 9,
+    "selectedAs": [
+      "legextension"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_prone_leg_curl_g3_s73.glb",
+    "bytes": 2832948,
+    "sha256": "3f2e8b28efcbaa7b30243d4d5d91af9c6f7676958a955db28f0cfd32bb18dfb1",
+    "meshes": 22,
+    "materials": 11,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_rear_delt_fly_g3_s22.glb",
+    "bytes": 2536052,
+    "sha256": "b75f7930aa2d6d09294c4b8c1ee90086c0e03fcc99d508bad08d1c90166014e3",
+    "meshes": 27,
+    "materials": 10,
+    "selectedAs": [
+      "pecdeck"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_rotary_torso_g3_s55.glb",
+    "bytes": 2914292,
+    "sha256": "24fb4292289d2c482d38bbc8abadb442206f1b6e6f8c9a04081cff1c899949a2",
+    "meshes": 9,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_seated_leg_curl_g3_s72.glb",
+    "bytes": 7395164,
+    "sha256": "0ea1b16b6a0b8314ecae9b605e27f28e29b8d3f5f1a5064d3a71e919273b9b8d",
+    "meshes": 17,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_aura_seated_leg_curl_g3_s72_2.glb",
+    "bytes": 5434332,
+    "sha256": "439cea58460a54d126c78b200b5f2ee47f4bf068549c2a710c2fac922fbfec94",
+    "meshes": 27,
+    "materials": 15,
+    "selectedAs": [
+      "legcurl"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_connexus_compact.glb",
+    "bytes": 14767804,
+    "sha256": "471ce12ac49a684af3a8af7ab335a1839f084f1dc8bf2143ef36947624d90f73",
+    "meshes": 14,
+    "materials": 10,
+    "selectedAs": [
+      "functional"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_connexus_large.glb",
+    "bytes": 10551472,
+    "sha256": "79734114dc2ea3ef5efd3eb62b68f6ee80a2588fa8b16bd1d6a40c41d69c80b9",
+    "meshes": 88,
+    "materials": 21,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_connexus_perimeter_wextension.glb",
+    "bytes": 26182236,
+    "sha256": "cbfd9455ef3a30ed856fc5314506b9d048ab7591ddd88c086f7ff5391a852b70",
+    "meshes": 14,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_connexus_small.glb",
+    "bytes": 5637996,
+    "sha256": "a9999428d471312742ea0dc8097c4f2282dfb66599733f64edcdbe6f2437ff63",
+    "meshes": 43,
+    "materials": 21,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_connexus_step.glb",
+    "bytes": 2795908,
+    "sha256": "0727a84d7aaec4250163dcf638d48db71ce8023f4bd787fc807027c2de47eba2",
+    "meshes": 4,
+    "materials": 4,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_cxm_training_cycle.glb",
+    "bytes": 3849156,
+    "sha256": "c4eb0fdd4609ff5987899988705cb33347d66b2fe3beb5dd251de506700b7a0c",
+    "meshes": 31,
+    "materials": 15,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_cxp_target_training_cycle.glb",
+    "bytes": 3776848,
+    "sha256": "a091a318a3c59cb9e4b09015a9e7523c1aa9b79f31ba3369832601ae85d92abe",
+    "meshes": 19,
+    "materials": 15,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_edge_standard.glb",
+    "bytes": 2589908,
+    "sha256": "06faebdd916cca3e97d358bad7d058827433ec8488655a5ad7e560d498857008",
+    "meshes": 17,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_endurance_gt_ep_1_13_22.glb",
+    "bytes": 6923320,
+    "sha256": "8fc27451bb1b3202ddea9d93d93b387e52950862ed2f16c47618b288c41d6cba",
+    "meshes": 281,
+    "materials": 17,
+    "selectedAs": [
+      "elliptical"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_10_pair_dumbbell_rack_g1_fw159.glb",
+    "bytes": 9874512,
+    "sha256": "8a7cf6f1d529fdc248042a1d65be393100b4669fa6b5e0ea52b2b073c6286200",
+    "meshes": 10,
+    "materials": 9,
+    "selectedAs": [
+      "dumbbells"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_4_stack_multi_station_g1_ms40_3d.glb",
+    "bytes": 13751372,
+    "sha256": "6c38994e900e049fce7722844bda7c67b54b5057754a5f8201b1d76e2806c185",
+    "meshes": 20,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_adjustable_decline_bench_g1_fw152.glb",
+    "bytes": 4006156,
+    "sha256": "ec084f57fead4cbc1aa43f9d007a4c05f1b5212ba2f2580a256ecb492828043a",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_adjustable_decline_bench_g1_fw152_1.glb",
+    "bytes": 4006180,
+    "sha256": "b7ea71c4d8518fb5666b92d05ed3e9b21bb4c3632cfb600c2b0d523827e163c1",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_adjustable_incline_bench_g1_fw153.glb",
+    "bytes": 3297028,
+    "sha256": "edf5a94c83c92ad70e3a54269c6f66aeb73a5597c9bace8a3dcc5dd01c05f1c8",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": [
+      "incline"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_adjustable_incline_bench_g1_fw153_1.glb",
+    "bytes": 3297012,
+    "sha256": "72031dac56bcb965465726851d384824373f0fb6453ad7be410951b5bff191e0",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_back_extension_bench_g1_fw162.glb",
+    "bytes": 3714888,
+    "sha256": "52eb6931f1708b62c3ed656305d1040e2fcd2734767d646c6bca6bfe59e6f07d",
+    "meshes": 8,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_back_extension_bench_g1_fw162_1.glb",
+    "bytes": 3714904,
+    "sha256": "37901d91cc5fc13b8e06af0704fd40e53d20c8b20c81677c0251f044e9160f4d",
+    "meshes": 8,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_barbell_rack_g1_fw160.glb",
+    "bytes": 3289540,
+    "sha256": "317d07bf069c6233b6da1e8d74ac2cd59f72b308fd81cd570b7d14a427d66e59",
+    "meshes": 4,
+    "materials": 4,
+    "selectedAs": [
+      "barbell"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_barbell_rack_g1_fw160_1.glb",
+    "bytes": 3289544,
+    "sha256": "84c94dd1cf7ee34444e415def895c78a5e092c124ad8f76af668f72ee4308d11",
+    "meshes": 4,
+    "materials": 4,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_flat_bench_g1_fw151.glb",
+    "bytes": 1935880,
+    "sha256": "5c98bde003ea35cf655e3b9615f93baed1129d7b9ea256c2b9874d63e367dc04",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_flat_bench_g1_fw151_1.glb",
+    "bytes": 1935896,
+    "sha256": "1a542d9f80865c4243393c86516565321e7315413086a48fbc9ba13363d3ebcd",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_olympic_decline_bench_g1_fw165.glb",
+    "bytes": 5014608,
+    "sha256": "72489198328ce5f18bb92747a8b7423cafffc6d8b2c36f486b9652915e51938d",
+    "meshes": 9,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_olympic_decline_bench_g1_fw165_1.glb",
+    "bytes": 5014632,
+    "sha256": "74cfac8f52048d0880885838666f74da0e722e041554937e49811f14a77cdf22",
+    "meshes": 9,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_olympic_flat_bench_g1_fw163.glb",
+    "bytes": 3588968,
+    "sha256": "75978e8791eaf4d09624fc65f62de89ba4c7c15d84bb503284dc93e027e704ed",
+    "meshes": 14,
+    "materials": 7,
+    "selectedAs": [
+      "olympic"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_olympic_flat_bench_g1_fw163_1.glb",
+    "bytes": 3588912,
+    "sha256": "68a130c8c2ec5e183fd61df7f80196028faaf2587cc1f88fa3ad6f4a0a0a9964",
+    "meshes": 14,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_olympic_incline_bench_g1_fw164.glb",
+    "bytes": 4727080,
+    "sha256": "f50321f748fc1d272a90f9657c141166e759247058c9c9dd78a96254e69e4dd1",
+    "meshes": 7,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_olympic_incline_bench_g1_fw164_1.glb",
+    "bytes": 4727144,
+    "sha256": "12e812968d28d703d6ba80eeeef561c83d4f821c884af4030d7eef33eec0a43a",
+    "meshes": 7,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_preacher_curl_bench_g1_fw155.glb",
+    "bytes": 3221756,
+    "sha256": "775712192c9c70eb8b2fc3d60a8b6c61fb12c1c0677fad2bb7d22f4bef723384",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_preacher_curl_bench_g1_fw155_1.glb",
+    "bytes": 3221776,
+    "sha256": "447d11ddaf01f15e6e570c85263fe3a1c79fc6bf695f62a322988c5392174e86",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_utility_bench_g1_fw156.glb",
+    "bytes": 2715556,
+    "sha256": "572731015beb20f5919cbb1e53fd5f0e9fe8a9216eb299513ee83f577f197d13",
+    "meshes": 5,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_utility_bench_g1_fw156_1.glb",
+    "bytes": 2715572,
+    "sha256": "5b486af58cd35780313582804589b5c631237c4927a2d984b7107402e1db79f8",
+    "meshes": 5,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_weight_tree_g1_fw157.glb",
+    "bytes": 4187900,
+    "sha256": "97622236b20beee7e58ce3cf8a620dec38a0050b72e5a4637a3849b5298bca26",
+    "meshes": 6,
+    "materials": 6,
+    "selectedAs": [
+      "plates"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_g1_weight_tree_g1_fw157_1.glb",
+    "bytes": 4187940,
+    "sha256": "94d870e4ece19a1056d9b34f08912113035fd5ce740eba3eb380b3a5178097ad",
+    "meshes": 6,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_abdominal_go_s53.glb",
+    "bytes": 6357384,
+    "sha256": "9a1bfbf2ea22460739f3b39ac507d194eea9b0e5792fcd1f500cfcf4ec039721",
+    "meshes": 53,
+    "materials": 16,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_abdominal_go_s53_1.glb",
+    "bytes": 6362932,
+    "sha256": "7aa1bf842077d536a62838407873611f188090690718e1aea606b43db7c69286",
+    "meshes": 54,
+    "materials": 17,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_biceps_curl_go_s40.glb",
+    "bytes": 5766620,
+    "sha256": "f3e53b4213c8edcf71667f6668931749148da177e4a4095e28b05cc56cb03b12",
+    "meshes": 49,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_biceps_curl_go_s40_1.glb",
+    "bytes": 5771848,
+    "sha256": "b386c457ebe4a34f5b1aa91f735db51630617a8ae420524aac291f956c7f57cc",
+    "meshes": 51,
+    "materials": 16,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_leg_curl_go_s72.glb",
+    "bytes": 6237452,
+    "sha256": "e15a942f00ed1a2f306fd575dbb5b75fc34c27e9bbeaa1ad1623dde3964577e9",
+    "meshes": 58,
+    "materials": 16,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_leg_curl_go_s72_1.glb",
+    "bytes": 6236988,
+    "sha256": "df850cf175e54477b78bd19879dc0f67b9c78635db8b426fc2b4010ad0e635d9",
+    "meshes": 58,
+    "materials": 16,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_leg_extension_go_s71.glb",
+    "bytes": 6068268,
+    "sha256": "1dbe44c3803e7a0b98b665a49556606f35de5729c45d438e86e6d6e0eebac789",
+    "meshes": 45,
+    "materials": 17,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_leg_extension_go_s71_1.glb",
+    "bytes": 6066788,
+    "sha256": "82280793107addba4b7111755d8a68ade6d64f9d2c5b53f3fb87a5b7c47e763b",
+    "meshes": 44,
+    "materials": 16,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_leg_press_go_s70.glb",
+    "bytes": 6478236,
+    "sha256": "d3701e8fb50ebb1cacc1bdd064e12742be50c6ff5d2444a848f20410c1ebe85a",
+    "meshes": 55,
+    "materials": 18,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_leg_press_go_s70_1.glb",
+    "bytes": 6476616,
+    "sha256": "cc555745cf1c7656c8290a963a7937f1136cf586d970f93828a85eceea6673fd",
+    "meshes": 55,
+    "materials": 18,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_seated_row_go_s34.glb",
+    "bytes": 5248980,
+    "sha256": "755af2d224ecc9c7313ceecec9b91daaaab2cc53f33e10383c39c49dc48d1a0f",
+    "meshes": 45,
+    "materials": 17,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_seated_row_go_s34_1.glb",
+    "bytes": 5249976,
+    "sha256": "171294481aa49dc05d2dd49251a289a588be5d960098aec91a2893954894f2c0",
+    "meshes": 45,
+    "materials": 17,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_shoulder_press_go_s23.glb",
+    "bytes": 6312252,
+    "sha256": "91560c3815b4fd1eddbff612ff6c11914bf8196bd65488a4220628b27a3ae16b",
+    "meshes": 52,
+    "materials": 23,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_shoulder_press_go_s23_1.glb",
+    "bytes": 6311056,
+    "sha256": "2d71ef3fa449a3728a4060967d0e95bbbdaf14cd44993ee311b65c6b5d76103b",
+    "meshes": 53,
+    "materials": 24,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_triceps_press_go_s42.glb",
+    "bytes": 5552388,
+    "sha256": "64c60c886c7f3a0f71bc76f1a6bb40e55878c086ca466e42d1ff44f775bf0744",
+    "meshes": 54,
+    "materials": 16,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_go_series_triceps_press_go_s42_1.glb",
+    "bytes": 5549812,
+    "sha256": "3ecf1a181e837b6681589c96f07ccc1b20aa5afdeac0620e7b5ca977dced1a5d",
+    "meshes": 53,
+    "materials": 15,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_2_tier_flat_tray_dumbbell_rack_6_mg_a697.glb",
+    "bytes": 831404,
+    "sha256": "475e260f047c2e767f41a5be4792d7f2a16b64deec0fa5622c647da31a142682",
+    "meshes": 4,
+    "materials": 4,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_3_tier_studio_flat_tray_dumbbell_rack_mg_a544.glb",
+    "bytes": 2086780,
+    "sha256": "1c4e78ddaad863773a4db6369b26ac0d82c24cf27765f5bb406f08549be2f894",
+    "meshes": 120,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_3_way_olympic_bench_mg_c895.glb",
+    "bytes": 17952592,
+    "sha256": "7d5bc4d850c06983f650bbed3bf20044cee30726c51f9c8847b9f19ddbbab839",
+    "meshes": 11,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_adjustable_pulley_ada_mg_ada23.glb",
+    "bytes": 3630152,
+    "sha256": "25f180a5068015dcf191ad91a269b2653e1e0cc6e4ba33d39832fa354db8ee1d",
+    "meshes": 6,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_adjustable_pulley_mg_923.glb",
+    "bytes": 4176864,
+    "sha256": "600582173b182c94b7aa724818b0d4a25c0785127ea1a203a0f89f7febec6c19",
+    "meshes": 6,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_back_extension_bench_mg_a52.glb",
+    "bytes": 8237072,
+    "sha256": "926c0c6dfe62243b73400b0291cb48244c7fddee7984363f27b1d8d3004ed85e",
+    "meshes": 12,
+    "materials": 9,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_barbell_rack_mg_a98.glb",
+    "bytes": 8123236,
+    "sha256": "4b87065a2e0b3546db7638d802924626c732c45f4fba8338d9c6ddb0c48ed424",
+    "meshes": 6,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_breaker_olympic_decline_bench_mg_a680.glb",
+    "bytes": 17753540,
+    "sha256": "b88a8d05c47bfe4dfcd180547a59f1c33a7a21ad790f9cd46de4244129193ecb",
+    "meshes": 17,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_breaker_olympic_flat_bench_mg_a678.glb",
+    "bytes": 15636476,
+    "sha256": "39acf090c083a91f04e88f107ad2437f3691a5f1488560e7b8603c49c0b3fd25",
+    "meshes": 12,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_breaker_olympic_incline_bench_mg_a679.glb",
+    "bytes": 14693060,
+    "sha256": "8d658d86116d91a05627cbb7ea9fc54f0d86d292e0291de8bbf5821f123e8d40",
+    "meshes": 12,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_glute_trainer_mg_pl78.glb",
+    "bytes": 5469968,
+    "sha256": "b0b107bab748b9de51fc8df0ed01fa9b7ec6d9f41252f71971f2fc6f1fd20e0b",
+    "meshes": 8,
+    "materials": 6,
+    "selectedAs": [
+      "hipthrust"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_half_rack_mg_a690.glb",
+    "bytes": 2058660,
+    "sha256": "f35f53e60f2ada25d92ba49a0758285d91d4d25eddace5caaf230fdf28998c22",
+    "meshes": 9,
+    "materials": 9,
+    "selectedAs": [
+      "rack"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_incline_bench_press_mg_a417.glb",
+    "bytes": 9077036,
+    "sha256": "e6838868bf9e672d2711123d2adf345c0cca70b150d23cd4bb9560090e10ad0c",
+    "meshes": 10,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_lat_pulldown_mg_921.glb",
+    "bytes": 2480360,
+    "sha256": "e7ccace588bfc0110490544b217afe4b9ade6f7b5b94ebe2e0e1fbc98bb26221",
+    "meshes": 7,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_lat_pulldown_mg_a435.glb",
+    "bytes": 6850596,
+    "sha256": "6d0ffc5e9425ee734eb491a35f2fdfc0cd6247abc20999f8fb069387571b472e",
+    "meshes": 8,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_lat_pulldown_mg_pl33.glb",
+    "bytes": 2042632,
+    "sha256": "8370e68568bead3fcdb44e448f86df38047764ae0814060cdcfab592a81bbe58",
+    "meshes": 9,
+    "materials": 9,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_mega_double_half_rack_mg_mr691.glb",
+    "bytes": 17750264,
+    "sha256": "eb8e1d515ef4c036176d3d3840a8eb0fe7da261c738e1a5e36b628ab9f35d098",
+    "meshes": 12,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_mega_half_rack_mg_mr690.glb",
+    "bytes": 12934344,
+    "sha256": "8484d124d0233784ce5f38c4e3892929d7c87516203915de2536ec35f984a7c7",
+    "meshes": 10,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_multi_adjustable_bench_mg_a85.glb",
+    "bytes": 4720880,
+    "sha256": "78d5207e6658c7b214a2757637861400a7a4e85cc5c6b9dae92212935ccb4cb9",
+    "meshes": 10,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_multi_adjustable_bench_wdecline_mg_a86.glb",
+    "bytes": 7857368,
+    "sha256": "2ee199c2b1f2644dbe1f31b4078c1e9e66efd2bc0a0793e0e662c336d1e0c3aa",
+    "meshes": 9,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_platform_rubber_6x8_mg_marp4794_06.glb",
+    "bytes": 2234800,
+    "sha256": "02cdcfc2cc6d0be44b273eb65257408ed86f588e0c419454b003d0bf080a8f90",
+    "meshes": 3,
+    "materials": 3,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_power_rack_mg_a47.glb",
+    "bytes": 10238868,
+    "sha256": "6e93610f7144930c87196fe397fa202ce362e87f1ee2adfe84d417635290a76c",
+    "meshes": 75,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_preacher_curl_mg_a62.glb",
+    "bytes": 3440264,
+    "sha256": "031fd902e1d5a4e6ebc50f639a05f7664fc1f03f565cec67d3d0d977851a5478",
+    "meshes": 11,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_pro_half_rack_mg_pro690.glb",
+    "bytes": 8718380,
+    "sha256": "8fd5517f4799e7891e4a37d3d90b400f1ffd6e3e07346f77886bf1d5a9db4cd2",
+    "meshes": 15,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_reverse_back_extension_mg_405.glb",
+    "bytes": 2545232,
+    "sha256": "9c32a3f5fb034b384dfcf6efa9d2e14a3b893a1a60fc8c5d2108c1c7cc31c011",
+    "meshes": 7,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_seated_calf_mg_a53.glb",
+    "bytes": 5569972,
+    "sha256": "0a6933ed20433d4ceb07fe3df1ff8b8f49cab570ba5b4198a4ee492189917453",
+    "meshes": 14,
+    "materials": 8,
+    "selectedAs": [
+      "calf"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_standing_arm_curl_mg_a71.glb",
+    "bytes": 3820368,
+    "sha256": "241d7a1aed6846437e9dccf3a32572b2c2fefb8846c48bffd2ed87cb8b9a8bf5",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_standing_calf_mg_a486.glb",
+    "bytes": 7792976,
+    "sha256": "db968b679b33f5ea46752b0631484872d7884241eb974dc4f47e0849ce648084",
+    "meshes": 7,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_standing_calf_mg_pl76.glb",
+    "bytes": 3323000,
+    "sha256": "8f68987c1c9c1eeba5de3c64ebc1e2a467524332fb76b58ef786fa75ecc1c8f8",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_step_up_platform_with_handle_mg_sup.glb",
+    "bytes": 382324,
+    "sha256": "172f2defed87fdcbf046e9a0633dda0ecb025184f57b13a44040255cb45cb9c6",
+    "meshes": 6,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_supine_bench_press_mg_pl13.glb",
+    "bytes": 1469072,
+    "sha256": "4a7082b01d6482a6eacd2b3e3024cffc8a85abe48778fff596ce75265bee70ae",
+    "meshes": 7,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_triceps_pushdown_mg_942.glb",
+    "bytes": 2600040,
+    "sha256": "6e0603705f14f4e8c328a497f0989c3c03480f179c19ef77f7d1b41fe2d98551",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_utility_bench_mg_a87.glb",
+    "bytes": 4063340,
+    "sha256": "164eb2f42c2646752373ef2cea4bf065af021d2850d8f24b9e928277fe76338b",
+    "meshes": 7,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_magnum_vertical_bench_press_mg_a422.glb",
+    "bytes": 9647092,
+    "sha256": "1380e10de3cae9eac39477086ce91bbf870fc1f663981ef60654e9cdd1e71dad",
+    "meshes": 10,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_mg_mx47.glb",
+    "bytes": 9917800,
+    "sha256": "e9bdd7dae28fbeb289a9eb4cdf64faf687b873c0d5a404dcf4f2a6727221bc3b",
+    "meshes": 7,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_mx_end_touch_stepper_1_20_22.glb",
+    "bytes": 5396368,
+    "sha256": "9468b42dd122dece2241b1ced491ea826a1b643d2ebebe842917a86eb0120cb1",
+    "meshes": 105,
+    "materials": 16,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_mx_endurance_gt_r_bike_1_16_22.glb",
+    "bytes": 4689164,
+    "sha256": "4d8372a5c977c0a837c5bf55a1929d5b207cad9b831c116458df892f3e11e360",
+    "meshes": 220,
+    "materials": 18,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_mx_endurance_touch_1_4_22.glb",
+    "bytes": 6299360,
+    "sha256": "cd24d96f62c2b362e34c8d5acf438b6196432e2e709e2f9885e874ef28cceb36",
+    "meshes": 550,
+    "materials": 17,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_mx_endurance_touch_xl_cm_1_13_22.glb",
+    "bytes": 8124532,
+    "sha256": "e058ca0c2194afaba751cc38ab097271162ff6305d5fb77d980fa42235b078f5",
+    "meshes": 100,
+    "materials": 27,
+    "selectedAs": [
+      "stairs"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_mx_g1_mg30_12_7_23.glb",
+    "bytes": 50684000,
+    "sha256": "0fdd0c222b138e334dc8200f34eba75d1c76545ae5fb14234753b12f546ed3bb",
+    "meshes": 416,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_mx_performance_touch_xl_tm_1_5_22.glb",
+    "bytes": 10853192,
+    "sha256": "99f9aa69bf2c9a3624cba0a9cf3f021ba6a94fc4b82b728eb5ffc5582ef9be08",
+    "meshes": 180,
+    "materials": 24,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws103_01_shoulder_pres.glb",
+    "bytes": 10535588,
+    "sha256": "5a0cef3017c192acb9630027d32cbf7991964b22c8a024a852a8401a81fd29d0",
+    "meshes": 13,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws107_01_pec_rear_delt.glb",
+    "bytes": 10551808,
+    "sha256": "52e0f69f075ed93d25342a475e3c00a678f6c60c0d406e3a68c3adb335686f53",
+    "meshes": 14,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws114_lat_raise.glb",
+    "bytes": 9880804,
+    "sha256": "9473451c0e4ff696bedcfb36314daaf9a26c2fe465bb7676e2bbae728d9dae10",
+    "meshes": 12,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws115_01_dip_assist.glb",
+    "bytes": 9056328,
+    "sha256": "857c91267eb245398587933db5f4650b9dbc33bd2447dbf39dbe85100a3ad452",
+    "meshes": 16,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws147_prone_leg_curl.glb",
+    "bytes": 6549496,
+    "sha256": "0895082f9aedd6c83adaaccc380dbf0027e869bf097d89fc94e545321700c409",
+    "meshes": 11,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws150_01_hip_abd_add.glb",
+    "bytes": 8507344,
+    "sha256": "ed966a2195ad612647bb0471a58c59d213bbd131c642f569e2cdd1bf1acc38d3",
+    "meshes": 14,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws151_rotary_hip.glb",
+    "bytes": 7797984,
+    "sha256": "0b0c7c58b7e9c4a4d2e15301cf2efe9b141618d630bd5615e956dff2ff15a3a4",
+    "meshes": 12,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws161_01_b_leg_press.glb",
+    "bytes": 9095108,
+    "sha256": "c210a0d3d39182d979cde0d50c91173f11d928fd68a84223b2386c81207bfd0a",
+    "meshes": 13,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws172_01_ab_low_back.glb",
+    "bytes": 7297960,
+    "sha256": "bb5c5340cace24d392fca45f9868dc250cc5bf7de33c9345ac6d6274bb34abec",
+    "meshes": 12,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_qws175_rotary_torso.glb",
+    "bytes": 10694952,
+    "sha256": "a70da72d5a60c319362d7f2fdecf3726f6aec3c81166de5f32248823897979da",
+    "meshes": 13,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_r3xm_recumbent_cycle.glb",
+    "bytes": 4481500,
+    "sha256": "f9762486322f701dc45c696170f9936cd29290e996636be0b4fcc1b1e6dca1c0",
+    "meshes": 35,
+    "materials": 24,
+    "selectedAs": [
+      "recumbent"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_retail_connexus_home_functional_training_system_cxr50.glb",
+    "bytes": 25098408,
+    "sha256": "eb0e3846ce49d0fab9a884fc79793ef46835a6c42b0256b1aed088c62ab67657",
+    "meshes": 28,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_rower.glb",
+    "bytes": 12179924,
+    "sha256": "671b1deec9762d00501a8183db6ab20dda4043feeee751d0b16f8b4f7851e502",
+    "meshes": 11,
+    "materials": 9,
+    "selectedAs": [
+      "rower"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_s_drive_performance_trainer.glb",
+    "bytes": 11661352,
+    "sha256": "9c81da4900ce5a0e2eaf559c26073c5d48e9b3e8490a45e99019f064a6cf354b",
+    "meshes": 10,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_s_force_performance_trainer.glb",
+    "bytes": 12784188,
+    "sha256": "db116041325ab3a0034dd8ace100debb98aa9b3e0796f5d11dda4e151a5726c2",
+    "meshes": 15,
+    "materials": 11,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_t3xm_treadmill.glb",
+    "bytes": 4801804,
+    "sha256": "26fbf9413feff93bfe1197f4f4a288c3be9a6f2267452b1e8adc6df306393ba7",
+    "meshes": 28,
+    "materials": 23,
+    "selectedAs": [
+      "treadmill"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_t600e.glb",
+    "bytes": 8944640,
+    "sha256": "c2f266222847d8a8741c8daadb774697cb2d18c08a2f7a11285ca3117e1bd822",
+    "meshes": 16,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_u600e.glb",
+    "bytes": 10739632,
+    "sha256": "8ccf4a8e12ebb9017860379324560276dcf74f95851c111843e3430bda62a97e",
+    "meshes": 27,
+    "materials": 15,
+    "selectedAs": [
+      "bike"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_abdominal_crunch_g7_s51.glb",
+    "bytes": 3471544,
+    "sha256": "055ea78c04b5b251b615185844ab6d5f20d8b3922f5b03f36864bcad33c95fea",
+    "meshes": 18,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_abdominal_crunch_with_itc_g7_s51.glb",
+    "bytes": 3909016,
+    "sha256": "a9f4ff65e6a1252ce64c31a6f536b5adaf23bd806e9bc2def330649c424040c4",
+    "meshes": 19,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_back_extension_g7_s52.glb",
+    "bytes": 3821680,
+    "sha256": "087c63f628736d8f504a3150047cda717ee6b4ece486bf56807b9a724b59b69f",
+    "meshes": 20,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_converging_chest_press_with_itc_g7_s13.glb",
+    "bytes": 4760708,
+    "sha256": "9449f3e91b58a1a3327246dd5f2bf727c108baf7273c3cd4f8d486a2f9213f1a",
+    "meshes": 16,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_dependent_curl_g7_s41.glb",
+    "bytes": 11957648,
+    "sha256": "f95e7472abca74e2af66549ea05cee60217f1517588dc9a04790cda84255e6b5",
+    "meshes": 20,
+    "materials": 15,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_diverging_lat_pulldown_with_itc_g7_s33.glb",
+    "bytes": 6171916,
+    "sha256": "209eedc22d478928e9ebe553e507b79366154b95b47cc3c192e3106323b247d7",
+    "meshes": 15,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_diverging_seated_row_with_itc_g7_s34.glb",
+    "bytes": 4242632,
+    "sha256": "c895b796e8890125caeaa11a4a3998202fb91fe81a5fd5aef0b0429d57c947a8",
+    "meshes": 16,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_glute_g7_s78.glb",
+    "bytes": 10673136,
+    "sha256": "3813fff3f4073c99cf4c8cc6187eb0195d050e0457b05295f87b6d74b5c39ee1",
+    "meshes": 113,
+    "materials": 15,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_hip_adductor_with_itc_g7_s74.glb",
+    "bytes": 3729832,
+    "sha256": "216e7cbc51eeed7b950a85773e0c4fdf3b9b0754ab0bcc5a4a9a8f72685ecdd5",
+    "meshes": 17,
+    "materials": 15,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_independent_biceps_curl_with_itc_g7_s40.glb",
+    "bytes": 4243200,
+    "sha256": "d282e55896c960476e4b44a0ee6b293e99679ce509ace711d6fe09c49e9794dc",
+    "meshes": 15,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_lateral_raise_with_itc_g7_s21.glb",
+    "bytes": 4490344,
+    "sha256": "3876e0b4c6585ff36a0a262cca39054355597131d8cacd655ac660ce3e98b81f",
+    "meshes": 16,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_leg_extension_g7_s71.glb",
+    "bytes": 5080596,
+    "sha256": "6928acd7088c4e043a13065e76d97403803f034af7f94002067e58d26104b39d",
+    "meshes": 22,
+    "materials": 17,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_leg_press_g7_s70.glb",
+    "bytes": 3446504,
+    "sha256": "26af94de06df07f2c60dfcc764f302d202999915568e3883b5a033755de3f099",
+    "meshes": 23,
+    "materials": 16,
+    "selectedAs": [
+      "legpress"
+    ]
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_rear_deltpec_fly_with_itc_g7_s22.glb",
+    "bytes": 4333276,
+    "sha256": "7fb636285254475ccf18384190527a7c74ca61a37b4b103904599c1ccc715fed",
+    "meshes": 23,
+    "materials": 17,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_rotary_torso_g7_s55.glb",
+    "bytes": 3235552,
+    "sha256": "efc7c03865182da9dab21e13a4ce1cf6245d94170a5b84b9ff377018bc18e1fb",
+    "meshes": 20,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_seated_leg_curl_with_itc_g7_s72.glb",
+    "bytes": 4439480,
+    "sha256": "df3637d97a27eca6ff65106eddb3b11f7ce87311fa76e109f3c644cbe2754483",
+    "meshes": 18,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_triceps_extension_g7_s45.glb",
+    "bytes": 12683140,
+    "sha256": "0fd4682bc48e74282ceac0091a13ea03b757ef15b925377d4c17f5d8defddcbc",
+    "meshes": 16,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_ultra_triceps_press_g7_s42.glb",
+    "bytes": 3442668,
+    "sha256": "1ec178ef88c05d30fbd396de7f5a67dd06cb973e561f2a8fd7e0eae5f1eff183",
+    "meshes": 19,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_3_way_press_vy_6045_na_only.glb",
+    "bytes": 3707512,
+    "sha256": "b105e662110a362d51e60b9319b4ea767203e28ea5354971d5ac46dd3d1a368a",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_ab_low_back_vy_6041_na_only.glb",
+    "bytes": 2391972,
+    "sha256": "4f3cef29bd3346a715bb1f10db339eb6a5ddb597f24f4edf530828bb4eb0dadb",
+    "meshes": 41,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_back_extension_bench_vy_d93_na_only.glb",
+    "bytes": 764912,
+    "sha256": "85fc3cc809ffe65e35c56e3c3a597ac322282cb077f6469041763567332e3ff2",
+    "meshes": 6,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_biceps_curl_vy_431.glb",
+    "bytes": 2323608,
+    "sha256": "9e1a2874bef2e817ad466f2467dbf13d0cb2823e3af7e4b62517540ef69039a2",
+    "meshes": 17,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_biceps_curl_vy_6011_na_only.glb",
+    "bytes": 1667424,
+    "sha256": "8914566b48bb501cb373b3a2974f46d77a27895c613794e13512bd03da2e57f6",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_biceps_triceps_vy_6042_na_only.glb",
+    "bytes": 3141012,
+    "sha256": "4a40c427d8e4c4ba7bedb379822e58db1d84d21b69752595b6a229d5ea9f29df",
+    "meshes": 7,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_chest_press_vy_6022_na_only.glb",
+    "bytes": 8040516,
+    "sha256": "85b431bfe7d490e43e5c2867a4222f246b7830007d995e608ebd6a92e7024188",
+    "meshes": 10,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_converging_shoulder_press_vy_6214ic_na_only.glb",
+    "bytes": 3392656,
+    "sha256": "5ba35a5570adc466403acb0e12ed14c079e5eb34a86920cb5b9f207ef13071a2",
+    "meshes": 9,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_converging_vertical_chest_press_vy_6222ic_na_only.glb",
+    "bytes": 2839384,
+    "sha256": "133f760e5520de63cc3b539a578098cd0f557e15f80194ba312551d45564c3ac",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_dip_chin_assist_vy_6037_na_only.glb",
+    "bytes": 2045436,
+    "sha256": "5e5d650fdaf002b00e44d64f0ce04968d34746d64386c329c2532597de8e4d33",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_flat_to_incline_bench_with_horizontal_adjustmen_213fbec.glb",
+    "bytes": 3402680,
+    "sha256": "698258d0d27d1ce717079cc650504bd8633ae366ccb23f85103da824678efa69",
+    "meshes": 6,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_hip_adductor_abductor_vy_6043_na_only.glb",
+    "bytes": 3691912,
+    "sha256": "822127753544b3bf10f8c8f9cff56d518b7a86ba13d031f9c96682fb256cc25f",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_lat_pulldown_low_row_vy_6046_na_only.glb",
+    "bytes": 2952196,
+    "sha256": "f616028f8dbc2f5cb24f5e85db3e6b1ab3bfb3b6e5b7bc7e9c5a8c869837961f",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_lat_pulldown_vy_6021_na_only.glb",
+    "bytes": 1315524,
+    "sha256": "340e6a33a2ba35e181e0b505c447462509f7f1477459f1167bae9361bf98a214",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_lat_pulldown_vy_d821_na_only.glb",
+    "bytes": 1411544,
+    "sha256": "a46ce5d7875f4b20bd483b33f1ec3df755991367cbf1c46e0b6df34c0ae8c10b",
+    "meshes": 7,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_leg_extension_prone_leg_curl_vy_6040_na_only_3d.glb",
+    "bytes": 2261416,
+    "sha256": "088f9fb72f952733ba99ccb8588a69e79bdd4bcbf2db960b3c782a4a7c1a13e3",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_leg_extension_vy_401.glb",
+    "bytes": 2779708,
+    "sha256": "4e4cbccd424aaed35bf22a95172db15fedccc498a32a60ebd0823b643c098be5",
+    "meshes": 230,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_leg_extension_vy_6001_na_only.glb",
+    "bytes": 2314128,
+    "sha256": "e456c6f3cea289b3fbc68de591671c401ba54acc7e2bdea9e1d198991bbdff74",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_leg_press_calf_vy_6003_na_only.glb",
+    "bytes": 5462588,
+    "sha256": "c13b123a36f855eee46d3ce6f142867f372085657b5ea3e012905527e2b390f9",
+    "meshes": 9,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_low_row_vy_d826_na_only.glb",
+    "bytes": 1709900,
+    "sha256": "baacbd871b053eae4269e66c4453fbc1ac0f87646b64c387eca03cf26ea09047",
+    "meshes": 7,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_olympic_incline_bench_vy_d79_na_only.glb",
+    "bytes": 729012,
+    "sha256": "abcb6efaf8129125b4aaae1616ac6342debc2aec67c5afc75d4978809e2d5031",
+    "meshes": 9,
+    "materials": 9,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_perfect_squat_vy_400.glb",
+    "bytes": 3662152,
+    "sha256": "534c202c6e7e44868cea2d0500be211df874a0ce5532d54895edb06e85a76d2a",
+    "meshes": 14,
+    "materials": 7,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_platform_vy_plat_na_only.glb",
+    "bytes": 19256,
+    "sha256": "c3b1b43ae7b4cc08019111a94daa8eea3ea4de1ad17b2f7302b398ca5c93216b",
+    "meshes": 7,
+    "materials": 3,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_power_rack_vy_d47_na_only.glb",
+    "bytes": 5701012,
+    "sha256": "25f5492966ab1757f764e1b4ede4ad0fb68a772d06a2787a1b08ba4b0cb7666f",
+    "meshes": 7,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_prone_leg_curl_vy_402.glb",
+    "bytes": 1088508,
+    "sha256": "1cb2fbd2efa82c37453a0b042b00ebd89496370292d115cdc5717eefb69728b3",
+    "meshes": 6,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_rear_delt_fly_vy_6036_na_only.glb",
+    "bytes": 5777224,
+    "sha256": "28a37937a6fc71503dca94d33c475e40f3aee889022944cfc1245021d5fe46b7",
+    "meshes": 331,
+    "materials": 11,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_rotary_hip_vy_6010_na_only.glb",
+    "bytes": 3259688,
+    "sha256": "08b00b887384087d3e132d35be0085473f2f7f9fa59c192998c695c885743524",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_seated_leg_curl_vy_6027_na_only.glb",
+    "bytes": 4022524,
+    "sha256": "55951b3bdd45d53e4582ae5255bf3518af73620c4833f211b60d6a1f6f5a9f62",
+    "meshes": 9,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_seated_row_vy_6020_na_only.glb",
+    "bytes": 2185660,
+    "sha256": "cef763356c3596f7019f346d78f1d13b65185cf50f62f470a930b5441e1400c3",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_shoulder_press_vy_6014_na_only.glb",
+    "bytes": 5204224,
+    "sha256": "78d9f024ba315008b34277ef11a49f11a8d74a81e752f46e17f718b524764e28",
+    "meshes": 9,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_triceps_extension_vy_432.glb",
+    "bytes": 3029336,
+    "sha256": "e5eaac29c1db90385ac24dc6667e52e6505e3061a567801848fe7871012a5ed8",
+    "meshes": 8,
+    "materials": 8,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_varsity_weight_tree_with_olympic_bar_holder_vy_d67h_na_only.glb",
+    "bytes": 353136,
+    "sha256": "d427cd6b34b2636d8a78eaa887b3198078ed1c35a532790573edce76bcafcd05",
+    "meshes": 5,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_ab_low_back_vs_s531.glb",
+    "bytes": 4090832,
+    "sha256": "c0b7c681ab451cf26146e0698fd813c143f3c05a529f6611e766042fabeceb39",
+    "meshes": 30,
+    "materials": 15,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_back_extension_vs_s52.glb",
+    "bytes": 5887228,
+    "sha256": "0c4d1185ff354f86aae8c381e3d65a618bba4b6fd41d2e7774e90f81b7c66015",
+    "meshes": 24,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_bicep_tricep_vs_s401.glb",
+    "bytes": 4858676,
+    "sha256": "54ab3121f5febd10357ad31c09a842eaa08d67fb4e649487a953894598e00c35",
+    "meshes": 84,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_chin_dip_assist_vs_s601.glb",
+    "bytes": 4167804,
+    "sha256": "6114b880be86e1c9afd4299bbfc88462e070f0513e7504e60be04b06b31de338",
+    "meshes": 29,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_combo_lat_pulldown_seated_row_vs_s331.glb",
+    "bytes": 16210172,
+    "sha256": "7c399717a26ce8929f1a9f66e8caa8ad025386308ee3170f03300b5697dbc8ac",
+    "meshes": 21,
+    "materials": 16,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_converging_shoulder_press_vs_s23.glb",
+    "bytes": 7103204,
+    "sha256": "9a0f3f24025f57e670c7d50f0a892b2b09e22955e1b4bedbb9c7412c7bc6f337",
+    "meshes": 19,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_diverging_lat_pulldown_vs_s33.glb",
+    "bytes": 5759872,
+    "sha256": "89ad8004498b0ed492319d0f99d1d33dda1eef93ef4f000c94130b333ba380eb",
+    "meshes": 19,
+    "materials": 12,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_diverging_seated_row_vs_s34.glb",
+    "bytes": 8294992,
+    "sha256": "d617540f568bf27dfbf0e807b3a3195b1630b8fc6d35ba762f510ff9ebb43766",
+    "meshes": 24,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_functional_trainer_w30_storage_vs_vft_vs_fts30.glb",
+    "bytes": 2916484,
+    "sha256": "bcaa8bf06f075097dcc4c4f19256a0da47cf6976c216b542a36234fcad0507ba",
+    "meshes": 9,
+    "materials": 6,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_glute_vs_s78.glb",
+    "bytes": 7395188,
+    "sha256": "a58a08ec70e7384d69c2804d9338d76653381995214af41c710f349f0bfb36ba",
+    "meshes": 17,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_glute_vs_s78_1.glb",
+    "bytes": 7395212,
+    "sha256": "a407daf328005558d11807ef584e33baabf9ef3d80644ff986f934d9e67e9e4f",
+    "meshes": 17,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_leg_extension_leg_curl_vs_s711.glb",
+    "bytes": 5434280,
+    "sha256": "c9beb76b968646b7b93c6dd5c7c92bc6a2ec388d53516d90feaaa9f6ebf4cce8",
+    "meshes": 27,
+    "materials": 15,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_leg_extension_vs_s71.glb",
+    "bytes": 5696568,
+    "sha256": "f6eaed0c6268e446b9bf5d6d00b5d0e966dfbd4c3d76b77b149bc1ec02a65e3c",
+    "meshes": 17,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_leg_extension_vs_s71_2.glb",
+    "bytes": 5696384,
+    "sha256": "b47de4fb22088048f34a3d2f216d883834fb58c2bbb02e2d434feb4d24a5d31b",
+    "meshes": 17,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_leg_press_calf_press_vs_s70.glb",
+    "bytes": 6390624,
+    "sha256": "f046590897a6be9c48d68336cd0ce09441a27f8200674bdacecd2d4bb315ffa8",
+    "meshes": 18,
+    "materials": 12,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_leg_press_calf_press_vs_s70_2.glb",
+    "bytes": 6390436,
+    "sha256": "692137d92c2678742549541a6adfc17b64bfc3ae33b063c05b3e4928a3e640e5",
+    "meshes": 18,
+    "materials": 12,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_seated_leg_curl_vs_s72.glb",
+    "bytes": 6607668,
+    "sha256": "e070bfa9ea6e6c72edf651ca861705819e994fbb53102a321335424002f748ee",
+    "meshes": 20,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_seated_leg_curl_vs_s72_2.glb",
+    "bytes": 6553432,
+    "sha256": "351fa49ed4c7066de74fe3b336b2b899e3f26a8297d204c6c473d37a5e768c51",
+    "meshes": 20,
+    "materials": 13,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_triceps_press_vs_s42.glb",
+    "bytes": 5607588,
+    "sha256": "9e6267f8704f1d3b8abef42244d9b644337a31ec4a8e6dd7212f1293a1034709",
+    "meshes": 24,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_versa_triceps_press_vs_s42_2.glb",
+    "bytes": 5532904,
+    "sha256": "8a873426e051f78d6f311d1ed3efb4a3da72df8520e328ed1296099a60df34b3",
+    "meshes": 24,
+    "materials": 14,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_vst600_ft_functional_trainer.glb",
+    "bytes": 13248636,
+    "sha256": "0d4b8efd54f8ebf18fa4dc1ccf4835906411c3015e5a5330799b89afe61dfb66",
+    "meshes": 43,
+    "materials": 25,
+    "selectedAs": []
+  },
+  {
+    "folder": "Matrix",
+    "filename": "matrix_vst600_fw82_adjustable_bench.glb",
+    "bytes": 4561984,
+    "sha256": "253289014ece7a83973a53c958fcd1ac011f983aa1ce45dc644c53698f8bf126",
+    "meshes": 5,
+    "materials": 5,
+    "selectedAs": []
+  },
+  {
+    "folder": "props",
+    "filename": "concrete_floor.glb",
+    "bytes": 43870472,
+    "sha256": "faf9d5379fd6383c51ac79506d084a80b1ebf12c789ddc10bf575f8d4325dbe7",
+    "meshes": 1,
+    "materials": 1,
+    "selectedAs": []
+  },
+  {
+    "folder": "props",
+    "filename": "floor_mat.glb",
+    "bytes": 35836240,
+    "sha256": "44d2a5998bd00497da6f70ff74bec3660a103e5efde60e8eb9198e30bd57ebc7",
+    "meshes": 1,
+    "materials": 1,
+    "selectedAs": [
+      "floorMat"
+    ]
+  },
+  {
+    "folder": "props",
+    "filename": "gym_equipment_rack.glb",
+    "bytes": 144886424,
+    "sha256": "2bcdc0244d3023195f255ce9b080aa9c94dbe87a0fd1d7cdcd6fe2f4758486bb",
+    "meshes": 267,
+    "materials": 38,
+    "selectedAs": [
+      "storageRack"
+    ]
+  },
+  {
+    "folder": "props",
+    "filename": "gym_locker_01.glb",
+    "bytes": 17510272,
+    "sha256": "aaa858486403c85486762ecb296d119b711afa22fa41f15c361e98a1505fb88a",
+    "meshes": 5,
+    "materials": 4,
+    "selectedAs": [
+      "locker1"
+    ]
+  },
+  {
+    "folder": "props",
+    "filename": "gym_locker_02.glb",
+    "bytes": 131189324,
+    "sha256": "8c18d0f570ad7e992d8c53e3af3d070df45bd2ec250cefecb8ddab1062bc2dd6",
+    "meshes": 64,
+    "materials": 12,
+    "selectedAs": [
+      "locker2"
+    ]
+  },
+  {
+    "folder": "props",
+    "filename": "kettlebell_16kg.glb",
+    "bytes": 22209412,
+    "sha256": "cf060d6bb21b18e287e3a5114542becad0325f414ef4e58b4b9deb0c797def45",
+    "meshes": 1,
+    "materials": 1,
+    "selectedAs": [
+      "kettlebell16"
+    ]
+  },
+  {
+    "folder": "props",
+    "filename": "kettlebell_24kg.glb",
+    "bytes": 34886236,
+    "sha256": "a5a7b67e9e267fea712bad0e4d6575450f65f89a8aded49d38d35d7864b98c89",
+    "meshes": 1,
+    "materials": 1,
+    "selectedAs": [
+      "kettlebell24"
+    ]
+  },
+  {
+    "folder": "props",
+    "filename": "kettlebell_32kg.glb",
+    "bytes": 61601496,
+    "sha256": "0bbd6ba3d11961f39db4d68213e895401e1089f34398c7f034a2fdf1f8b05f6c",
+    "meshes": 1,
+    "materials": 1,
+    "selectedAs": [
+      "kettlebell32"
+    ]
+  },
+  {
+    "folder": "props",
+    "filename": "puzzle_mats.glb",
+    "bytes": 19494604,
+    "sha256": "bf81ab53c1c3d8d203eba0c9236f1fce8ac7a9794c9ebab2909e7c00ba72215d",
+    "meshes": 12,
+    "materials": 2,
+    "selectedAs": []
+  },
+  {
+    "folder": "props",
+    "filename": "reception_desk_no51.glb",
+    "bytes": 57723108,
+    "sha256": "2adb033c1df22872116aa90f7fe6f19027a9dd794061dccc570eb4293e855240",
+    "meshes": 13,
+    "materials": 15,
+    "selectedAs": [
+      "reception"
+    ]
+  }
+]

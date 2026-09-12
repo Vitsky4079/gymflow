@@ -1,3 +1,4 @@
+export const approachPoint=e=>e.approach?{x:e.x+e.approach.x,z:e.z+e.approach.z}:{x:e.x,z:e.z+2};
 // Real stations are ~2.7m wide x ~3.13m deep (cable's own footprint is the
 // one wider exception) — a flat 1.65m isotropic margin overshoots that
 // half-width (1.35m) enough that two same-row neighbours 3m apart (a normal
@@ -49,7 +50,10 @@ function simplifyPath(points,equipment,gym,floor){
 // aisle's own centre first, then on to the destination, instead of a single
 // direct search.
 export function findGymPath(equipment,a,b,gym,floor){
-	const start={x:a.x,z:a.z+2},end={x:b.x,z:b.z+2};
+	const start=approachPoint(a),end=approachPoint(b);
+	// Keep the new room on its verified aisle grid; diagonal smoothing can
+	// clip the narrow gaps beside its columns and studio doorway.
+	if(gym.reconstruction)return gridPath(start,end,equipment,gym,floor);
 	const aisle=gym.aisle;
 	if(aisle){
 		const side=x=>x<aisle.min?-1:x>aisle.max?1:0;

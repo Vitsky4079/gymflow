@@ -1,3 +1,4 @@
+import {gyms} from './gyms.js';
 const KEY = 'gymflow-test-workspace-v1';
 const empty = () => ({ clients: [], gyms: {} });
 const validRows = rows => Array.isArray(rows) ? rows.filter(row => row && typeof row.id === 'string' && typeof row.name === 'string').map(row => ({ id: row.id, name: row.name.slice(0, 60), note: String(row.note || '').slice(0, 200), active: row.active !== false })) : [];
@@ -7,7 +8,7 @@ export function createTestWorkspace(storage) {
     const saved = JSON.parse(storage?.getItem(KEY) || 'null');
     if (saved && typeof saved === 'object') {
       data.clients = validRows(saved.clients);
-      for (const id of ['studio', 'atlas']) {
+      for (const id of gyms.map(g=>g.id)) {
         const gym = saved.gyms?.[id];
         if (gym) data.gyms[id] = { trainers: validRows(gym.trainers), promotions: validRows(gym.promotions), maintenance: Array.isArray(gym.maintenance) ? gym.maintenance.filter(id => typeof id === 'string') : [] };
       }

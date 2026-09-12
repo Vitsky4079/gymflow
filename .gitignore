@@ -1,6 +1,7 @@
 # Local dependencies and caches
 node_modules/
 .npm/
+.tools/
 coverage/
 *.log
 

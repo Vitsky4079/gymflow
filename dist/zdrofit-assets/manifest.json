@@ -1,0 +1,648 @@
+{
+  "treadmill": {
+    "url": "./zdrofit-assets/treadmill.glb",
+    "source": "matrix_t3xm_treadmill.glb",
+    "bounds": {
+      "min": [
+        -0.32038310575892126,
+        -6.349383703513058e-08,
+        -0.7908425678885007
+      ],
+      "max": [
+        0.3203828514140028,
+        1.0747161824456413,
+        0.7908423749218196
+      ]
+    },
+    "bytes": 1939196
+  },
+  "elliptical": {
+    "url": "./zdrofit-assets/elliptical.glb",
+    "source": "matrix_endurance_gt_ep_1_13_22.glb",
+    "bounds": {
+      "min": [
+        -0.36897953723911314,
+        1.9976758508510883e-07,
+        -0.8730118986898134
+      ],
+      "max": [
+        0.3689797159797763,
+        1.7895172238476071,
+        0.8730123306716648
+      ]
+    },
+    "bytes": 2532000
+  },
+  "bike": {
+    "url": "./zdrofit-assets/bike.glb",
+    "source": "matrix_u600e.glb",
+    "bounds": {
+      "min": [
+        -0.32191818634679237,
+        0.20714704168185485,
+        -0.43847672393859793
+      ],
+      "max": [
+        0.32191865870164094,
+        1.6516866468891003,
+        0.6124491508199212
+      ]
+    },
+    "bytes": 3964964
+  },
+  "recumbent": {
+    "url": "./zdrofit-assets/recumbent.glb",
+    "source": "matrix_r3xm_recumbent_cycle.glb",
+    "bounds": {
+      "min": [
+        -0.3408525667866513,
+        2.341379334858118e-08,
+        -0.7833936931106747
+      ],
+      "max": [
+        0.3408525667866513,
+        1.4679729296391197,
+        0.7833922555453626
+      ]
+    },
+    "bytes": 1912152
+  },
+  "rower": {
+    "url": "./zdrofit-assets/rower.glb",
+    "source": "matrix_rower.glb",
+    "bounds": {
+      "min": [
+        -0.2687641461747403,
+        4.3869791212193185e-07,
+        -1.1128109991034076
+      ],
+      "max": [
+        0.2687617120479402,
+        0.9427919955746313,
+        1.1128109450348334
+      ]
+    },
+    "bytes": 4429240
+  },
+  "stairs": {
+    "url": "./zdrofit-assets/stairs.glb",
+    "source": "matrix_mx_endurance_touch_xl_cm_1_13_22.glb",
+    "bounds": {
+      "min": [
+        -0.5119844742633006,
+        2.01157203155299e-07,
+        -0.8046059742336906
+      ],
+      "max": [
+        0.5119850788424674,
+        2.17837999075714,
+        0.8046078279412892
+      ]
+    },
+    "bytes": 1866256
+  },
+  "chest": {
+    "url": "./zdrofit-assets/chest.glb",
+    "source": "matrix_aura_chest_press_g3_s10.glb",
+    "bounds": {
+      "min": [
+        -0.5150553298579397,
+        5.0224249090354e-08,
+        -0.8154378124618825
+      ],
+      "max": [
+        0.6461295157372295,
+        1.8469997798322249,
+        0.5949247986287471
+      ]
+    },
+    "bytes": 1182688
+  },
+  "shoulder": {
+    "url": "./zdrofit-assets/shoulder.glb",
+    "source": "matrix_aura_converging_shoulder_press_g3_s23.glb",
+    "bounds": {
+      "min": [
+        -0.7176545150909514,
+        1.3449868136431896e-07,
+        -0.8425746034272683
+      ],
+      "max": [
+        0.5974285849579987,
+        1.7359998680487856,
+        0.8230875055630535
+      ]
+    },
+    "bytes": 862436
+  },
+  "lat": {
+    "url": "./zdrofit-assets/lat.glb",
+    "source": "matrix_aura_lat_pulldown_g3_s30.glb",
+    "bounds": {
+      "min": [
+        -0.5673655446171788,
+        2.518671312935761e-07,
+        -0.7286663810722553
+      ],
+      "max": [
+        0.56736571534951,
+        2.2170003421556697,
+        0.7286698497681613
+      ]
+    },
+    "bytes": 689408
+  },
+  "row": {
+    "url": "./zdrofit-assets/row.glb",
+    "source": "matrix_aura_diverging_seated_row_g3_s34.glb",
+    "bounds": {
+      "min": [
+        -0.4490274532493959,
+        2.906122077769445e-07,
+        -0.8164014307937535
+      ],
+      "max": [
+        0.44902755162091523,
+        1.9870004011202902,
+        0.8164013843727135
+      ]
+    },
+    "bytes": 682984
+  },
+  "legcurl": {
+    "url": "./zdrofit-assets/legcurl.glb",
+    "source": "matrix_aura_seated_leg_curl_g3_s72_2.glb",
+    "bounds": {
+      "min": [
+        -0.8415695848537241,
+        -6.1540153424577415e-09,
+        -0.6151535005048165
+      ],
+      "max": [
+        0.8415692772862233,
+        1.7360000120378027,
+        0.6151531582599259
+      ]
+    },
+    "bytes": 2228324
+  },
+  "legextension": {
+    "url": "./zdrofit-assets/legextension.glb",
+    "source": "matrix_aura_leg_extension_g3_s71.glb",
+    "bounds": {
+      "min": [
+        -0.7445530820569278,
+        1.4155136823942004e-07,
+        -0.47736186128012553
+      ],
+      "max": [
+        0.7420118854600328,
+        1.7360002460852377,
+        0.8352049946112162
+      ]
+    },
+    "bytes": 766816
+  },
+  "abductor": {
+    "url": "./zdrofit-assets/abductor.glb",
+    "source": "matrix_aura_hip_abductor_g3_s75.glb",
+    "bounds": {
+      "min": [
+        -0.3445899095296693,
+        1.0458480374786472e-07,
+        -0.8304922076485977
+      ],
+      "max": [
+        0.34458931238616075,
+        1.508000126847917,
+        0.8304924162544378
+      ]
+    },
+    "bytes": 1091672
+  },
+  "adductor": {
+    "url": "./zdrofit-assets/adductor.glb",
+    "source": "matrix_aura_hip_adductor_g3_s74.glb",
+    "bounds": {
+      "min": [
+        -0.4137839997369747,
+        3.276786146337238e-07,
+        -0.8279325774611106
+      ],
+      "max": [
+        0.4137843815974662,
+        1.5080004792805826,
+        0.8279326187239217
+      ]
+    },
+    "bytes": 2193044
+  },
+  "pecdeck": {
+    "url": "./zdrofit-assets/pecdeck.glb",
+    "source": "matrix_aura_rear_delt_fly_g3_s22.glb",
+    "bounds": {
+      "min": [
+        -0.7031233386051502,
+        2.7178117040184066e-07,
+        -0.6834994641925214
+      ],
+      "max": [
+        0.7031235459569984,
+        2.0430003236747996,
+        0.6835007201923787
+      ]
+    },
+    "bytes": 904728
+  },
+  "cable": {
+    "url": "./zdrofit-assets/cable.glb",
+    "source": "matrix_aura_adjustable_cable_crossover_g3_ms20.glb",
+    "bounds": {
+      "min": [
+        -1.9865929608175767,
+        1.5709511164943742e-07,
+        -0.4503259152318957
+      ],
+      "max": [
+        1.9865969812025241,
+        2.3960003212782315,
+        0.4503263208611825
+      ]
+    },
+    "bytes": 2803156
+  },
+  "assisted": {
+    "url": "./zdrofit-assets/assisted.glb",
+    "source": "matrix_aura_dip_chin_assist_g3_s60_3d.glb",
+    "bounds": {
+      "min": [
+        -0.6088594750681071,
+        5.406683090147281e-08,
+        -0.623001212671408
+      ],
+      "max": [
+        0.6088590047005837,
+        2.3070002705682553,
+        0.6230010779400654
+      ]
+    },
+    "bytes": 2626220
+  },
+  "abdominal": {
+    "url": "./zdrofit-assets/abdominal.glb",
+    "source": "matrix_aura_abdominal_crunch_g3_s51.glb",
+    "bounds": {
+      "min": [
+        -0.6993879408839399,
+        -1.1570737731625625e-08,
+        -0.5503460141460433
+      ],
+      "max": [
+        0.6993888702173803,
+        1.5050000229728409,
+        0.5503453490631078
+      ]
+    },
+    "bytes": 1899660
+  },
+  "backextension": {
+    "url": "./zdrofit-assets/backextension.glb",
+    "source": "matrix_aura_back_extension_g3_s52.glb",
+    "bounds": {
+      "min": [
+        -0.5310703040287057,
+        2.909210042117104e-07,
+        -0.6859436277751015
+      ],
+      "max": [
+        0.5310688268670368,
+        1.7490002504493383,
+        0.6859414526314773
+      ]
+    },
+    "bytes": 2224496
+  },
+  "armcurl": {
+    "url": "./zdrofit-assets/armcurl.glb",
+    "source": "matrix_aura_arm_curl_g3_s40.glb",
+    "bounds": {
+      "min": [
+        -0.542640266220336,
+        3.637678946350549e-08,
+        -0.6116013207406803
+      ],
+      "max": [
+        0.5426396593043866,
+        1.5060000897601342,
+        0.611605773093747
+      ]
+    },
+    "bytes": 1941140
+  },
+  "legpress": {
+    "url": "./zdrofit-assets/legpress.glb",
+    "source": "matrix_ultra_leg_press_g7_s70.glb",
+    "bounds": {
+      "min": [
+        -0.6345852497950883,
+        1.0296400887455093e-07,
+        -1.088873225389636
+      ],
+      "max": [
+        0.6345847397170026,
+        1.5199999321728481,
+        1.0888756083105853
+      ]
+    },
+    "bytes": 1442288
+  },
+  "rack": {
+    "url": "./zdrofit-assets/rack.glb",
+    "source": "matrix_magnum_half_rack_mg_a690.glb",
+    "bounds": {
+      "min": [
+        -1.0963610500983307,
+        8.31658979303627e-09,
+        -0.7881978945807668
+      ],
+      "max": [
+        1.0963569200869188,
+        2.4540033536055037,
+        0.7881964996725911
+      ]
+    },
+    "bytes": 866416
+  },
+  "olympic": {
+    "url": "./zdrofit-assets/olympic.glb",
+    "source": "matrix_g1_olympic_flat_bench_g1_fw163.glb",
+    "bounds": {
+      "min": [
+        -1.1024668556892507,
+        -7.468209132075456e-08,
+        -1.0049987926103279
+      ],
+      "max": [
+        1.1024640848906841,
+        1.2714042897770188,
+        1.005000177337887
+      ]
+    },
+    "bytes": 664592
+  },
+  "incline": {
+    "url": "./zdrofit-assets/incline.glb",
+    "source": "matrix_g1_adjustable_incline_bench_g1_fw153.glb",
+    "bounds": {
+      "min": [
+        -0.3049990778253857,
+        -1.1912942229665236e-07,
+        -0.7491596541506592
+      ],
+      "max": [
+        0.30500127045431213,
+        0.7918408363194106,
+        0.7491601693685341
+      ]
+    },
+    "bytes": 800704
+  },
+  "dumbbells": {
+    "url": "./zdrofit-assets/dumbbells.glb",
+    "source": "matrix_g1_10_pair_dumbbell_rack_g1_fw159.glb",
+    "bounds": {
+      "min": [
+        -1.1120035641699388,
+        -1.7139088148709902e-08,
+        -0.30245115069044615
+      ],
+      "max": [
+        1.1120036829391609,
+        0.725000038704231,
+        0.3024512456354068
+      ]
+    },
+    "bytes": 2425868
+  },
+  "barbell": {
+    "url": "./zdrofit-assets/barbell.glb",
+    "source": "matrix_g1_barbell_rack_g1_fw160.glb",
+    "bounds": {
+      "min": [
+        -0.4226348542472742,
+        -4.257565211748305e-09,
+        -0.4879411669735695
+      ],
+      "max": [
+        0.42263408914187295,
+        1.5000002369255787,
+        0.4879433315987378
+      ]
+    },
+    "bytes": 825204
+  },
+  "plates": {
+    "url": "./zdrofit-assets/plates.glb",
+    "source": "matrix_g1_weight_tree_g1_fw157.glb",
+    "bounds": {
+      "min": [
+        -0.32440606224716717,
+        9.534566755900662e-07,
+        -0.2655901329621773
+      ],
+      "max": [
+        0.3244029315975361,
+        1.2700010468901088,
+        0.2655903634158139
+      ]
+    },
+    "bytes": 809800
+  },
+  "hipthrust": {
+    "url": "./zdrofit-assets/hipthrust.glb",
+    "source": "matrix_magnum_glute_trainer_mg_pl78.glb",
+    "bounds": {
+      "min": [
+        -0.6685824646724495,
+        1.940480945333389e-07,
+        -0.849185301722061
+      ],
+      "max": [
+        0.6685838591388773,
+        1.0900002144028949,
+        0.8491841826759277
+      ]
+    },
+    "bytes": 2029120
+  },
+  "calf": {
+    "url": "./zdrofit-assets/calf.glb",
+    "source": "matrix_magnum_seated_calf_mg_a53.glb",
+    "bounds": {
+      "min": [
+        -0.3213207927344388,
+        7.892536307778472e-08,
+        -0.6851406313236821
+      ],
+      "max": [
+        0.3213194741549472,
+        0.9837324831855623,
+        0.6851398339069663
+      ]
+    },
+    "bytes": 1744364
+  },
+  "functional": {
+    "url": "./zdrofit-assets/functional.glb",
+    "source": "matrix_connexus_compact.glb",
+    "bounds": {
+      "min": [
+        -0.7921281255307395,
+        2.925959241518658e-08,
+        -0.49934386701452826
+      ],
+      "max": [
+        0.7921277178016055,
+        2.2308947409778015,
+        0.4993440889153635
+      ]
+    },
+    "bytes": 4382832
+  },
+  "kettlebell16": {
+    "url": "./zdrofit-assets/kettlebell16.glb",
+    "source": "kettlebell_16kg.glb",
+    "bounds": {
+      "min": [
+        -0.09519418024169557,
+        4.170461531671776e-09,
+        -0.09541910243255458
+      ],
+      "max": [
+        0.09519418787109046,
+        0.2705780066004735,
+        0.09541910243255458
+      ]
+    },
+    "bytes": 99044
+  },
+  "kettlebell24": {
+    "url": "./zdrofit-assets/kettlebell24.glb",
+    "source": "kettlebell_24kg.glb",
+    "bounds": {
+      "min": [
+        -0.09519418787109046,
+        4.170461531671776e-09,
+        -0.09541910243255458
+      ],
+      "max": [
+        0.09519418024169557,
+        0.2705780066004735,
+        0.09541910243255458
+      ]
+    },
+    "bytes": 149688
+  },
+  "kettlebell32": {
+    "url": "./zdrofit-assets/kettlebell32.glb",
+    "source": "kettlebell_32kg.glb",
+    "bounds": {
+      "min": [
+        -0.09519418024169557,
+        4.170461531671776e-09,
+        -0.09541910243255458
+      ],
+      "max": [
+        0.09519418024169557,
+        0.2705780066004735,
+        0.09541910243255458
+      ]
+    },
+    "bytes": 419068
+  },
+  "floorMat": {
+    "url": "./zdrofit-assets/floorMat.glb",
+    "source": "floor_mat.glb",
+    "bounds": {
+      "min": [
+        -0.2500000576507322,
+        0,
+        -0.2500000576507322
+      ],
+      "max": [
+        0.250000072909522,
+        0.012000000569969416,
+        0.250000072909522
+      ]
+    },
+    "bytes": 263212
+  },
+  "storageRack": {
+    "url": "./zdrofit-assets/storageRack.glb",
+    "source": "gym_equipment_rack.glb",
+    "bounds": {
+      "min": [
+        -1.6415457230375838,
+        5.5039706126081e-10,
+        -1.6927468928491223
+      ],
+      "max": [
+        1.763689632369667,
+        2.377459118716473,
+        1.6699785703583685
+      ]
+    },
+    "bytes": 23937288
+  },
+  "locker1": {
+    "url": "./zdrofit-assets/locker1.glb",
+    "source": "gym_locker_01.glb",
+    "bounds": {
+      "min": [
+        -1.0500006011008676,
+        9.310079152058393e-09,
+        -0.4708930752679286
+      ],
+      "max": [
+        1.050000754923391,
+        2.2160010895489153,
+        0.47089296861931285
+      ]
+    },
+    "bytes": 1134192
+  },
+  "locker2": {
+    "url": "./zdrofit-assets/locker2.glb",
+    "source": "gym_locker_02.glb",
+    "bounds": {
+      "min": [
+        -3.1084261313080788,
+        -2.263480223252401e-07,
+        -0.4779075774840355
+      ],
+      "max": [
+        3.108426261693239,
+        2.26765067758515,
+        0.477907535384005
+      ]
+    },
+    "bytes": 15496180
+  },
+  "reception": {
+    "url": "./zdrofit-assets/reception.glb",
+    "source": "reception_desk_no51.glb",
+    "bounds": {
+      "min": [
+        -1.4843778498470783,
+        2.699345290624322e-07,
+        -0.9320314712935134
+      ],
+      "max": [
+        1.570531747554469,
+        3.0443629475570866,
+        0.9320311899483187
+      ]
+    },
+    "bytes": 4939504
+  }
+}
