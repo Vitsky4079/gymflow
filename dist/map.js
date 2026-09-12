@@ -140,13 +140,15 @@ textOnFloor('changingWomen',13.05,15.1,1);
 // a 0.2m margin on each end instead of just maximizing width.
 placeProp(scene,'reception_desk_no51',{x:5.55,z:18.5,rotY:Math.PI,scale:1.05,scaleX:1.43});
 // A TV mounted on the wall directly ahead of each cardio machine, instead of
-// the plain decorative panels that used to run along the same wall.
-const tvBezel=mat('#0c0e10',.3,.55),tvScreen=new THREE.MeshStandardMaterial({color:'#dbe9f5',emissive:'#6fa8d8',emissiveIntensity:.55,roughness:.25,metalness:.05});
+// the plain decorative panels that used to run along the same wall. Sized to
+// a real 55"-ish set (16:9) — the tightest gap between neighbouring cardio
+// machines is 2.4m, so 1.8m wide still leaves clearance on both sides.
+const tvBezel=mat('#0a0a0b',.4,.5),tvScreen=mat('#020203',.2,.2);
 const CARDIO_WALL=['treadmill','bike','elliptical','rower','stairs','airbike'];
 equipment.filter(e=>CARDIO_WALL.includes(e.id)).forEach(e=>{
-	box(scene,1.3,.8,.06,e.x,2.15,-13.34,tvBezel);
-	box(scene,1.16,.66,.02,e.x,2.15,-13.3,tvScreen);
-	bar(scene,[e.x,2.15,-13.55],[e.x,2.15,-13.38],.03,silver);
+	box(scene,1.8,1.05,.07,e.x,2.2,-13.34,tvBezel);
+	box(scene,1.66,.92,.02,e.x,2.2,-13.3,tvScreen);
+	bar(scene,[e.x,2.2,-13.55],[e.x,2.2,-13.37],.035,silver);
 });
 // The cardio row only has one real, clickable station per machine type —
 // fill each type out into a proper side-by-side bank of three (like a real
