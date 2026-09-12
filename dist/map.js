@@ -134,10 +134,11 @@ textOnFloor('changingWomen',13.05,15.1,1);
 // and pushed back so that backdrop actually touches the front wall
 // instead of standing 0.26m clear of it. The model is already ~3.2m tall
 // against a 3.3m wall, so there's no headroom left to scale up uniformly
-// — stretch it wider instead (scaleX only) so the backdrop panel actually
-// spans the wall instead of leaving bare wall on both sides, and shift it
-// right so the wider backdrop still clears the door-gap opening at x<3.1.
-placeProp(scene,'reception_desk_no51',{x:7,z:18.5,rotY:Math.PI,scale:1.05,scaleX:2.25});
+// — stretch it wider instead (scaleX only). It only has x:[3.1,8] of solid
+// wall to work with before the door-gap opening on one side and the
+// women's changing room's own partition wall (x=8) on the other, so keep
+// a 0.2m margin on each end instead of just maximizing width.
+placeProp(scene,'reception_desk_no51',{x:5.55,z:18.5,rotY:Math.PI,scale:1.05,scaleX:1.43});
 // A TV mounted on the wall directly ahead of each cardio machine, instead of
 // the plain decorative panels that used to run along the same wall.
 const tvBezel=mat('#0c0e10',.3,.55),tvScreen=new THREE.MeshStandardMaterial({color:'#dbe9f5',emissive:'#6fa8d8',emissiveIntensity:.55,roughness:.25,metalness:.05});
