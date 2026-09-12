@@ -102,12 +102,12 @@ function flattenModel(root){
 }
 // Places one prop instance in the room. Callers await the returned promise
 // only if they need the instance handle; most room decor is fire-and-forget.
-export function placeProp(scene,name,{x=0,y=0,z=0,rotY=0,scale=1,flatten=false}={}){
+export function placeProp(scene,name,{x=0,y=0,z=0,rotY=0,scale=1,scaleX=scale,scaleY=scale,scaleZ=scale,flatten=false}={}){
 	return loadTemplate(name).then(template=>{
 		const instance=template.clone(true);
 		instance.position.set(x,y,z);
 		instance.rotation.y=rotY;
-		if(scale!==1)instance.scale.setScalar(scale);
+		if(scaleX!==1||scaleY!==1||scaleZ!==1)instance.scale.set(scaleX,scaleY,scaleZ);
 		if(flatten)flattenModel(instance);
 		scene.add(instance);
 		return instance;
