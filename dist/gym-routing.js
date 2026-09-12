@@ -8,33 +8,28 @@ export const approachPoint=e=>e.approach?{x:e.x+e.approach.x,z:e.z+e.approach.z}
 // buffer that stays under the ~1.5m half-spacing) as the default so the
 // actual gap between machines opens up as a crossable single-file gap.
 function gridPath(startPt,endPt,equipment,gym,floor){const step=.5,start=[Math.round(startPt.x/step),Math.round(startPt.z/step)],end=[Math.round(endPt.x/step),Math.round(endPt.z/step)],key=p=>p.join(','),queue=[start],seen=new Map([[key(start),null]]);let cursor=0;while(cursor<queue.length){const p=queue[cursor++];if(key(p)===key(end)){const path=[];let current=p;while(current){path.push([current[0]*step,.12,current[1]*step]);current=seen.get(key(current))}return path.reverse()}for(const [dx,dz] of [[1,0],[-1,0],[0,1],[0,-1]]){const n=[p[0]+dx,p[1]+dz],x=n[0]*step,z=n[1]*step;if(x<-gym.width/2+1||x>gym.width/2-1||z<gym.minZ+1||z>gym.maxZ-1||seen.has(key(n)))continue;if(equipment.some(e=>e.floor===floor&&Math.abs(x-e.x)<(e.footprint?e.footprint.w/2+.15:1.4)&&Math.abs(z-e.z)<(e.footprint?e.footprint.d/2+.15:1.7)))continue;if(gym.obstacles.some(o=>(o.floor===undefined||o.floor===floor)&&Math.abs(x-o.x)<o.w/2+.15&&Math.abs(z-o.z)<o.d/2+.15))continue;seen.set(key(n),p);queue.push(n)}}return []}
-function segmentClear(a,b,equipment,gym,floor){
-	const dx=b[0]-a[0],dz=b[2]-a[2],dist=Math.hypot(dx,dz),steps=Math.max(1,Math.ceil(dist/.2));
-	for(let i=0;i<=steps;i++){
-		const t=i/steps,x=a[0]+dx*t,z=a[2]+dz*t;
-		if(x<-gym.width/2+1||x>gym.width/2-1||z<gym.minZ+1||z>gym.maxZ-1)return false;
-		if(equipment.some(e=>e.floor===floor&&Math.abs(x-e.x)<(e.footprint?e.footprint.w/2+.15:1.4)&&Math.abs(z-e.z)<(e.footprint?e.footprint.d/2+.15:1.7)))return false;
-		if(gym.obstacles.some(o=>(o.floor===undefined||o.floor===floor)&&Math.abs(x-o.x)<o.w/2+.15&&Math.abs(z-o.z)<o.d/2+.15))return false;
-	}
-	return true;
-}
 // The BFS above only ever steps axis-aligned at a 0.5m grid resolution, so
 // once the gaps between individual machines opened up as crossable, the raw
-// path started zigzagging in and out of every gap it passed near — a visible
-// staircase instead of the fairly direct line a person would actually walk.
-// "String-pull" it afterwards: greedily extend a straight line-of-sight from
-// the last kept waypoint as far as it can go before it would clip an
-// obstacle, and only drop a new waypoint where the walk genuinely has to
-// bend. Same route, far fewer (and often diagonal, more natural-looking)
-// segments.
-function simplifyPath(points,equipment,gym,floor){
+// path could zigzag in and out of every gap it passed near — a dense row of
+// 0.5m dashes instead of a few corridor-length runs. An earlier version of
+// this smoothed it with line-of-sight "string-pulling," which does shorten
+// it but can cut a genuine diagonal across the open floor instead of
+// following the pathway the search actually found. Collapse it instead:
+// keep a waypoint only where the walk's direction actually changes, merging
+// every run of consecutive same-direction steps into one straight segment.
+// Since the BFS itself never steps diagonally, every merged segment stays
+// perfectly axis-aligned — straight down the middle of whatever gap or
+// aisle it's in, just drawn as one bar instead of a dozen.
+function simplifyPath(points){
 	if(points.length<3)return points;
+	const dir=(a,b)=>[Math.sign(b[0]-a[0]),Math.sign(b[2]-a[2])];
 	const result=[points[0]];
-	let anchor=0;
-	for(let i=2;i<points.length;i++){
-		if(!segmentClear(points[anchor],points[i],equipment,gym,floor)){
-			result.push(points[i-1]);
-			anchor=i-1;
+	let prevDir=dir(points[0],points[1]);
+	for(let i=1;i<points.length-1;i++){
+		const nextDir=dir(points[i],points[i+1]);
+		if(nextDir[0]!==prevDir[0]||nextDir[1]!==prevDir[1]){
+			result.push(points[i]);
+			prevDir=nextDir;
 		}
 	}
 	result.push(points[points.length-1]);
@@ -64,9 +59,9 @@ export function findGymPath(equipment,a,b,gym,floor){
 			// waypoint itself always survives as a hard pinch point — simplifying
 			// the joined path in one pass would just line-of-sight straight across
 			// the open mats and erase the very crossing this was meant to force.
-			if(first.length&&second.length)return [...simplifyPath(first,equipment,gym,floor),...simplifyPath(second,equipment,gym,floor).slice(1)];
+			if(first.length&&second.length)return [...simplifyPath(first),...simplifyPath(second).slice(1)];
 		}
 	}
 	const path=gridPath(start,end,equipment,gym,floor);
-	return path.length?simplifyPath(path,equipment,gym,floor):path;
+	return path.length?simplifyPath(path):path;
 }
